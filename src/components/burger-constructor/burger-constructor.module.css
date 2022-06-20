@@ -7,22 +7,8 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-end;
+	align-items: center;
 	gap: 10;
-	height: calc(100vh - 336px);
-	min-height: 208px;
-	overflow-y: auto;
-	overflow-x: hidden;
-}
-
-.container::-webkit-scrollbar {
-	width: 8px;
-	height: auto;
-	background-color: #2f2f37;
-}
-
-.container::-webkit-scrollbar-thumb {
-	background-color: #8585ad;
 }
 
 .order {
@@ -42,4 +28,18 @@
 	flex-direction: column;
 	padding: 0;
 	margin: 0;
+	height: calc(100vh - 336px);
+	min-height: 208px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.list::-webkit-scrollbar {
+	width: 8px;
+	height: auto;
+	background-color: #2f2f37;
+}
+
+.list::-webkit-scrollbar-thumb {
+	background-color: #8585ad;
 }

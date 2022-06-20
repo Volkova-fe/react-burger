@@ -14,7 +14,7 @@ ___
 * Использована библиотека готовых компонентов - npm i @ya.praktikum/react-developer-burger-ui-components 
 * Организована файловая структура : 
   - Компоненты в директории components/, шрифты — в fonts/, изображения — в images/
-    - AppHeader
+   - AppHeader
 	 - BurgerIngredients (внутри содержит свои компоненты: IngredientsCategory, IngridientsItem)
 	 - BurgerConstructor (внутри содержит свой компонент: ConstructorItems)
   - Каждый компонент хранить в отдельной директории

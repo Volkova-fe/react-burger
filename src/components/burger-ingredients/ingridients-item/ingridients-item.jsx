@@ -1,4 +1,5 @@
 import React from 'react';
+import ingredientType from '../../../utils/types'
 import PropTypes from 'prop-types';
 import ingredientsItemStyles from './ingridients-item.module.css'
 import {
@@ -21,12 +22,8 @@ const IngridientsItem = (props) => {
 	)
 }
 
-IngridientsItem.prototype = {
-	ingredient: PropTypes.shape({
-		image: PropTypes.string.isRequired,
-		price: PropTypes.number.isRequired,
-		name: PropTypes.string.isRequired
-	}).isRequired
+IngridientsItem.protoType = {
+	ingredient: PropTypes.arrayOf(ingredientType.isRequired)
 }
 
 export default IngridientsItem;

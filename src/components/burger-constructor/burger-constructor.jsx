@@ -20,10 +20,12 @@ const BurgerConstructor = () => {
 					price={200}
 					thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
 				/>
-				<ul className={`${burgerConstructorStyle.list} pl-4 pr-2`}>
-					{data.map((elem) => (
-						<ConstructorItems key={elem._id} items={elem} />
-					))}
+				<ul className={`${burgerConstructorStyle.list} pr-2`}>
+					{data.map((elem) => {
+						if (elem.type === 'sauce' || elem.type === 'main') {
+							return <ConstructorItems key={elem._id} items={elem} />
+						}
+					})}
 				</ul>
 
 				<ConstructorElement
@@ -46,5 +48,6 @@ const BurgerConstructor = () => {
 		</section>
 	)
 }
+
 
 export default BurgerConstructor

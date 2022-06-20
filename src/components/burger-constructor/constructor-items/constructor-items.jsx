@@ -1,4 +1,5 @@
 import React from 'react';
+import ingredientType from '../../../utils/types'
 import PropTypes from 'prop-types';
 import constructorItemStyles from './constructor-items.module.css'
 import {
@@ -9,7 +10,7 @@ import {
 
 const ConstructorItems = (props) => {
 	return (
-		<li className={`${constructorItemStyles.item} pt-4`}>
+		<li className={`${constructorItemStyles.item} pt-4 pr-3`}>
 			<DragIcon type="primary" />
 			<ConstructorElement
 				text={props.items.name}
@@ -20,12 +21,8 @@ const ConstructorItems = (props) => {
 	)
 }
 
-ConstructorItems.prototype = {
-	items: PropTypes.shape({
-		text: PropTypes.string.isRequired,
-		price: PropTypes.number.isRequired,
-		image: PropTypes.string.isRequired
-	}).isRequired
+ConstructorItems.protoType = {
+	items: PropTypes.arrayOf(ingredientType.isRequired)
 }
 
 export default ConstructorItems;
