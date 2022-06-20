@@ -6,9 +6,13 @@
 	padding: 0;
 	display: flex;
 	flex-wrap: wrap;
-	column-gap: 8px;
+	justify-content: space-between;
 }
 
 .text {
 	text-align: left;
+}
+
+.item {
+	margin-right: 5px;
 }

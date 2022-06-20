@@ -4,6 +4,8 @@
 	flex-direction: column;
 	cursor: pointer;
 	position: relative;
+	cursor: pointer;
+	box-sizing: border-box;
 }
 
 .image {

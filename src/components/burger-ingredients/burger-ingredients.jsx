@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerIngridientStyle from './burger-ingredients.module.css'
 import IngredientsCategory from './ingridients-category/ingridients-category'
-import categories from '../../utils/categories'
 
-const BurgerIngredients = () => {
+const BurgerIngredients = ({ ingridients, onClick }) => {
 	const [current, setCurrent] = React.useState('bun')
+
 	return (
 		<section className={burgerIngridientStyle.section}>
 			<h1 className={`${burgerIngridientStyle.title} text text_type_main-large`}>Соберите бургер</h1>
@@ -26,13 +27,18 @@ const BurgerIngredients = () => {
 					</Tab>
 				</a>
 			</div>
+
 			<ul className={`${burgerIngridientStyle.list} pt-8`}>
-				{categories.map((elem) => (
-					<IngredientsCategory key={elem.type} type={elem.type} text={elem.text} />
-				))}
+				<IngredientsCategory ingridients={ingridients} type='bun' onClick={onClick} />
+				<IngredientsCategory ingridients={ingridients} type='sauce' onClick={onClick} />
+				<IngredientsCategory ingridients={ingridients} type='main' onClick={onClick} />
 			</ul>
 		</section >
 	)
+}
+
+BurgerIngredients.protoType = {
+	onclick: PropTypes.func
 }
 
 export default BurgerIngredients

@@ -1,15 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
 	ConstructorElement,
 	CurrencyIcon,
 	Button,
 }
 	from '@ya.praktikum/react-developer-burger-ui-components'
-import { data } from '../../utils/data';
 import ConstructorItems from './constructor-items/constructor-items'
 import burgerConstructorStyle from './burger-constructor.module.css';
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({ ingridients, onClick }) => {
 	return (
 		<section className={`${burgerConstructorStyle.section} pl-10 pt-25`}>
 			<div className={`${burgerConstructorStyle.container} pr-2`}>
@@ -21,7 +21,7 @@ const BurgerConstructor = () => {
 					thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
 				/>
 				<ul className={`${burgerConstructorStyle.list} pr-2`}>
-					{data.map((elem) => {
+					{ingridients.map((elem) => {
 						if (elem.type === 'sauce' || elem.type === 'main') {
 							return <ConstructorItems key={elem._id} items={elem} />
 						}
@@ -41,7 +41,7 @@ const BurgerConstructor = () => {
 					<p className='text text_type_digits-medium pr-2'>15000</p>
 					<CurrencyIcon type="primary" />
 				</div>
-				<Button type="primary" size="large">
+				<Button type="primary" size="large" onClick={onClick}>
 					Оформить заказ
 				</Button>
 			</div>
@@ -49,5 +49,8 @@ const BurgerConstructor = () => {
 	)
 }
 
+BurgerConstructor.protoType = {
+	onclick: PropTypes.func
+}
 
 export default BurgerConstructor

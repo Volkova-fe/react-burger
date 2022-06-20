@@ -10,7 +10,7 @@ import {
 
 const IngridientsItem = (props) => {
 	return (
-		<li className={`${ingredientsItemStyles.item} pl-4`}>
+		<div className={`${ingredientsItemStyles.item} pl-4 mr-4`}>
 			<img className={`${ingredientsItemStyles.image}`} src={props.ingredient.image} alt={props.ingredient.name} />
 			<div className={`${ingredientsItemStyles.price} pt-1 pb-2`}>
 				<p className='text text_type_digits-default pr-2'>{props.ingredient.price}</p>
@@ -18,11 +18,11 @@ const IngridientsItem = (props) => {
 			</div>
 			<p className='text text_type_main-default pb-10'>{props.ingredient.name}</p>
 			<Counter count={1} size="default" />
-		</li>
+		</div>
 	)
 }
 
-IngridientsItem.protoType = {
+IngridientsItem.protoTypes = {
 	ingredient: PropTypes.arrayOf(ingredientType.isRequired)
 }
 
