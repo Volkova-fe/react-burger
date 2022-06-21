@@ -1,6 +1,5 @@
 import React from 'react';
 import ingredientType from '../../../utils/types'
-import PropTypes from 'prop-types';
 import constructorItemStyles from './constructor-items.module.css'
 import {
 	DragIcon,
@@ -21,8 +20,8 @@ const ConstructorItems = (props) => {
 	)
 }
 
-ConstructorItems.protoType = {
-	items: PropTypes.arrayOf(ingredientType.isRequired)
+ConstructorItems.propTypes = {
+	items: ingredientType.isRequired
 }
 
 export default ConstructorItems;
