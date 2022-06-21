@@ -30,8 +30,8 @@ const IngredientDetails = (props) => {
 	)
 }
 
-IngredientDetails.protoTypes = {
-	item: PropTypes.arrayOf(ingredientType.isRequired)
+IngredientDetails.propTypes = {
+	item: ingredientType.isRequired
 }
 
 export default IngredientDetails;

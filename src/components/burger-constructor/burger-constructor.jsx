@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ingredientType from '../../utils/types'
 import {
 	ConstructorElement,
 	CurrencyIcon,
@@ -49,7 +50,8 @@ const BurgerConstructor = ({ ingridients, onClick }) => {
 	)
 }
 
-BurgerConstructor.protoType = {
+BurgerConstructor.propTypes = {
+	ingridients: PropTypes.arrayOf(ingredientType.isRequired).isRequired,
 	onclick: PropTypes.func
 }
 

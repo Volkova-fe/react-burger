@@ -37,7 +37,7 @@ const BurgerIngredients = ({ ingridients, onClick }) => {
 	)
 }
 
-BurgerIngredients.protoType = {
+BurgerIngredients.propTypes = {
 	onclick: PropTypes.func
 }
 

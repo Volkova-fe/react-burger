@@ -21,8 +21,8 @@ const ConstructorItems = (props) => {
 	)
 }
 
-ConstructorItems.protoTypes = {
-	items: PropTypes.arrayOf(ingredientType.isRequired)
+ConstructorItems.propTypes = {
+	items: ingredientType.isRequired
 }
 
 export default ConstructorItems;

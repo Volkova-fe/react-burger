@@ -28,6 +28,8 @@ const IngredientsCategory = ({ ingridients, type, onClick }) => {
 
 IngredientsCategory.propTypes = {
 	type: PropTypes.string.isRequired,
+	ingridients: PropTypes.array.isRequired,
+	onClick: PropTypes.func.isRequired
 }
 
 export default IngredientsCategory;
