@@ -10,7 +10,7 @@ import {
 import ConstructorItems from './constructor-items/constructor-items'
 import burgerConstructorStyle from './burger-constructor.module.css';
 
-const BurgerConstructor = ({ ingridients, onClick }) => {
+const BurgerConstructor = ({ ingredients, onClick }) => {
 	return (
 		<section className={`${burgerConstructorStyle.section} pl-10 pt-25`}>
 			<div className={`${burgerConstructorStyle.container} pr-2`}>
@@ -22,7 +22,7 @@ const BurgerConstructor = ({ ingridients, onClick }) => {
 					thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
 				/>
 				<ul className={`${burgerConstructorStyle.list} pr-2`}>
-					{ingridients.map((elem) => {
+					{ingredients.map((elem) => {
 						if (elem.type === 'sauce' || elem.type === 'main') {
 							return <ConstructorItems key={elem._id} items={elem} />
 						}
@@ -51,7 +51,7 @@ const BurgerConstructor = ({ ingridients, onClick }) => {
 }
 
 BurgerConstructor.propTypes = {
-	ingridients: PropTypes.arrayOf(ingredientType.isRequired).isRequired,
+	ingredients: PropTypes.arrayOf(ingredientType.isRequired).isRequired,
 	onClick: PropTypes.func.isRequired
 }
 

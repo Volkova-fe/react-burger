@@ -1,14 +1,13 @@
 import React from 'react';
 import ingredientType from '../../../utils/types'
-import PropTypes from 'prop-types';
-import ingredientsItemStyles from './ingridients-item.module.css'
+import ingredientsItemStyles from './ingredients-item.module.css'
 import {
 	CurrencyIcon,
 	Counter
 }
 	from '@ya.praktikum/react-developer-burger-ui-components';
 
-const IngridientsItem = (props) => {
+const IngredientsItem = (props) => {
 	return (
 		<div className={`${ingredientsItemStyles.item} pl-4 mr-4`}>
 			<img className={`${ingredientsItemStyles.image}`} src={props.ingredient.image} alt={props.ingredient.name} />
@@ -22,9 +21,9 @@ const IngridientsItem = (props) => {
 	)
 }
 
-IngridientsItem.propTypes = {
+IngredientsItem.propTypes = {
 	ingredient: ingredientType.isRequired
 }
 
-export default IngridientsItem;
+export default IngredientsItem;
 

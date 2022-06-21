@@ -1,44 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import burgerIngridientStyle from './burger-ingredients.module.css'
-import IngredientsCategory from './ingridients-category/ingridients-category'
+import burgerIngredientStyle from './burger-ingredients.module.css'
+import IngredientsCategory from './ingredients-category/ingredients-category'
 
-const BurgerIngredients = ({ ingridients, onClick }) => {
+const BurgerIngredients = ({ ingredients, onClick }) => {
 	const [current, setCurrent] = React.useState('bun')
 
 	return (
-		<section className={burgerIngridientStyle.section}>
-			<h1 className={`${burgerIngridientStyle.title} text text_type_main-large`}>Соберите бургер</h1>
-			<div className={`${burgerIngridientStyle.tab} pt-5`}>
-				<a href='#bun' className={burgerIngridientStyle.link}>
+		<section className={burgerIngredientStyle.section}>
+			<h1 className={`${burgerIngredientStyle.title} text text_type_main-large`}>Соберите бургер</h1>
+			<div className={`${burgerIngredientStyle.tab} pt-5`}>
+				<a href='#bun' className={burgerIngredientStyle.link}>
 					<Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
 						Булки
 					</Tab>
 				</a>
-				<a href='#sauce' className={burgerIngridientStyle.link}>
+				<a href='#sauce' className={burgerIngredientStyle.link}>
 					<Tab value="sauce" active={current === 'sauce'} onClick={setCurrent}>
 						Соусы
 					</Tab>
 				</a>
-				<a href='#main' className={burgerIngridientStyle.link}>
+				<a href='#main' className={burgerIngredientStyle.link}>
 					<Tab value="main" active={current === 'main'} onClick={setCurrent}>
 						Начинки
 					</Tab>
 				</a>
 			</div>
 
-			<ul className={`${burgerIngridientStyle.list} pt-8`}>
-				<IngredientsCategory ingridients={ingridients} type='bun' onClick={onClick} />
-				<IngredientsCategory ingridients={ingridients} type='sauce' onClick={onClick} />
-				<IngredientsCategory ingridients={ingridients} type='main' onClick={onClick} />
+			<ul className={`${burgerIngredientStyle.list} pt-8`}>
+				<IngredientsCategory ingredients={ingredients} type='bun' onClick={onClick} />
+				<IngredientsCategory ingredients={ingredients} type='sauce' onClick={onClick} />
+				<IngredientsCategory ingredients={ingredients} type='main' onClick={onClick} />
 			</ul>
 		</section >
 	)
 }
 
 BurgerIngredients.propTypes = {
-	ingridients: PropTypes.array.isRequired,
+	ingredients: PropTypes.array.isRequired,
 	onClick: PropTypes.func.isRequired
 }
 

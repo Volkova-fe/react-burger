@@ -45,8 +45,8 @@ function App() {
     <div className={page.app}>
       <AppHeader />
       <main className={page.content}>
-        <BurgerIngredients ingridients={data} onClick={handleOpenIngredientDetailsModal} />
-        <BurgerConstructor ingridients={data} onClick={handleOpenOrderDetailsModal} />
+        <BurgerIngredients ingredients={data} onClick={handleOpenIngredientDetailsModal} />
+        <BurgerConstructor ingredients={data} onClick={handleOpenOrderDetailsModal} />
       </main>
       {openOrderDetailsModal &&
         <Modal
