@@ -1,20 +1,20 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { API, responseCheck } from '../api/api';
+import { API, checkResponse } from '../api/api';
 import page from './app.module.css';
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import Modal from '../modal/modal';
-import OrderDetails from '../order-details/order-details'
-import IngredientDetails from '../ingredient-details/ingredient-details'
+import OrderDetails from '../order-details/order-details';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 
 function App() {
   const [data, setData] = useState([])
 
   function getData() {
     fetch(`${API.url}`)
-      .then(responseCheck)
+      .then(checkResponse)
       .then((res) => { setData(res.data) })
       .catch(err => { console.log(err) });
   }
@@ -25,7 +25,7 @@ function App() {
 
   const [openOrderDetailsModal, setOpenOrderDetailsModal] = React.useState(false)
   const [openIngredientDetailsModal, setOpenIngredientDetailsModal] = React.useState(false)
-  const [Ingredient, setIngredient] = React.useState(null)
+  const [ingredient, setIngredient] = React.useState(null)
 
   const handleOpenOrderDetailsModal = () => {
     setOpenOrderDetailsModal(true);
@@ -61,7 +61,7 @@ function App() {
           title='Детали ингредиента'
           active={openIngredientDetailsModal}
           onClickClose={handleCloseModal}>
-          <IngredientDetails item={Ingredient} />
+          <IngredientDetails item={ingredient} />
         </Modal>
       }
     </div>

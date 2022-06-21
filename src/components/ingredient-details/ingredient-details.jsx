@@ -1,7 +1,6 @@
 import React from 'react';
 import ingredientDetailstStyle from './ingredient-details.module.css'
 import ingredientType from '../../utils/types'
-import PropTypes from 'prop-types';
 
 const IngredientDetails = (props) => {
 	return (

@@ -38,7 +38,8 @@ const BurgerIngredients = ({ ingridients, onClick }) => {
 }
 
 BurgerIngredients.propTypes = {
-	onclick: PropTypes.func
+	ingridients: PropTypes.array.isRequired,
+	onClick: PropTypes.func.isRequired
 }
 
 export default BurgerIngredients

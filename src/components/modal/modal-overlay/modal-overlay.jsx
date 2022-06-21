@@ -7,7 +7,7 @@ const ModalOverlay = ({ onClickClose }) => (
 )
 
 ModalOverlay.propTypes = {
-	onClick: PropTypes.func
+	onClickClose: PropTypes.func.isRequired
 }
 
 export default ModalOverlay;

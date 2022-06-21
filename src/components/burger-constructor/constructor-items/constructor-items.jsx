@@ -1,6 +1,5 @@
 import React from 'react';
 import ingredientType from '../../../utils/types'
-import PropTypes from 'prop-types';
 import constructorItemStyles from './constructor-items.module.css'
 import {
 	DragIcon,

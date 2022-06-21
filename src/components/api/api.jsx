@@ -6,7 +6,7 @@ export const API = {
 };
 
 
-export const responseCheck = res => {
+export const checkResponse = res => {
 	if (res.ok) {
 		return res.json()
 	} else {

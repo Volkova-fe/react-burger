@@ -9,18 +9,19 @@ const modalRoot = document.querySelector('#modal');
 
 const Modal = ({ title, active, onClickClose, children }) => {
 
-	const handleEscClose = (evt) => {
-		if (evt.key === 'Escape') {
-			onClickClose()
-		};
-	}
-
 	React.useEffect(() => {
-		document.addEventListener("keydown", handleEscClose)
-		return () => {
-			document.removeEventListener("keydown", handleEscClose)
+		function handleEscClose(evt) {
+			if (evt.key === 'Escape') {
+				onClickClose();
+			}
 		}
-	})
+		if (active) {
+			document.addEventListener('keydown', handleEscClose);
+			return () => {
+				document.removeEventListener('keydown', handleEscClose);
+			}
+		}
+	}, [active])
 
 	return ReactDOM.createPortal(
 		<>
