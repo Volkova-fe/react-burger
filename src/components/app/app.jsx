@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { API, checkResponse } from '../api/api';
 import page from './app.module.css';
 import AppHeader from '../app-header/app-header';
@@ -23,9 +22,9 @@ function App() {
     getData()
   }, [])
 
-  const [openOrderDetailsModal, setOpenOrderDetailsModal] = React.useState(false)
-  const [openIngredientDetailsModal, setOpenIngredientDetailsModal] = React.useState(false)
-  const [ingredient, setIngredient] = React.useState(null)
+  const [openOrderDetailsModal, setOpenOrderDetailsModal] = useState(false)
+  const [openIngredientDetailsModal, setOpenIngredientDetailsModal] = useState(false)
+  const [ingredient, setIngredient] = useState(null)
 
   const handleOpenOrderDetailsModal = () => {
     setOpenOrderDetailsModal(true);
