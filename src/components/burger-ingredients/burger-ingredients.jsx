@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerIngredientStyle from './burger-ingredients.module.css'
 import IngredientsCategory from './ingredients-category/ingredients-category'
 
 const BurgerIngredients = ({ ingredients, onClick }) => {
-	const [current, setCurrent] = React.useState('bun')
+	const [current, setCurrent] = useState('bun');
 
 	return (
 		<section className={burgerIngredientStyle.section}>

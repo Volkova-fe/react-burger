@@ -13,4 +13,3 @@ export const checkResponse = res => {
 		return Promise.reject(`Ошибка: code ${res.status}`)
 	}
 }
-
