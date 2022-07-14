@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import ingredientType from '../../utils/types'
 import {
 	ConstructorElement,
 	CurrencyIcon,
@@ -9,40 +8,59 @@ import {
 	from '@ya.praktikum/react-developer-burger-ui-components'
 import ConstructorItems from './constructor-items/constructor-items'
 import burgerConstructorStyle from './burger-constructor.module.css';
+import { DataContext } from '../../services/appContext';
 
-const BurgerConstructor = ({ ingredients, onClick }) => {
+const BurgerConstructor = ({ onClick, getOrder }) => {
+	const { data } = useContext(DataContext);
+	const [total, setTotal] = useState(0);
+	let burgerId = useMemo(() => data.map((item) => item._id), [data])
+
+	const bunItem = useMemo(
+		() => data.find((item) => item.type === 'bun'), [data])
+
+	const filling = useMemo(
+		() => data.filter((item) => item.type !== 'bun'), [data])
+
+	useEffect(() => {
+		const totalPrice = filling.reduce((sum, item) => sum + item.price, bunItem ? (bunItem.price * 2) : 0)
+		setTotal(totalPrice)
+	}, [bunItem, filling])
+
 	return (
 		<section className={`${burgerConstructorStyle.section} pl-10 pt-25`}>
 			<div className={`${burgerConstructorStyle.container} pr-2`}>
-				<ConstructorElement
+				{bunItem && <ConstructorElement
 					type="top"
 					isLocked={true}
-					text="Краторная булка N-200i (верх)"
-					price={200}
-					thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-				/>
+					text={bunItem.name + '(верх)'}
+					price={bunItem.price}
+					thumbnail={bunItem.image}
+				/>}
 				<ul className={`${burgerConstructorStyle.list} pr-2`}>
-					{ingredients.map((elem) => {
+					{data.map((elem) => {
 						if (elem.type === 'sauce' || elem.type === 'main') {
 							return <ConstructorItems key={elem._id} items={elem} />
 						}
 					})}
 				</ul>
 
-				<ConstructorElement
+				{bunItem && <ConstructorElement
 					type="bottom"
 					isLocked={true}
-					text="Краторная булка N-200i (низ)"
-					price={200}
-					thumbnail={'https://code.s3.yandex.net/react/code/bun-02.png'}
-				/>
+					text={bunItem.name + '(низ)'}
+					price={bunItem.price}
+					thumbnail={bunItem.image}
+				/>}
 			</div>
 			<div className={`${burgerConstructorStyle.order} pt-10 pr-5`}>
 				<div className={`${burgerConstructorStyle.count_result} pr-10`}>
-					<p className='text text_type_digits-medium pr-2'>15000</p>
+					<p className='text text_type_digits-medium pr-2'>{total}</p>
 					<CurrencyIcon type="primary" />
 				</div>
-				<Button type="primary" size="large" onClick={onClick}>
+				<Button type="primary" size="large" onClick={() => {
+					onClick();
+					getOrder(burgerId)
+				}}>
 					Оформить заказ
 				</Button>
 			</div>
@@ -51,8 +69,8 @@ const BurgerConstructor = ({ ingredients, onClick }) => {
 }
 
 BurgerConstructor.propTypes = {
-	ingredients: PropTypes.arrayOf(ingredientType.isRequired).isRequired,
-	onClick: PropTypes.func.isRequired
+	onClick: PropTypes.func.isRequired,
+	getOrder: PropTypes.func.isRequired
 }
 
 export default BurgerConstructor

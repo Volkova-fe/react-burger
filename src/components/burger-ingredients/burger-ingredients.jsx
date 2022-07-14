@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerIngredientStyle from './burger-ingredients.module.css'
 import IngredientsCategory from './ingredients-category/ingredients-category'
+import { DataContext } from '../../services/appContext';
 
-const BurgerIngredients = ({ ingredients, onClick }) => {
+const BurgerIngredients = ({ onClick }) => {
 	const [current, setCurrent] = useState('bun');
+	const { data } = useContext(DataContext);
 
 	return (
 		<section className={burgerIngredientStyle.section}>
@@ -29,9 +31,9 @@ const BurgerIngredients = ({ ingredients, onClick }) => {
 			</div>
 
 			<ul className={`${burgerIngredientStyle.list} pt-8`}>
-				<IngredientsCategory ingredients={ingredients} type='bun' onClick={onClick} />
-				<IngredientsCategory ingredients={ingredients} type='sauce' onClick={onClick} />
-				<IngredientsCategory ingredients={ingredients} type='main' onClick={onClick} />
+				<IngredientsCategory ingredients={data} type='bun' onClick={onClick} />
+				<IngredientsCategory ingredients={data} type='sauce' onClick={onClick} />
+				<IngredientsCategory ingredients={data} type='main' onClick={onClick} />
 			</ul>
 		</section >
 	)

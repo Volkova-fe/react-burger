@@ -7,12 +7,20 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import { DataContext } from '../../services/appContext';
 
 function App() {
   const [data, setData] = useState([])
+  const [orderNumber, setOrderNumber] = useState({
+    name: '',
+    order: {
+      number: ''
+    },
+    success: false
+  });
 
   function getData() {
-    fetch(`${API.url}`)
+    fetch(`${API.url}ingredients`)
       .then(checkResponse)
       .then((res) => { setData(res.data) })
       .catch(err => { console.log(err) });
@@ -21,6 +29,21 @@ function App() {
   useEffect(() => {
     getData()
   }, [])
+
+  function getOrder(id) {
+    fetch(`${API.url}orders`, {
+      method: 'POST',
+      body: JSON.stringify({
+        ingredients: id
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(checkResponse)
+      .then((res) => setOrderNumber(res))
+      .catch(err => { console.log(err) });
+  }
 
   const [openOrderDetailsModal, setOpenOrderDetailsModal] = useState(false)
   const [openIngredientDetailsModal, setOpenIngredientDetailsModal] = useState(false)
@@ -42,27 +65,29 @@ function App() {
 
   return (
     <div className={page.app}>
-      <AppHeader />
-      <main className={page.content}>
-        <BurgerIngredients ingredients={data} onClick={handleOpenIngredientDetailsModal} />
-        <BurgerConstructor ingredients={data} onClick={handleOpenOrderDetailsModal} />
-      </main>
-      {openOrderDetailsModal &&
-        <Modal
-          title=''
-          active={openOrderDetailsModal}
-          onClickClose={handleCloseModal}>
-          <OrderDetails />
-        </Modal>
-      }
-      {openIngredientDetailsModal &&
-        <Modal
-          title='Детали ингредиента'
-          active={openIngredientDetailsModal}
-          onClickClose={handleCloseModal}>
-          <IngredientDetails item={ingredient} />
-        </Modal>
-      }
+      <DataContext.Provider value={{ data, setData }}>
+        <AppHeader />
+        <main className={page.content}>
+          <BurgerIngredients ingredients={data} onClick={handleOpenIngredientDetailsModal} />
+          <BurgerConstructor onClick={handleOpenOrderDetailsModal} getOrder={getOrder} />
+        </main>
+        {openOrderDetailsModal &&
+          <Modal
+            title=''
+            active={openOrderDetailsModal}
+            onClickClose={handleCloseModal}>
+            <OrderDetails props={orderNumber} />
+          </Modal>
+        }
+        {openIngredientDetailsModal &&
+          <Modal
+            title='Детали ингредиента'
+            active={openIngredientDetailsModal}
+            onClickClose={handleCloseModal}>
+            <IngredientDetails item={ingredient} />
+          </Modal>
+        }
+      </DataContext.Provider>
     </div>
   );
 }
