@@ -1,93 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import { API, checkResponse } from '../api/api';
+import React, { useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+
 import page from './app.module.css';
+
 import AppHeader from '../app-header/app-header';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-import { DataContext } from '../../services/appContext';
+
+import { closeOrderModal } from '../../services/actions/order-details';
+import { getBurgerIngredients } from '../../services/actions/burger-ingredients';
+import { closeIngredientModal } from '../../services/actions/ingredient-details';
+import { RESET_ITEM } from '../../services/actions/burger-constructor';
 
 function App() {
-  const [data, setData] = useState([])
-  const [orderNumber, setOrderNumber] = useState({
-    name: '',
-    order: {
-      number: ''
-    },
-    success: false
-  });
-
-  function getData() {
-    fetch(`${API.url}ingredients`)
-      .then(checkResponse)
-      .then((res) => { setData(res.data) })
-      .catch(err => { console.log(err) });
-  }
+  const dispatch = useDispatch();
+  const orderNumber = useSelector(store => store.order.number);
+  const openIngredientDetailsModal = useSelector(store => store.ingredientDetails.openModal);
 
   useEffect(() => {
-    getData()
-  }, [])
+    dispatch(getBurgerIngredients());
+  }, [dispatch]);
 
-  function getOrder(id) {
-    fetch(`${API.url}orders`, {
-      method: 'POST',
-      body: JSON.stringify({
-        ingredients: id
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(checkResponse)
-      .then((res) => setOrderNumber(res))
-      .catch(err => { console.log(err) });
-  }
+  const handleCloseOrderDetailsModal = useCallback(() => {
+    dispatch(closeOrderModal())
+    dispatch({ type: RESET_ITEM });
+  }, [dispatch]);
 
-  const [openOrderDetailsModal, setOpenOrderDetailsModal] = useState(false)
-  const [openIngredientDetailsModal, setOpenIngredientDetailsModal] = useState(false)
-  const [ingredient, setIngredient] = useState(null)
-
-  const handleOpenOrderDetailsModal = () => {
-    setOpenOrderDetailsModal(true);
-  }
-
-  const handleOpenIngredientDetailsModal = (item) => {
-    setOpenIngredientDetailsModal(true);
-    setIngredient(item);
-  }
-
-  const handleCloseModal = () => {
-    setOpenOrderDetailsModal(false);
-    setOpenIngredientDetailsModal(false);
-  }
+  const handleCloseIngredientDetailsModal = useCallback(() => {
+    dispatch(closeIngredientModal());
+  }, [dispatch]);
 
   return (
     <div className={page.app}>
-      <DataContext.Provider value={{ data, setData }}>
-        <AppHeader />
-        <main className={page.content}>
-          <BurgerIngredients ingredients={data} onClick={handleOpenIngredientDetailsModal} />
-          <BurgerConstructor onClick={handleOpenOrderDetailsModal} getOrder={getOrder} />
-        </main>
-        {openOrderDetailsModal &&
-          <Modal
-            title=''
-            active={openOrderDetailsModal}
-            onClickClose={handleCloseModal}>
-            <OrderDetails props={orderNumber} />
-          </Modal>
-        }
-        {openIngredientDetailsModal &&
-          <Modal
-            title='Детали ингредиента'
-            active={openIngredientDetailsModal}
-            onClickClose={handleCloseModal}>
-            <IngredientDetails item={ingredient} />
-          </Modal>
-        }
-      </DataContext.Provider>
+      <AppHeader />
+      <main className={page.content}>
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </DndProvider>
+      </main>
+      {!!orderNumber &&
+        <Modal
+          title=''
+          onClickClose={handleCloseOrderDetailsModal}>
+          <OrderDetails />
+        </Modal>
+      }
+      {!!openIngredientDetailsModal &&
+        <Modal
+          title='Детали ингредиента'
+          onClickClose={handleCloseIngredientDetailsModal}>
+          <IngredientDetails ingredient={openIngredientDetailsModal} />
+        </Modal>
+      }
     </div>
   );
 }
