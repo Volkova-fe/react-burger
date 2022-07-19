@@ -32,7 +32,7 @@ ___
 * Установка заготовенного CRA - npx create-react-app react-burger --template typescript 
 * Использована библиотека готовых компонентов - npm i @ya.praktikum/react-developer-burger-ui-components 
 * Организована файловая структура : 
-  - Компоненты в директории components/, шрифты — в fonts/, изображения — в images, экшены и редьюсеры - services
+  - Компоненты в директории components/, шрифты — в fonts/, изображения — в images, экшены и редьюсеры - services/
   - App
    	 - AppHeader
 	 - BurgerIngredients (внутри содержит свои компоненты: IngredientsCategory, IngridientsItem)
