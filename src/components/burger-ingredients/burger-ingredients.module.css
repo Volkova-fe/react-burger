@@ -11,7 +11,7 @@
 	list-style: none;
 	margin: 0;
 	padding-left: 0;
-	height: calc(100vh - 324px);
+	height: calc(100vh - 575px);
 	min-height: 208px;
 	overflow-y: auto;
 	overflow-x: hidden;
@@ -31,5 +31,9 @@
 
 .title {
 	text-align: left;
-	padding-top: 10%;
+	padding-top: 9%;
+}
+
+.link {
+	text-decoration: none;
 }

@@ -7,32 +7,53 @@ import {
 }
 	from '@ya.praktikum/react-developer-burger-ui-components'
 import header from './app-header.module.css';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 const AppHeader = () => {
+	const location = useLocation();
+
+
 	return (
 		<header className={header.header}>
 			<nav className={header.container}>
 				<ul className={header.list}>
 					<li className={`${header.item} ${header.item_left}`}>
-						<a className={`${header.link} pl-5 pr-5 pb-4 pt-4`} href='#constructor'>
-							<BurgerIcon type="primary" />
-							<p className='text text_type_main-default pl-2'>Конструктор</p>
-						</a>
+							<NavLink 
+							to='/' 
+							exact
+							className={`${header.link} text text_type_main-default `}
+							activeClassName={`${header.linkActive} text text_type_main-default`}
+							>
+								<BurgerIcon type={location.pathname === '/' ? 'primary' :'secondary'} />
+								<p className={`${header.text} pl-2`}>Конструктор</p>
+							</NavLink>
 					</li>
 					<li className={`${header.item} ${header.item_left} ml-2`}>
-						<a className={`${header.link} pl-5 pr-5 pb-4 pt-4`} href='#orderFeed'>
-							<ListIcon type="secondary" />
-							<p className='text text_type_main-default text_color_inactive pl-2'>Лента заказов</p>
-						</a>
+							<NavLink 
+							to='/feed' 
+							exact
+							className={`${header.link} text text_type_main-default`}
+							activeClassName={`${header.linkActive} text text_type_main-default`}
+							>
+								<ListIcon type={location.pathname === '/feed' ? 'primary' :'secondary'} />
+								<p className={`${header.text} pl-2`}>Лента заказов</p>
+							</NavLink>
 					</li>
-					<li className={`${header.item} ${header.logo}`}>
-						<Logo />
+					<li className={`${header.item} ${header.logo} pt-6 pb-6`}>
+						<Link to='/' exact>
+							<Logo />
+						</Link>
 					</li>
 					<li className={`${header.item} ${header.item_right}`}>
-						<a className={`${header.link} pl-5 pr-5 pb-4 pt-4`} href='#userAccount'>
-							<ProfileIcon type="secondary" />
-							<p className='text text_type_main-default text_color_inactive pl-2'>Личный кабинет</p>
-						</a>
+							<NavLink 
+							to='/profile' 
+							exact
+							className={`${header.link} text text_type_main-default`}
+							activeClassName={`${header.linkActive} text text_type_main-default`}
+							>
+								<ProfileIcon type={location.pathname === '/profile' ? 'primary' :'secondary'} />
+								<p className={`${header.text} pl-2`}>Личный кабинет</p>
+							</NavLink>
 					</li>
 				</ul>
 			</nav>

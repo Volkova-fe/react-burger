@@ -54,8 +54,8 @@ const BurgerConstructor = () => {
 	});
 
 	return (
-		<section className={`${burgerConstructorStyle.section} pl-10 pt-25`}>
-			<div className={`${burgerConstructorStyle.container} pr-2`} ref={dropTarget}>
+		<section className={`${burgerConstructorStyle.section} pl-10 pt-15`}>
+			<div className={`${burgerConstructorStyle.container} pr-2 pt-4`} ref={dropTarget}>
 				{bun.length === 0
 					? (<p className='text text_type_main-large pr-2'>Выберите булочку</p>)
 					: (<ConstructorElement
