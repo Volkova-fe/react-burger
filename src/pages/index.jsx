@@ -1,3 +1,4 @@
+import { NotFound404 } from './not-found-404/not-found-404';
 import { Profile } from "./profile/profile";
 import { ResetPassword } from "./reset-password/reset-password";
 import { ForgotPassword } from "./forgot-password/forgot-password";
@@ -9,5 +10,6 @@ export {
 	Register,
 	ForgotPassword,
 	ResetPassword,
-	Profile
+	Profile,
+	NotFound404
 };

@@ -7,11 +7,16 @@ import {
 }
 	from '@ya.praktikum/react-developer-burger-ui-components'
 import header from './app-header.module.css';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, Redirect, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const AppHeader = () => {
 	const location = useLocation();
+	const { isAuthChecked } = useSelector(state => state.auth);
 
+	if (isAuthChecked) {
+		return (<Redirect to={location.state?.from || '/login'} />);
+	}
 
 	return (
 		<header className={header.header}>
@@ -40,7 +45,7 @@ const AppHeader = () => {
 							</NavLink>
 					</li>
 					<li className={`${header.item} ${header.logo} pt-6 pb-6`}>
-						<Link to='/' exact>
+						<Link to='/'>
 							<Logo />
 						</Link>
 					</li>

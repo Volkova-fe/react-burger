@@ -1,39 +1,50 @@
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { Link, Redirect, useLocation } from 'react-router-dom';
+import { setLoginFormValue, singIn } from '../../services/actions/auth';
 import styles from './login.module.css';
 
 export const Login = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
 
-	const onChangeEmail = e => {
-		setEmail(e.target.value);
+	const dispatch = useDispatch();
+	const location = useLocation()
+	const { email, password } = useSelector(state => state.auth.form);
+	const { isAuthChecked } = useSelector(state => state.auth);
+
+	const onChange = e => {
+		dispatch(setLoginFormValue(e.target.name, e.target.value));
 	}
 
-	const onChangePassword = e => {
-		setPassword(e.target.value);
+	const onFormSubmit = e => {
+		e.preventDefault();
+		dispatch(singIn(email, password))
+	}
+
+	if (isAuthChecked) {
+		return <Redirect to={{ pathname: "/" }} />;
 	}
 
 	return (
 		<div className={styles.container}>
 			<h2 className={`${styles.title} text text_type_main-medium pb-6`}>Вход</h2>
-			<form className={styles.form}>
+			<form className={styles.form} onSubmit={onFormSubmit}>
 				<div className="pb-6">
-					<EmailInput onChange={onChangeEmail} value={email} name={'email'} size="default" />
+					<EmailInput onChange={onChange} value={email} name={'email'} size="default" />
 				</div>
 				<div className="pb-6">
-					<PasswordInput onChange={onChangePassword} value={password} name={'password'} size="default" />
+					<PasswordInput onChange={onChange} value={password} name={'password'} size="default" />
 				</div>
 				<Button type="primary" size="medium">
 					Войти
 				</Button>
 			</form>
 			<p className="text text_type_main-default text_color_inactive pt-20 pb-4">Вы — новый пользователь?
-			<Link className={styles.link} to='/register'>Зарегистрироваться</Link>
+				<Link className={styles.link} to='/register'>Зарегистрироваться</Link>
 			</p>
 			<p className="text text_type_main-default text_color_inactive">Забыли пароль?
-			<Link className={styles.link} to='/forgot-password'>Восстановить пароль</Link>
+				<Link className={styles.link} to='/forgot-password'>Восстановить пароль</Link>
 			</p>
 		</div >)
 }

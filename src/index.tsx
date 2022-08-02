@@ -9,6 +9,7 @@ import { compose, legacy_createStore as createStore, applyMiddleware } from 'red
 import { rootReducer } from './services/reducers';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 declare global {
   interface Window {
@@ -25,9 +26,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-      <Provider store={store}>
-        <App />
-      </Provider>
+  <Router>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </Router>
 );
 
 reportWebVitals();

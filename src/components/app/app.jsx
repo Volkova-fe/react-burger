@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import page from './app.module.css';
 
@@ -17,7 +17,7 @@ import { closeOrderModal } from '../../services/actions/order-details';
 import { getBurgerIngredients } from '../../services/actions/burger-ingredients';
 import { closeIngredientModal } from '../../services/actions/ingredient-details';
 import { RESET_ITEM } from '../../services/actions/burger-constructor';
-import { ForgotPassword, Login, Profile, Register, ResetPassword } from '../../pages';
+import { ForgotPassword, Login, NotFound404, Profile, Register, ResetPassword } from '../../pages';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,50 +39,49 @@ function App() {
 
   return (
     <div className={page.app}>
-      <Router>
-        <AppHeader />
-        <>
-          <Switch>
-            <Route path='/' exact>
-              <main className={page.content}>
-                <DndProvider backend={HTML5Backend}>
-                  <BurgerIngredients />
-                  <BurgerConstructor />
-                </DndProvider>
-              </main>
-            </Route>
-            <Route path='/login' exact>
-              <Login />
-            </Route>
-            <Route path='/register' exact>
-              <Register />
-            </Route>
-            <Route path='/forgot-password' exact>
-              <ForgotPassword />
-            </Route>
-            <Route path='/reset-password' exact>
-              <ResetPassword />
-            </Route>
-            <Route path='/profile' exact>
-              <Profile />
-            </Route>
-          </Switch>
-        </>
-        {!!orderNumber &&
-          <Modal
-            title=''
-            onClickClose={handleCloseOrderDetailsModal}>
-            <OrderDetails />
-          </Modal>
-        }
-        {!!openIngredientDetailsModal &&
-          <Modal
-            title='Детали ингредиента'
-            onClickClose={handleCloseIngredientDetailsModal}>
-            <IngredientDetails ingredient={openIngredientDetailsModal} />
-          </Modal>
-        }
-      </Router>
+      <AppHeader />
+      <Switch>
+        <Route path='/' exact>
+          <main className={page.content}>
+            <DndProvider backend={HTML5Backend}>
+              <BurgerIngredients />
+              <BurgerConstructor />
+            </DndProvider>
+          </main>
+        </Route>
+        <Route path='/login' exact>
+          <Login />
+        </Route>
+        <Route path='/register' exact>
+          <Register />
+        </Route>
+        <Route path='/forgot-password' exact>
+          <ForgotPassword />
+        </Route>
+        <Route path='/reset-password' exact>
+          <ResetPassword />
+        </Route>
+        <Route path='/profile' exact>
+          <Profile />
+        </Route>
+        <Route>
+          <NotFound404 />
+        </Route>
+      </Switch>
+      {!!orderNumber &&
+        <Modal
+          title=''
+          onClickClose={handleCloseOrderDetailsModal}>
+          <OrderDetails />
+        </Modal>
+      }
+      {!!openIngredientDetailsModal &&
+        <Modal
+          title='Детали ингредиента'
+          onClickClose={handleCloseIngredientDetailsModal}>
+          <IngredientDetails ingredient={openIngredientDetailsModal} />
+        </Modal>
+      }
     </div>
   );
 }

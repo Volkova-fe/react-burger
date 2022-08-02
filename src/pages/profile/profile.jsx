@@ -1,24 +1,40 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { getUser, singOut, updateUser } from '../../services/actions/auth';
 import styles from './profile.module.css';
 
 export const Profile = () => {
-	const [name, setName] = useState('')
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
 
-	const onChangeName = e => {
-		setName(e.target.value);
+	const dispatch = useDispatch();
+	const { email, name } = useSelector(state => state.auth.user);
+
+	const [form, setForm] = useState({
+		email: email,
+		name: name,
+		password: "",
+	});
+
+	const onChange = (e) => {
+		setForm({ ...form, [e.target.name]: e.target.value });
 	}
 
-	const onChangeEmail = e => {
-		setEmail(e.target.value);
-	}
+	useEffect(() => {
+		dispatch(getUser());
+	}, [dispatch])
 
-	const onChangePassword = e => {
-		setPassword(e.target.value);
-	}
+	function handleSingOut() {
+		dispatch(singOut());
+	};
+
+	const onSubmit = (e) => {
+		e.preventDefault();
+		dispatch(updateUser( form.email,form.name, form.password));
+	};
+
+
 
 	return (
 		<div className={`${styles.container} pt-30`}>
@@ -46,10 +62,11 @@ export const Profile = () => {
 					</li>
 					<li className={`${styles.item}`}>
 						<NavLink
-							to='/'
+							to='/login'
 							exact
 							className={`${styles.link} text text_type_main-medium text_color_inactive`}
 							activeClassName={`${styles.linkActive} text text_type_main-medium`}
+							onClick={handleSingOut}
 						>
 							Выход
 						</NavLink>
@@ -59,14 +76,14 @@ export const Profile = () => {
 					В этом разделе вы можете изменить свои персональные данные
 				</p>
 			</nav>
-			<form className={styles.form}>
+			<form className={styles.form} onSubmit={onSubmit}>
 				<div className="pb-6">
 					<Input
 						type={'text'}
 						placeholder={'Имя'}
-						onChange={onChangeName}
+						onChange={onChange}
 						icon={'EditIcon'}
-						value={name}
+						value={form.name}
 						name={'name'}
 						error={false}
 						errorText={'Ошибка'}
@@ -77,9 +94,9 @@ export const Profile = () => {
 					<Input
 						type={'email'}
 						placeholder={'Логин'}
-						onChange={onChangeEmail}
+						onChange={onChange}
 						icon={'EditIcon'}
-						value={email}
+						value={form.email}
 						name={'email'}
 						error={false}
 						errorText={'Ошибка'}
@@ -90,9 +107,9 @@ export const Profile = () => {
 					<Input
 						type={'password'}
 						placeholder={'Пароль'}
-						onChange={onChangePassword}
+						onChange={onChange}
 						icon={'EditIcon'}
-						value={password}
+						value={form.password}
 						name={'password'}
 						error={false}
 						errorText={'Ошибка'}
@@ -100,9 +117,9 @@ export const Profile = () => {
 					/>
 				</div>
 				<Button type="primary" size="medium">
-					Сохранить 
+					Сохранить
 				</Button>
 			</form>
 		</div >
-		)
+	)
 }
