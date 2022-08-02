@@ -11,7 +11,7 @@ export const Login = () => {
 	const dispatch = useDispatch();
 	const location = useLocation()
 	const { email, password } = useSelector(state => state.auth.form);
-	const { isAuthChecked } = useSelector(state => state.auth);
+	const user = useSelector(state => state.auth.user);
 
 	const onChange = e => {
 		dispatch(setLoginFormValue(e.target.name, e.target.value));
@@ -21,9 +21,10 @@ export const Login = () => {
 		e.preventDefault();
 		dispatch(singIn(email, password))
 	}
+	
 
-	if (isAuthChecked) {
-		return <Redirect to={{ pathname: "/" }} />;
+	if (user) {
+		return (<Redirect to={ location.state?.from || '/' } />);
 	}
 
 	return (

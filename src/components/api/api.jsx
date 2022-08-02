@@ -59,19 +59,13 @@ export const forgotPassRequest = async email => {
 export const resetPassRequest = async (password, token) => {
 	return await fetch(`${API.url}password-reset/reset`, {
 		method: 'POST',
-		body: JSON.stringify({
-			password: password,
-			token: token
-		}
+		body: JSON.stringify(
+			password,
+			token
 		),
-		mode: 'cors',
-		cache: 'no-cache',
-		credentials: 'same-origin',
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		redirect: 'follow',
-		referrerPolicy: 'no-referrer'
 	})
 		.then(checkResponse);
 };

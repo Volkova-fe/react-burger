@@ -7,15 +7,13 @@ import { forgotPassword } from '../../services/actions/auth';
 import styles from './forgot-password.module.css';
 
 export const ForgotPassword = () => {
-	const [emailInput, setEmailInput] = useState('');
-
+	const [email, setEmail] = useState('');
 	const dispatch = useDispatch();
 
-	const { email } = useSelector(state => state.auth.form);
 	const { forgetPassSuccess } = useSelector(state => state.auth);
 
 	const onChangeEmail = e => {
-		setEmailInput(e.target.value);
+		setEmail(e.target.value);
 	}
 
 	const onFormSubmit = e => {
@@ -33,7 +31,7 @@ export const ForgotPassword = () => {
 						type={'email'}
 						placeholder={'Укажите e-mail'}
 						onChange={onChangeEmail}
-						value={emailInput}
+						value={email}
 						name={'email'}
 						error={false}
 						errorText={'Ошибка'}

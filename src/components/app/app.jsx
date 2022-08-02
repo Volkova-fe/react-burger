@@ -18,15 +18,31 @@ import { getBurgerIngredients } from '../../services/actions/burger-ingredients'
 import { closeIngredientModal } from '../../services/actions/ingredient-details';
 import { RESET_ITEM } from '../../services/actions/burger-constructor';
 import { ForgotPassword, Login, NotFound404, Profile, Register, ResetPassword } from '../../pages';
+import { getUser, updateToken } from '../../services/actions/auth';
+import { getCookie } from '../../utils/utils';
+import { ProtectedRoute } from '../protected-route/protected-route';
 
 function App() {
   const dispatch = useDispatch();
   const orderNumber = useSelector(store => store.order.number);
   const openIngredientDetailsModal = useSelector(store => store.ingredientDetails.openModal);
+  const refreshToken = localStorage.getItem('refreshToken');
+  const cookie = getCookie('token')
 
   useEffect(() => {
     dispatch(getBurgerIngredients());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch])
+
+  useEffect(() => {
+    if (!cookie && refreshToken) {
+      dispatch(updateToken());
+    }
+  }, [dispatch, refreshToken, cookie]);
+
 
   const handleCloseOrderDetailsModal = useCallback(() => {
     dispatch(closeOrderModal())
@@ -36,6 +52,7 @@ function App() {
   const handleCloseIngredientDetailsModal = useCallback(() => {
     dispatch(closeIngredientModal());
   }, [dispatch]);
+
 
   return (
     <div className={page.app}>
@@ -58,12 +75,12 @@ function App() {
         <Route path='/forgot-password' exact>
           <ForgotPassword />
         </Route>
-        <Route path='/reset-password' exact>
+        <Route  path='/reset-password' exact>
           <ResetPassword />
         </Route>
-        <Route path='/profile' exact>
+        <ProtectedRoute  path='/profile'>
           <Profile />
-        </Route>
+        </ProtectedRoute>
         <Route>
           <NotFound404 />
         </Route>

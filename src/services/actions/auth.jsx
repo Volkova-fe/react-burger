@@ -5,7 +5,8 @@ import {
 	logoutRequest,
 	resetPassRequest,
 	updateUserRequest,
-	resgisterUserRequest
+	resgisterUserRequest,
+	updateTokenRequest
 } from "../../components/api/api";
 
 import { deleteCookie, setCookie } from "../../utils/utils";
@@ -37,10 +38,13 @@ export const GET_USER_REQUEST = 'GET_USER_REQUEST';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_FAILED = 'GET_USER_FAILED';
 
-export const PATCH_USER_SET_VALUE = 'PATCH_USER_SET_VALUE';
 export const PATCH_USER_REQUEST = 'PATCH_USER_REQUEST';
 export const PATCH_USER_SUCCESS = 'PATCH_USER_SUCCESS';
 export const PATCH_USER_FAILED = 'PATCH_USER_FAILED';
+
+export const UPDATE_TOKEN_REQUEST= 'UPDATE_TOKEN_REQUEST';
+export const UPDATE_TOKEN_SUCCESS = 'UPDATE_TOKEN_SUCCESS';
+export const UPDATE_TOKEN_FAILED = 'UPDATE_TOKEN_FAILED';
 
 export function forgotPassword(email) {
 	return function (dispatch) {
@@ -51,7 +55,7 @@ export function forgotPassword(email) {
 			.then((res) => {
 				dispatch({
 					type: FORGOT_PASSWORD_SUCCESS,
-					message: res
+					message: res.message
 				});
 			})
 			.catch(() => {
@@ -200,12 +204,6 @@ export function getUser() {
 	};
 }
 
-export const setUpdateFormValue = (field, value) => ({
-	type: PATCH_USER_SET_VALUE,
-	field,
-	value
-});
-
 export function updateUser(email, name, password) {
 	return function (dispatch) {
 		dispatch({
@@ -224,4 +222,25 @@ export function updateUser(email, name, password) {
 				});
 			})
 	};
+}
+
+export function updateToken() {
+	return function (dispatch) {
+		dispatch({ type: UPDATE_TOKEN_REQUEST })
+		updateTokenRequest()
+			.then((res) => {
+				const authToken = res.accessToken.split('Bearer ')[1];
+				const refreshToken = res.refreshToken;
+				setCookie('token', authToken);
+				localStorage.setItem('refreshToken', refreshToken);
+				dispatch({
+					type: UPDATE_TOKEN_SUCCESS,
+				})
+			})
+			.catch((err) => {
+				dispatch({
+					type: UPDATE_TOKEN_FAILED,
+				});
+			});
+	}
 }

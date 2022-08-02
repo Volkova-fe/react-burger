@@ -1,9 +1,9 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getUser, singOut, updateUser } from '../../services/actions/auth';
+import { singOut, updateUser } from '../../services/actions/auth';
 import styles from './profile.module.css';
 
 export const Profile = () => {
@@ -14,16 +14,12 @@ export const Profile = () => {
 	const [form, setForm] = useState({
 		email: email,
 		name: name,
-		password: "",
+		password: '',
 	});
 
 	const onChange = (e) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	}
-
-	useEffect(() => {
-		dispatch(getUser());
-	}, [dispatch])
 
 	function handleSingOut() {
 		dispatch(singOut());

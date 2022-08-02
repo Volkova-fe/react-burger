@@ -14,7 +14,6 @@ import {
 	LOGOUT_FORM_SUCCESS,
 	PATCH_USER_FAILED,
 	PATCH_USER_REQUEST,
-	PATCH_USER_SET_VALUE,
 	PATCH_USER_SUCCESS,
 	REGISTER_FORM_FAILED,
 	REGISTER_FORM_REQUEST,
@@ -23,7 +22,10 @@ import {
 	RESET_FORM_SET_VALUE,
 	RESET_PASSWORD_FAILED,
 	RESET_PASSWORD_REQUEST,
-	RESET_PASSWORD_SUCCESS
+	RESET_PASSWORD_SUCCESS,
+	UPDATE_TOKEN_FAILED,
+	UPDATE_TOKEN_REQUEST,
+	UPDATE_TOKEN_SUCCESS
 } from "../actions/auth";
 
 
@@ -64,9 +66,9 @@ const initialState = {
 	updateUserRequest: false,
 	updateUserFailed: false,
 
-	updateTokenRequest: false,
-	updateTokenSuccess: false,
-	updateTokenFailed: false,
+	updateupdateTokenRequest: false,
+	updateupdateTokenSuccess: false,
+	updateupdateTokenFailed: false,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -251,15 +253,6 @@ export const authReducer = (state = initialState, action) => {
 				loginFailed: false,
 			};
 		}
-		case PATCH_USER_SET_VALUE: {
-			return {
-				...state,
-				form: {
-					...state.form,
-					[action.field]: action.value
-				}
-			};
-		}
 		case PATCH_USER_REQUEST: {
 			return {
 				...state,
@@ -288,6 +281,25 @@ export const authReducer = (state = initialState, action) => {
 				updateUserFailed: false,
 			};
 		}
+		case UPDATE_TOKEN_REQUEST:
+			return {
+				...state,
+				updateTokenRequest: true,
+				updateTokenFailed: false,
+			}
+		case UPDATE_TOKEN_FAILED:
+			return {
+				...state,
+				updateTokenRequest: false,
+				updateTokenFailed: true,
+			}
+		case UPDATE_TOKEN_SUCCESS:
+			return {
+				...state,
+				updateTokenRequest: false,
+				updateTokenSuccess: true,
+				updateTokenFailed: false,
+			}
 		default: {
 			return state;
 		}
