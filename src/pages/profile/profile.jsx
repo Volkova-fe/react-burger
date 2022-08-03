@@ -2,8 +2,9 @@ import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-component
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import { singOut, updateUser } from '../../services/actions/auth';
+import { Orders } from './orders/orders';
 import styles from './profile.module.css';
 
 export const Profile = () => {
@@ -27,7 +28,7 @@ export const Profile = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		dispatch(updateUser( form.email,form.name, form.password));
+		dispatch(updateUser(form.email, form.name, form.password));
 	};
 
 
@@ -72,50 +73,57 @@ export const Profile = () => {
 					В этом разделе вы можете изменить свои персональные данные
 				</p>
 			</nav>
-			<form className={styles.form} onSubmit={onSubmit}>
-				<div className="pb-6">
-					<Input
-						type={'text'}
-						placeholder={'Имя'}
-						onChange={onChange}
-						icon={'EditIcon'}
-						value={form.name}
-						name={'name'}
-						error={false}
-						errorText={'Ошибка'}
-						size={'default'}
-					/>
-				</div>
-				<div className="pb-6">
-					<Input
-						type={'email'}
-						placeholder={'Логин'}
-						onChange={onChange}
-						icon={'EditIcon'}
-						value={form.email}
-						name={'email'}
-						error={false}
-						errorText={'Ошибка'}
-						size={'default'}
-					/>
-				</div>
-				<div className="pb-6">
-					<Input
-						type={'password'}
-						placeholder={'Пароль'}
-						onChange={onChange}
-						icon={'EditIcon'}
-						value={form.password}
-						name={'password'}
-						error={false}
-						errorText={'Ошибка'}
-						size={'default'}
-					/>
-				</div>
-				<Button type="primary" size="medium">
-					Сохранить
-				</Button>
-			</form>
+			<Switch>
+				<Route exact path="/profile/orders">
+					<Orders />
+				</Route>
+				<Route exact path="/profile">
+					<form className={styles.form} onSubmit={onSubmit}>
+						<div className="pb-6">
+							<Input
+								type={'text'}
+								placeholder={'Имя'}
+								onChange={onChange}
+								icon={'EditIcon'}
+								value={form.name}
+								name={'name'}
+								error={false}
+								errorText={'Ошибка'}
+								size={'default'}
+							/>
+						</div>
+						<div className="pb-6">
+							<Input
+								type={'email'}
+								placeholder={'Логин'}
+								onChange={onChange}
+								icon={'EditIcon'}
+								value={form.email}
+								name={'email'}
+								error={false}
+								errorText={'Ошибка'}
+								size={'default'}
+							/>
+						</div>
+						<div className="pb-6">
+							<Input
+								type={'password'}
+								placeholder={'Пароль'}
+								onChange={onChange}
+								icon={'EditIcon'}
+								value={form.password}
+								name={'password'}
+								error={false}
+								errorText={'Ошибка'}
+								size={'default'}
+							/>
+						</div>
+						<Button type="primary" size="medium">
+							Сохранить
+						</Button>
+					</form>
+				</Route>
+			</Switch>
 		</div >
 	)
 }

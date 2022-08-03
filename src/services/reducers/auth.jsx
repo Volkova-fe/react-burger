@@ -51,7 +51,6 @@ const initialState = {
 		email: '',
 		name: '',
 	},
-	isAuthChecked: false,
 
 	loginRequest: false,
 	loginFailed: false,
@@ -77,14 +76,14 @@ export const authReducer = (state = initialState, action) => {
 			return {
 				...state,
 				getUserFailed: false,
-				getUserRequest: true
+				getUserRequest: true,
 			};
 		}
 		case GET_USER_FAILED: {
 			return {
 				...state,
 				getUserFailed: true,
-				getUserRequest: false
+				getUserRequest: false,
 			};
 		}
 		case GET_USER_SUCCESS: {
@@ -187,7 +186,7 @@ export const authReducer = (state = initialState, action) => {
 				},
 				loginRequest: false,
 				loginFailed: false,
-				isAuthChecked: true
+				loginSuccess: true,
 			};
 		}
 		case LOGOUT_FORM_REQUEST: {
@@ -251,6 +250,7 @@ export const authReducer = (state = initialState, action) => {
 				},
 				loginRequest: false,
 				loginFailed: false,
+				loginSuccess: true,
 			};
 		}
 		case PATCH_USER_REQUEST: {

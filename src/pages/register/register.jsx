@@ -2,21 +2,28 @@ import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-de
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import { registerUser, setRegisterFormValue } from '../../services/actions/auth';
+import { getCookie } from '../../utils/utils';
 import styles from './register.module.css';
 
 export const Register = () => {
 	const dispatch = useDispatch();
+	const location = useLocation();
+	const cookie = getCookie('token');
 	const { email, password, name } = useSelector(state => state.auth.form);
 
-	const onChange= e => {
+	const onChange = e => {
 		dispatch(setRegisterFormValue(e.target.name, e.target.value));
 	}
 
 	const onFormSubmit = e => {
 		e.preventDefault();
-		dispatch(registerUser(email, password, name))
+		dispatch(registerUser(email, password, name));
+	}
+
+	if (cookie) {
+		return (<Redirect to={location.state?.from || '/'} />);
 	}
 
 	return (

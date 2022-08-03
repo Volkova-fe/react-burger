@@ -13,7 +13,7 @@ export function getBurgerIngredients() {
 			.then((res) => {
 				dispatch({
 					type: BURGER_INGREDIENTS_SUCCESS,
-					ingredients: res.data
+					ingredients: res.data,
 				});
 			})
 			.catch(() => {

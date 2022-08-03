@@ -4,7 +4,7 @@ export const OPEN_INGREDIENT_MODAL = 'OPEN_INGREDIENT_MODAL';
 export const openIngredientModal = (ingredient) => {
 	return {
 		type: OPEN_INGREDIENT_MODAL,
-		ingredient: ingredient
+		ingredient: ingredient,
 	};
 }
 

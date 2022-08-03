@@ -3,15 +3,15 @@ import { getCookie } from "../../utils/utils";
 export const API = {
 	url: 'https://norma.nomoreparties.space/api/',
 	headers: {
-		'Content-Type': 'aplication.json'
-	}
-};
+		'Content-Type': 'aplication.json',
+	},
+}
 
 export const checkResponse = res => {
 	if (res.ok) {
-		return res.json()
+		return res.json();
 	} else {
-		return Promise.reject(`Ошибка: code ${res.status}`)
+		return Promise.reject(`Ошибка: code ${res.status}`);
 	}
 }
 
@@ -22,9 +22,9 @@ export const orderDetailsRequest = async (productsId) => {
 			ingredients: productsId
 		}),
 		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
+			'Content-Type': 'application/json',
+		},
+	})
 	return checkResponse(res);
 }
 
@@ -32,9 +32,9 @@ export const getIngredientData = async () => {
 	const res = await fetch(`${API.url}ingredients`, {
 		method: 'GET',
 		headers: {
-			'Content-Type': 'application/json'
-		}
-	});
+			'Content-Type': 'application/json',
+		},
+	})
 	return checkResponse(res);
 }
 
@@ -48,41 +48,41 @@ export const forgotPassRequest = async email => {
 		cache: 'no-cache',
 		credentials: 'same-origin',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
 		redirect: 'follow',
-		referrerPolicy: 'no-referrer'
+		referrerPolicy: 'no-referrer',
 	})
 		.then(checkResponse);
-};
+}
 
 export const resetPassRequest = async (password, token) => {
 	return await fetch(`${API.url}password-reset/reset`, {
 		method: 'POST',
 		body: JSON.stringify(
 			password,
-			token
+			token,
 		),
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
 	})
 		.then(checkResponse);
-};
+}
 
 export const loginRequest = async (email, password) => {
 	return await fetch(`${API.url}auth/login`, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
 			email: email,
 			password: password,
-		})
+		}),
 	})
 		.then(checkResponse);
-};
+}
 
 export const resgisterUserRequest = async (email, password, name) => {
 	return await fetch(`${API.url}auth/register`, {
@@ -90,45 +90,45 @@ export const resgisterUserRequest = async (email, password, name) => {
 		body: JSON.stringify({
 			email: email,
 			password: password,
-			name: name
+			name: name,
 		}),
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
 	})
 		.then(checkResponse);
-};
+}
 
 export const logoutRequest = async () => {
 	return await fetch(`${API.url}auth/logout`, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
-			token: localStorage.getItem('refreshToken')
-		})
+			token: localStorage.getItem('refreshToken'),
+		}),
 	})
 		.then(checkResponse);
-};
+}
 
 export const getUserRequest = async () => {
 	return await fetch(`${API.url}auth/user`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: 'Bearer ' + getCookie('token')
-		}
+			Authorization: 'Bearer ' + getCookie('token'),
+		},
 	})
 		.then(checkResponse);
-};
+}
 
 export const updateUserRequest = async (email, name, password) => {
 	return await fetch(`${API.url}auth/user`, {
 		method: 'PATCH',
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: 'Bearer ' + getCookie('token')
+			Authorization: 'Bearer ' + getCookie('token'),
 		},
 		body: JSON.stringify({
 			email: email,
@@ -137,18 +137,18 @@ export const updateUserRequest = async (email, name, password) => {
 		}),
 	})
 		.then(checkResponse);
-};
+}
 
 export const updateTokenRequest = async () => {
 	return await fetch(`${API.url}auth/token`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: 'Bearer ' + getCookie('token')
+			Authorization: 'Bearer ' + getCookie('token'),
 		},
 		body: JSON.stringify({
-			token: localStorage.getItem('refreshToken')
+			token: localStorage.getItem('refreshToken'),
 		}),
 	})
 		.then(checkResponse);
-};
+}

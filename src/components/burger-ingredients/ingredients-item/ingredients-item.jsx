@@ -9,10 +9,13 @@ import {
 }
 	from '@ya.praktikum/react-developer-burger-ui-components';
 import { openIngredientModal } from '../../../services/actions/ingredient-details';
+import { Link, useLocation } from 'react-router-dom';
 
 const IngredientsItem = ({ ingredient }) => {
-	const { bun, items } = useSelector((state) => state.burgerConstructor);
 	const dispatch = useDispatch();
+	const location = useLocation();
+
+	const { bun, items } = useSelector((state) => state.burgerConstructor);
 	const { image, name, price } = ingredient;
 
 	const [{ opacity }, dragRef] = useDrag({
@@ -40,20 +43,25 @@ const IngredientsItem = ({ ingredient }) => {
 	};
 
 	return (
-		<div
-			className={`${ingredientsItemStyles.item} pl-4 mr-4`}
+		<Link
+			to={{ pathname: `/ingredients/${ingredient._id}`, state: { background: location } }}
 			onClick={() => handleOpenIngredientDetailsModal(ingredient)}
-			style={{ opacity }}
-			ref={dragRef}
+			className={`${ingredientsItemStyles.link}`}
 		>
-			<img className={`${ingredientsItemStyles.image}`} src={image} alt={name} />
-			<div className={`${ingredientsItemStyles.price} pt-1 pb-2`}>
-				<p className='text text_type_digits-default pr-2'>{price}</p>
-				<CurrencyIcon type="primary" />
+			<div
+				className={`${ingredientsItemStyles.item} pl-4 mr-4`}
+				style={{ opacity }}
+				ref={dragRef}
+			>
+				<img className={`${ingredientsItemStyles.image}`} src={image} alt={name} />
+				<div className={`${ingredientsItemStyles.price} pt-1 pb-2`}>
+					<p className='text text_type_digits-default pr-2'>{price}</p>
+					<CurrencyIcon type="primary" />
+				</div>
+				<p className='text text_type_main-default pb-10'>{name}</p>
+				{counter() > 0 && <Counter count={counter()} size="default" />}
 			</div>
-			<p className='text text_type_main-default pb-10'>{name}</p>
-			{counter() > 0 && <Counter count={counter()} size="default" />}
-		</div>
+		</Link>
 	)
 }
 

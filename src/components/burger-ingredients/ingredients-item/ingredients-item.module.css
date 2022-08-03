@@ -4,6 +4,7 @@
 	flex-direction: column;
 	cursor: pointer;
 	position: relative;
+	align-items: center;
 	cursor: pointer;
 	box-sizing: border-box;
 }
@@ -15,4 +16,9 @@
 .price {
 	display: flex;
 	justify-content: center;
+}
+
+.link {
+	text-decoration: none;
+	color: inherit
 }

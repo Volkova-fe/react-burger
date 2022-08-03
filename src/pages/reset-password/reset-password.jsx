@@ -2,25 +2,33 @@ import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burg
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import { resetPassword, setResetFormValue } from '../../services/actions/auth';
+import { getCookie } from '../../utils/utils';
 import styles from './reset-password.module.css';
 
 export const ResetPassword = () => {
 	const dispatch = useDispatch();
-	const history = useHistory();
+	const location = useLocation()
+	const cookie = getCookie('token');
 	const { password, code } = useSelector(state => state.auth.form);
-	const { resetPassSuccess } = useSelector(state => state.auth);
+	const { resetPassSuccess, forgetPassSuccess } = useSelector(state => state.auth);
 
-	const onChange= e => {
+	const onChange = e => {
 		dispatch(setResetFormValue(e.target.name, e.target.value));
 	}
 
 	const onFormSubmit = e => {
 		e.preventDefault();
-		dispatch(resetPassword({ password, token:code }))
+		dispatch(resetPassword({ password, token: code }));
 	}
 
+	if (cookie) {
+		return (<Redirect to={location.state?.from || '/'} />);
+	}
+	if (!forgetPassSuccess) {
+		return <Redirect to={{ pathname: "/forgot-password" }} />;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -48,10 +56,10 @@ export const ResetPassword = () => {
 					/>
 				</div>
 				<Button type="primary" size="medium">
-				{!!resetPassSuccess 
-				? (<Redirect to='/profile'/>)
-				: ''
-				}
+					{!!resetPassSuccess
+						? (<Redirect to={location.state?.from || '/profile'} />)
+						: ''
+					}
 					Сохранить
 				</Button>
 			</form>

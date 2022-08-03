@@ -12,11 +12,6 @@ import { useSelector } from 'react-redux';
 
 const AppHeader = () => {
 	const location = useLocation();
-	const { isAuthChecked } = useSelector(state => state.auth);
-
-	if (isAuthChecked) {
-		return (<Redirect to={location.state?.from || '/login'} />);
-	}
 
 	return (
 		<header className={header.header}>

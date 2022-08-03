@@ -4,14 +4,15 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { setLoginFormValue, singIn } from '../../services/actions/auth';
+import { getCookie } from '../../utils/utils';
 import styles from './login.module.css';
 
 export const Login = () => {
-
 	const dispatch = useDispatch();
-	const location = useLocation()
+	const location = useLocation();
+	const cookie = getCookie('token');
 	const { email, password } = useSelector(state => state.auth.form);
-	const user = useSelector(state => state.auth.user);
+
 
 	const onChange = e => {
 		dispatch(setLoginFormValue(e.target.name, e.target.value));
@@ -19,12 +20,12 @@ export const Login = () => {
 
 	const onFormSubmit = e => {
 		e.preventDefault();
-		dispatch(singIn(email, password))
+		dispatch(singIn(email, password));
 	}
-	
 
-	if (user) {
-		return (<Redirect to={ location.state?.from || '/' } />);
+
+	if (cookie) {
+		return (<Redirect to={location.state?.from || '/'} />);
 	}
 
 	return (

@@ -42,7 +42,7 @@ export const PATCH_USER_REQUEST = 'PATCH_USER_REQUEST';
 export const PATCH_USER_SUCCESS = 'PATCH_USER_SUCCESS';
 export const PATCH_USER_FAILED = 'PATCH_USER_FAILED';
 
-export const UPDATE_TOKEN_REQUEST= 'UPDATE_TOKEN_REQUEST';
+export const UPDATE_TOKEN_REQUEST = 'UPDATE_TOKEN_REQUEST';
 export const UPDATE_TOKEN_SUCCESS = 'UPDATE_TOKEN_SUCCESS';
 export const UPDATE_TOKEN_FAILED = 'UPDATE_TOKEN_FAILED';
 
@@ -55,7 +55,7 @@ export function forgotPassword(email) {
 			.then((res) => {
 				dispatch({
 					type: FORGOT_PASSWORD_SUCCESS,
-					message: res.message
+					message: res.message,
 				});
 			})
 			.catch(() => {
@@ -69,7 +69,7 @@ export function forgotPassword(email) {
 export const setResetFormValue = (field, value) => ({
 	type: RESET_FORM_SET_VALUE,
 	field,
-	value
+	value,
 });
 
 export function resetPassword(password, token) {
@@ -94,7 +94,7 @@ export function resetPassword(password, token) {
 export const setLoginFormValue = (field, value) => ({
 	type: LOGIN_FORM_SET_VALUE,
 	field,
-	value
+	value,
 });
 
 export function singIn(email, password) {
@@ -154,7 +154,7 @@ export function singOut() {
 export const setRegisterFormValue = (field, value) => ({
 	type: REGISTER_FORM_SET_VALUE,
 	field,
-	value
+	value,
 });
 
 export function registerUser(email, password, name) {
@@ -173,7 +173,7 @@ export function registerUser(email, password, name) {
 			.then((res) => {
 				dispatch({
 					type: REGISTER_FORM_SUCCESS,
-					user: res
+					user: res,
 				});
 			})
 			.catch(() => {
@@ -193,7 +193,7 @@ export function getUser() {
 			.then((res) => {
 				dispatch({
 					type: GET_USER_SUCCESS,
-					user: res.user
+					user: res.user,
 				});
 			})
 			.catch(() => {
@@ -213,7 +213,7 @@ export function updateUser(email, name, password) {
 			.then((res) => {
 				dispatch({
 					type: PATCH_USER_SUCCESS,
-					user: res
+					user: res,
 				});
 			})
 			.catch(() => {

@@ -2,13 +2,16 @@ import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-component
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import { forgotPassword } from '../../services/actions/auth';
+import { getCookie } from '../../utils/utils';
 import styles from './forgot-password.module.css';
 
 export const ForgotPassword = () => {
 	const [email, setEmail] = useState('');
 	const dispatch = useDispatch();
+	const location = useLocation();
+	const cookie = getCookie('token');
 
 	const { forgetPassSuccess } = useSelector(state => state.auth);
 
@@ -18,9 +21,12 @@ export const ForgotPassword = () => {
 
 	const onFormSubmit = e => {
 		e.preventDefault();
-		dispatch(forgotPassword({ email }))
+		dispatch(forgotPassword({ email }));
 	}
 
+	if (cookie) {
+		return (<Redirect to={location.state?.from || '/'} />);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -39,10 +45,10 @@ export const ForgotPassword = () => {
 					/>
 				</div>
 				<Button type="primary" size="medium">
-				{!!forgetPassSuccess 
-				? (<Redirect to='/reset-password'/>)
-				: ''
-				}
+					{!!forgetPassSuccess
+						? (<Redirect to='/reset-password' />)
+						: ''
+					}
 					Восстановить
 				</Button>
 			</form>

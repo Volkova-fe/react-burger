@@ -13,27 +13,32 @@ import burgerConstructorStyle from './burger-constructor.module.css'
 
 import { getOrderDetails } from '../../services/actions/order-details';
 import { ADD_BUN, ADD_ITEM_CONSTRUCTOR } from '../../services/actions/burger-constructor';
+import { getCookie } from '../../utils/utils';
+import { useHistory } from 'react-router-dom';
 
 const BurgerConstructor = () => {
 	const { bun, items } = useSelector((state) => state.burgerConstructor);
 	const dispatch = useDispatch();
 	const [total, setTotal] = useState(0);
+	const cookie = getCookie('token');
+	const history = useHistory();
 
 	const filling = useMemo(
 		() => items.filter((item) => item.type !== 'bun'),
-		[items])
+		[items]);
 
 	useEffect(() => {
-		const totalPrice = filling.reduce((sum, item) => sum + item.price, bun.length === 0 ? 0 : (bun.price * 2))
-		setTotal(totalPrice)
-	}, [bun, filling])
+		const totalPrice = filling.reduce((sum, item) => sum + item.price, bun.length === 0 ? 0 : (bun.price * 2));
+		setTotal(totalPrice);
+	}, [bun, filling]);
 
 	const itemsId = useMemo(
 		() => items.map((item) => item._id),
-		[items])
+		[items]);
 
-	const orderDetailsModal = (productsId) => {
-		dispatch(getOrderDetails(itemsId));
+	const orderDetailsModal = (itemsId) => {
+		cookie && dispatch(getOrderDetails(itemsId));
+		!cookie && history.push('/login');
 	};
 
 	const [, dropTarget] = useDrop({
@@ -99,7 +104,6 @@ const BurgerConstructor = () => {
 					? (<Button
 						type="primary"
 						size="large"
-						onClick={() => { orderDetailsModal(itemsId) }}
 						disabled
 					>
 						Оформить заказ
