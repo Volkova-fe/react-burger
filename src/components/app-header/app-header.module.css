@@ -1,13 +1,14 @@
 .header {
-	max-width: 1440px;
+	max-width: 100%;
 	width: 100%;
 	margin: auto;
 	grid-area: header;
+	background: #1c1c21;
 }
 
 .container {
-	padding: 16px 0 0 0;
-	margin: 0 auto;
+	padding: 0;
+	margin: 16px auto 0;
 	max-width: 1280px;
 	width: 100%;
 	display: flex;
@@ -40,13 +41,28 @@
 
 .link {
 	text-decoration: none;
-	color: inherit;
+	color: #8585ad;
 	display: flex;
 	align-items: center;
+	padding: 0 20px;
+	transition: color 0.5s ease;
+}
+
+.link:hover {
+	color: #f2f2f3;
+}
+
+.linkActive {
+	color: #f2f2f3;
+	cursor: default;
 }
 
 .logo {
 	padding-left: 9%;
 	justify-self: center;
 	flex-grow: 2;
+}
+
+.text {
+	margin: 0;
 }

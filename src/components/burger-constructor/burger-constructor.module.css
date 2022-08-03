@@ -30,7 +30,7 @@
 	flex-direction: column;
 	padding: 0;
 	margin: 0;
-	height: calc(100vh - 336px);
+	height: calc(100vh - 475px);
 	min-height: 208px;
 	overflow-y: auto;
 	overflow-x: hidden;
