@@ -22,14 +22,23 @@ export const Profile = () => {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	}
 
-	function handleSingOut() {
-		dispatch(singOut());
-	};
-
 	const onSubmit = (e) => {
 		e.preventDefault();
 		dispatch(updateUser(form.email, form.name, form.password));
 	};
+
+	function handleSingOut() {
+		dispatch(singOut());
+	};
+
+	const onResetForm = (e) => {
+		e.preventDefault();
+		setForm({
+			email: email,
+			name: name,
+			password: '',
+		})
+	}
 
 
 
@@ -118,7 +127,10 @@ export const Profile = () => {
 								size={'default'}
 							/>
 						</div>
-						<Button type="primary" size="medium">
+						<Button type="secondary" size="medium" onClick={onResetForm}>
+							Oтмена
+						</Button>
+						<Button disabled={!form.password} type="primary" size="medium">
 							Сохранить
 						</Button>
 					</form>

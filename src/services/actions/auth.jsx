@@ -111,7 +111,6 @@ export function singIn(email, password) {
 				return res;
 			})
 			.then((res) => {
-				console.log(res)
 				dispatch({
 					type: LOGIN_FORM_SUCCESS,
 					user: res.user,

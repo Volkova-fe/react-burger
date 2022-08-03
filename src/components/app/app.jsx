@@ -27,6 +27,7 @@ function App() {
   const dispatch = useDispatch();
   const orderNumber = useSelector(store => store.order.number);
 
+  const { updateTokenSuccess } = useSelector(store => store.auth);
   const refreshToken = localStorage.getItem('refreshToken');
   const cookie = getCookie('token');
 
@@ -38,15 +39,18 @@ function App() {
     dispatch(getBurgerIngredients());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
 
   useEffect(() => {
+    if (cookie && refreshToken) {
+      dispatch(getUser());
+    }
     if (!cookie && refreshToken) {
       dispatch(updateToken());
     }
-  }, [dispatch, refreshToken, cookie]);
+    if (cookie && refreshToken && updateTokenSuccess) {
+      dispatch(getUser());
+    }
+  }, [dispatch, refreshToken, cookie, updateTokenSuccess]);
 
 
   const handleCloseOrderDetailsModal = useCallback(() => {
