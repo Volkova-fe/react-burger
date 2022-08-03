@@ -144,7 +144,6 @@ export const updateTokenRequest = async () => {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: 'Bearer ' + getCookie('token'),
 		},
 		body: JSON.stringify({
 			token: localStorage.getItem('refreshToken'),

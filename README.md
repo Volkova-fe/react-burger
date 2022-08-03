@@ -22,6 +22,14 @@ ___
    - Если в BurgerConstructor добавлено несколько одинаковых ингредиентов — удаление одного ингредиента не влияет на остальные ингредиенты в BurgerConstructor с тем же _id;
    - Пользователь может изменить порядок ингредиентов в BurgerConstructor перетаскиванием конкретного элемента;
    - При попытке «бросить» ингредиент за пределы BurgerConstructor ничего не происходит — ингредиент возвращается в исходное положение.
+
+* React-Router
+   - Регистрация
+   - Авторизация и обновление токена
+   - Выход из системы
+   - Куки
+   - Получение и обновление информации о пользователе
+   - Защищённые маршруты в приложении
 ___
 ## Использованные технологии
 * HTML
@@ -29,6 +37,8 @@ ___
 * React - JSX (модульный подход с использованием import, export)
 * Hooks
 * Redux
+* DnD
+* React Router v5.2.1
 * Установка заготовенного CRA - npx create-react-app react-burger --template typescript 
 * Использована библиотека готовых компонентов - npm i @ya.praktikum/react-developer-burger-ui-components 
 * Организована файловая структура : 
@@ -47,5 +57,5 @@ ___
 
 ___
 ## Макет
-* [Ссылка на макет в Figma Месяц-1/Месяц-2](https://www.figma.com/file/ocw9a6hNGeAejl4F3G9fp8/React-_-%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BD%D1%8B%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8-(3-%D0%BC%D0%B5%D1%81%D1%8F%D1%86%D0%B0)_external_link?node-id=0%3A1)
+* [Ссылка на макет в Figma Месяц-1/Месяц-2/Месяц-3](https://www.figma.com/file/ocw9a6hNGeAejl4F3G9fp8/React-_-%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BD%D1%8B%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8-(3-%D0%BC%D0%B5%D1%81%D1%8F%D1%86%D0%B0)_external_link?node-id=0%3A1)
 
