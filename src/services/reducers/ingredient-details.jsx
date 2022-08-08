@@ -1,7 +1,7 @@
 import { 
 	CLOSE_INGREDIENT_MODAL, 
 	OPEN_INGREDIENT_MODAL 
-} from "../actions/ingredient-details";
+} from "../action-types";
 
 
 const ingredientInitialState = {

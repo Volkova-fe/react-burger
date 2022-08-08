@@ -4,7 +4,7 @@ import {
 	DELETE_ITEM,
 	MOVE_ITEM,
 	RESET_ITEM
-} from "../actions/burger-constructor";
+} from "../action-types";
 
 const initialState = {
 	items: [],

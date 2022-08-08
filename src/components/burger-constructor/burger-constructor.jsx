@@ -12,7 +12,7 @@ import ConstructorItems from './constructor-items/constructor-items'
 import burgerConstructorStyle from './burger-constructor.module.css'
 
 import { getOrderDetails } from '../../services/actions/order-details';
-import { ADD_BUN, ADD_ITEM_CONSTRUCTOR } from '../../services/actions/burger-constructor';
+import { ADD_BUN, ADD_ITEM_CONSTRUCTOR } from '../../services/action-types';
 import { getCookie } from '../../utils/utils';
 import { useHistory } from 'react-router-dom';
 

@@ -4,7 +4,8 @@ import { ResetPassword } from "./reset-password/reset-password";
 import { ForgotPassword } from "./forgot-password/forgot-password";
 import { Register } from "./register/register";
 import { Login } from './login/login';
-import { Orders } from './profile/orders/orders';
+import { OrderHistory } from './profile/order-history/order-history';
+import { Feed } from './feed/feed';
 
 export {
 	Login,
@@ -12,6 +13,7 @@ export {
 	ForgotPassword,
 	ResetPassword,
 	Profile,
-	Orders,
-	NotFound404
+	OrderHistory,
+	NotFound404,
+	Feed
 };

@@ -8,7 +8,7 @@ import {
 }
 	from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { DELETE_ITEM, MOVE_ITEM } from '../../../services/actions/burger-constructor';
+import { DELETE_ITEM, MOVE_ITEM } from '../../../services/action-types';
 import ingredientType from '../../../utils/types'
 
 const ConstructorItems = ({ index, items }) => {

@@ -16,9 +16,9 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import { closeOrderModal } from '../../services/actions/order-details';
 import { getBurgerIngredients } from '../../services/actions/burger-ingredients';
 import { closeIngredientModal } from '../../services/actions/ingredient-details';
-import { RESET_ITEM } from '../../services/actions/burger-constructor';
+import { RESET_ITEM } from '../../services/action-types';
 
-import { ForgotPassword, Login, NotFound404, Profile, Register, ResetPassword } from '../../pages';
+import { Feed, ForgotPassword, Login, NotFound404, Profile, Register, ResetPassword } from '../../pages';
 import { getUser, updateToken } from '../../services/actions/auth';
 import { getCookie } from '../../utils/utils';
 import { ProtectedRoute } from '../protected-route/protected-route';
@@ -85,18 +85,21 @@ function App() {
           <Route path='/reset-password' exact>
             <ResetPassword />
           </Route>
-          <Route path='/ingredients/:id' exact={true}>
+          <Route path='/ingredients/:id' exact>
             <IngredientDetails />
           </Route>
           <ProtectedRoute path='/profile'>
             <Profile />
           </ProtectedRoute>
+          <Route path='/feed' exact>
+            <Feed />
+          </Route>
           <Route>
             <NotFound404 />
           </Route>
         </Switch>
         {background && (
-          <Route path='/ingredients/:id' exact={true}>
+          <Route path='/ingredients/:id' exact>
             <Modal
               title='Детали ингредиента'
               onClickClose={handleCloseIngredientDetailsModal}>

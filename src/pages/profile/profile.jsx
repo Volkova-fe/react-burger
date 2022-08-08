@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import { singOut, updateUser } from '../../services/actions/auth';
-import { Orders } from './orders/orders';
+import { OrderHistory } from './order-history/order-history';
 import styles from './profile.module.css';
 
 export const Profile = () => {
@@ -84,7 +84,7 @@ export const Profile = () => {
 			</nav>
 			<Switch>
 				<Route exact path="/profile/orders">
-					<Orders />
+					<OrderHistory />
 				</Route>
 				<Route exact path="/profile">
 					<form className={styles.form} onSubmit={onSubmit}>
