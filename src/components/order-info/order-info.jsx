@@ -44,6 +44,24 @@ export const OrdersInfo = () => {
 		}, 0);
 	}, [orderIngredientsData])
 
+	useEffect(() => {
+		if (!order) {
+			if (match.path === isProfile) {
+				dispatch(wsAuthConnectionOpen());
+			}
+			if (match.path === isFeed) {
+				dispatch(wsConnectionOpen());
+			}
+		}
+		return () => {
+			if (match.path === isProfile) {
+				dispatch(wsAuthConnectionClosed());
+			}
+			if (match.path === isFeed) {
+				dispatch(wsConnectionClosed());
+			}
+		}
+	}, [dispatch, order, history, match.path, match.url]);
 
 	return (
 		<>

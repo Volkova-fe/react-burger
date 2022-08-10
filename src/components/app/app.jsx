@@ -105,13 +105,13 @@ const orderNumber = useSelector(store => store.order.number);
           <Route path='/feed' exact>
             <Feed />
           </Route>
-          <Route path='/feed/:id'>
+          <Route path='/feed/:id' exact>
             <OrdersInfo />
           </Route>
           <Route path='/profile/orders' exact>
             <OrderHistory />
           </Route>
-          <Route path='/profile/orders/:id'>
+          <Route path='/profile/orders/:id' exact>
             <OrdersInfo />
           </Route>
           <Route>
@@ -129,7 +129,7 @@ const orderNumber = useSelector(store => store.order.number);
         )
         }
         {background && idOrderInfo && (
-          <ProtectedRoute  path='/profile/orders/:id'>
+          <ProtectedRoute  path='/profile/orders/:id' exact>
             <Modal
               title=''
               onClickClose={handleCloseOrderInfoDetailsModal}>
@@ -139,7 +139,7 @@ const orderNumber = useSelector(store => store.order.number);
         )
         }
         {background && idOrderInfo && (
-          <Route path='/feed/:id'>
+          <Route path='/feed/:id' exact>
             <Modal
               title=''
               onClickClose={handleCloseOrderInfoDetailsModal}>
