@@ -1,15 +1,29 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+import uniqid from 'uniqid';
 import { OrdersCard } from '../../../components/orders/orders-card/orders-card';
 import styles from './order-history.module.css';
 
 export const OrderHistory = () => {
+	const location = useLocation();
+	const orders = useSelector(store => store.wsAuthFeed.orders)
+
 
 	return (
-		<article className={styles.container}>
-			<h2 className="text text_type_main-medium">
-				На данный момент вы не сделали ни одного заказа
-			</h2 >
-			<OrdersCard />
-		</article >
+		<div className={styles.container}>
+			{orders &&
+				(orders.map((order) => {
+					return (
+						<Link
+							to={{ pathname: `/profile/orders/${order._id}`, state: { background: location } }}
+							className={`${styles.link}`} key={order._id}
+						>
+							<OrdersCard order={order} status={true} />
+						</Link>
+					)
+				}))
+			}
+		</div >
 	)
 }

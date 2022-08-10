@@ -18,10 +18,12 @@ import { getBurgerIngredients } from '../../services/actions/burger-ingredients'
 import { closeIngredientModal } from '../../services/actions/ingredient-details';
 import { RESET_ITEM } from '../../services/action-types';
 
-import { Feed, ForgotPassword, Login, NotFound404, Profile, Register, ResetPassword } from '../../pages';
+import { Feed, ForgotPassword, Login, NotFound404, OrderHistory, Profile, Register, ResetPassword } from '../../pages';
 import { getUser, updateToken } from '../../services/actions/auth';
 import { getCookie } from '../../utils/utils';
 import { ProtectedRoute } from '../protected-route/protected-route';
+import { OrdersInfo } from '../order-info/order-info';
+import { closeOrderInfoModal } from '../../services/actions/order-info-detailsTypes';
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +61,11 @@ function App() {
     history.replace('/');
   }, [dispatch]);
 
+  const handleCloseOrderInfoDetailsModal = useCallback(() => {
+    dispatch(closeOrderInfoModal());
+    history.goBack();
+  }, [dispatch]);
+
 
   return (
     <div className={page.app}>
@@ -94,6 +101,15 @@ function App() {
           <Route path='/feed' exact>
             <Feed />
           </Route>
+          <Route path='/feed/:id'>
+            <OrdersInfo />
+          </Route>
+          <Route path='/profile/orders' exact>
+            <OrderHistory />
+          </Route>
+          <Route path='/profile/orders/:id'>
+            <OrdersInfo />
+          </Route>
           <Route>
             <NotFound404 />
           </Route>
@@ -104,6 +120,26 @@ function App() {
               title='Детали ингредиента'
               onClickClose={handleCloseIngredientDetailsModal}>
               <IngredientDetails />
+            </Modal>
+          </Route>
+        )
+        }
+        {background && (
+          <ProtectedRoute  path='/profile/orders/:id'>
+            <Modal
+              title=''
+              onClickClose={handleCloseOrderInfoDetailsModal}>
+              <OrdersInfo />
+            </Modal>
+          </ProtectedRoute>
+        )
+        }
+        {background && (
+          <Route path='/feed/:id'>
+            <Modal
+              title=''
+              onClickClose={handleCloseOrderInfoDetailsModal}>
+              <OrdersInfo />
             </Modal>
           </Route>
         )

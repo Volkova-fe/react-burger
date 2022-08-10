@@ -1,14 +1,15 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useMemo } from 'react';
+import propTypes from "prop-types";
 import styles from './orders-card.module.css';
 import { useSelector } from 'react-redux';
 import uniqid from 'uniqid';
 import { StackedImage } from './stacked-image/stacked-image';
 
 
-export const OrdersCard = ({ order }) => {
+export const OrdersCard = ({ order, status }) => {
 	const ingredients = useSelector(store => store.burgerIngredients.ingredients)
-	const { createdAt, number, name, status } = order;
+	const { createdAt, number, name } = order;
 
 	const MAX_LENGTH = order.ingredients.length;
 	const hideIngredients = MAX_LENGTH - 6
@@ -31,9 +32,7 @@ export const OrdersCard = ({ order }) => {
 		}, 0);
 	}, [orderIngredientsData])
 
-
 	const dataCreate = new Date(createdAt).toLocaleString()
-	const ItemId = uniqid();
 
 	return (
 		<div className={styles.container}>
@@ -44,24 +43,24 @@ export const OrdersCard = ({ order }) => {
 			<div className={styles.info}>
 				<h2 className={`${styles.text} text text_type_main-medium`}>{name}</h2>
 				{!!status &&
-					<p className={`text text_type_main-default`}>
+					<p className={`${styles.status} text text_type_main-default`}>
 						{status === 'done' ? 'Выполнен' : status === 'pending' ? 'Готовится' : status === 'created' ? 'Создан' : 'Выполнен'}
 					</p>}
 			</div>
 			<div className={styles.price}>
 				<ul className={styles.list}>
 					{orderIngredientsData && MAX_LENGTH <= 5 && orderIngredientsData.map((item, index) => {
-						return (item ? (
-							<li className={styles.items} key={ItemId + index}>
-								<StackedImage image={item.image} alt={item.name} key={ItemId + index} />
+						return ( 
+							<li className={styles.items} key={uniqid()}>
+							{item && 
+								<StackedImage image={item.image} alt={item.name} key={uniqid()} />}
 							</li>
 						)
-							: '')
 					})}
 					{orderIngredientsData && MAX_LENGTH >= 6 && orderIngredientsData.slice(0, 5).map((item, index) => {
 						return (item ? (
-							<li className={styles.items} key={ItemId + index}>
-								<StackedImage image={item.image} alt={item.name} key={ItemId + index} />
+							<li className={styles.items} key={uniqid()}>
+								<StackedImage image={item.image} alt={item.name} key={uniqid()} />
 							</li>
 						)
 							: '')
@@ -69,10 +68,10 @@ export const OrdersCard = ({ order }) => {
 					{orderIngredientsData && MAX_LENGTH > 6 && orderIngredientsData.slice(5, 6).map((item, index) => {
 						return (item ? (
 							<>
-								<li className={styles.items} key={ItemId + index}>
+								<li className={styles.items} key={uniqid()}>
 									<p className={`text text_type_main-default ${styles.hideText}`}>{`+${hideIngredients}`}</p>
 									<div className={styles.hidePic}>
-										<StackedImage image={item.image} alt={item.name} key={ItemId + index} />
+										<StackedImage image={item.image} alt={item.name} key={uniqid()}/>
 									</div>
 								</li>
 							</>
@@ -87,3 +86,8 @@ export const OrdersCard = ({ order }) => {
 			</div>
 		</div >)
 }
+
+OrdersCard.propTypes = {
+	order: propTypes.object.isRequired,
+	status: propTypes.bool,
+};

@@ -9,6 +9,7 @@ import {
 const initialState = {
 	items: [],
 	bun: [],
+	itemsId: [],
 };
 
 export const constructorReducer = (state = initialState, action) => {
@@ -27,12 +28,14 @@ export const constructorReducer = (state = initialState, action) => {
 			return {
 				...state,
 				bun: action.data,
+				itemsId: [...state.itemsId, action.data._id]
 			};
 		}
 		case ADD_ITEM_CONSTRUCTOR: {
 			return {
 				...state,
 				items: [...state.items, action.data],
+				itemsId: [...state.itemsId, action.data._id]
 			};
 		}
 		case RESET_ITEM: {

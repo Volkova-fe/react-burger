@@ -1,16 +1,23 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import { singOut, updateUser } from '../../services/actions/auth';
+import { wsAuthConnectionClosed, wsAuthConnectionOpen } from '../../services/actions/wsAuthActions';
 import { OrderHistory } from './order-history/order-history';
 import styles from './profile.module.css';
 
 export const Profile = () => {
-
 	const dispatch = useDispatch();
 	const { email, name } = useSelector(state => state.auth.user);
+
+	useEffect(() => {
+		dispatch(wsAuthConnectionOpen());
+		return () => {
+			dispatch(wsAuthConnectionClosed())
+		}
+	}, [dispatch]);
 
 	const [form, setForm] = useState({
 		email: email,

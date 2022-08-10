@@ -58,3 +58,7 @@
 	opacity: 0.6;
 	z-index: 2;
 }
+
+.status {
+	color: #00cccc;
+}

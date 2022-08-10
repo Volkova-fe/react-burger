@@ -8,11 +8,9 @@ import {
 	Counter
 }
 	from '@ya.praktikum/react-developer-burger-ui-components';
-import { openIngredientModal } from '../../../services/actions/ingredient-details';
 import { Link, useLocation } from 'react-router-dom';
 
 const IngredientsItem = ({ ingredient }) => {
-	const dispatch = useDispatch();
 	const location = useLocation();
 
 	const { bun, items } = useSelector((state) => state.burgerConstructor);
@@ -38,14 +36,9 @@ const IngredientsItem = ({ ingredient }) => {
 		[bun, items, ingredient._id]
 	);
 
-	const handleOpenIngredientDetailsModal = (ingredient) => {
-		dispatch(openIngredientModal(ingredient));
-	};
-
 	return (
 		<Link
 			to={{ pathname: `/ingredients/${ingredient._id}`, state: { background: location } }}
-			onClick={() => handleOpenIngredientDetailsModal(ingredient)}
 			className={`${ingredientsItemStyles.link}`}
 		>
 			<div

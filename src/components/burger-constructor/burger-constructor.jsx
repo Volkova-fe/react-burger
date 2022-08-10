@@ -17,7 +17,7 @@ import { getCookie } from '../../utils/utils';
 import { useHistory } from 'react-router-dom';
 
 const BurgerConstructor = () => {
-	const { bun, items } = useSelector((state) => state.burgerConstructor);
+	const { bun, items, itemsId } = useSelector((state) => state.burgerConstructor);
 	const dispatch = useDispatch();
 	const [total, setTotal] = useState(0);
 	const cookie = getCookie('token');
@@ -32,9 +32,7 @@ const BurgerConstructor = () => {
 		setTotal(totalPrice);
 	}, [bun, filling]);
 
-	const itemsId = useMemo(
-		() => items.map((item) => item._id),
-		[items]);
+
 
 	const orderDetailsModal = (itemsId) => {
 		cookie && dispatch(getOrderDetails(itemsId));
@@ -69,6 +67,7 @@ const BurgerConstructor = () => {
 						text={bun.name + '(верх)'}
 						price={bun.price}
 						thumbnail={bun.image}
+						key={bun._id}
 					/>)}
 				{items.length === 0
 					? (<p className={`${burgerConstructorStyle.list} ${burgerConstructorStyle.text} pr-2 text text_type_main-large`}>&#8592; Выберите начинку</p>)
@@ -93,6 +92,7 @@ const BurgerConstructor = () => {
 						text={bun.name + '(низ)'}
 						price={bun.price}
 						thumbnail={bun.image}
+						key={`bottom: ${bun._id}`}
 					/>)}
 			</div>
 			<div className={`${burgerConstructorStyle.order} pt-10 pr-5`}>
