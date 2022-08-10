@@ -27,16 +27,16 @@ export const OrdersInfo = () => {
 	console.log(authOrders)
 
 	const orderIngredientsData = useMemo(() => {
-		return order.ingredients.map((id) => {
+		return order?.ingredients.map((id) => {
 			return ingredients?.find((item) => {
 				return id === item._id
 			})
 		})
-	}, [order.ingredients, ingredients])
+	}, [order?.ingredients, ingredients])
 
 	console.log(orderIngredientsData)
 	const orderTotalPrice = useMemo(() => {
-		return orderIngredientsData.reduce((sum, item) => {
+		return orderIngredientsData?.reduce((sum, item) => {
 			if (item.type === 'bun') {
 				return sum += item.price * 2
 			}
@@ -44,26 +44,6 @@ export const OrdersInfo = () => {
 		}, 0);
 	}, [orderIngredientsData])
 
-	useEffect(() => {
-		if (!order) {
-			if (match.path === isProfile) {
-				dispatch(getUser());
-				dispatch(wsAuthConnectionOpen());
-			}
-			if (match.path === isFeed) {
-				dispatch(wsConnectionOpen());
-			}
-			history.replace(`${match.url}`);
-		}
-		return () => {
-			if (match.path === isProfile) {
-				dispatch(wsAuthConnectionClosed());
-			}
-			if (match.path === isFeed) {
-				dispatch(wsConnectionClosed());
-			}
-		}
-	}, [dispatch, order, history, match.path, match.url]);
 
 	return (
 		<>

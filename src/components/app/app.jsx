@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
-import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
+import { Switch, Route, useLocation, useHistory, useRouteMatch } from 'react-router-dom';
 
 import page from './app.module.css';
 
@@ -27,7 +27,11 @@ import { closeOrderInfoModal } from '../../services/actions/order-info-detailsTy
 
 function App() {
   const dispatch = useDispatch();
-  const orderNumber = useSelector(store => store.order.number);
+  const idOrderInfo = useRouteMatch([
+    '/profile/orders/:id',
+    '/feed/:id',
+  ])?.params?.id;
+const orderNumber = useSelector(store => store.order.number);
 
   const token = localStorage.getItem('refreshToken');
   const cookie = getCookie('token');
@@ -124,7 +128,7 @@ function App() {
           </Route>
         )
         }
-        {background && (
+        {background && idOrderInfo && (
           <ProtectedRoute  path='/profile/orders/:id'>
             <Modal
               title=''
@@ -134,7 +138,7 @@ function App() {
           </ProtectedRoute>
         )
         }
-        {background && (
+        {background && idOrderInfo && (
           <Route path='/feed/:id'>
             <Modal
               title=''
