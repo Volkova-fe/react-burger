@@ -38,9 +38,14 @@ export const Login = () => {
 				<div className="pb-6">
 					<PasswordInput onChange={onChange} value={password} name={'password'} size="default" />
 				</div>
-				<Button type="primary" size="medium">
-					Войти
-				</Button>
+				{email && password ?
+					(<Button type="primary" size="medium">
+						Войти
+					</Button>)
+					: (<Button type="primary" size="medium" disabled>
+						Войти
+					</Button>)}
+
 			</form>
 			<p className="text text_type_main-default text_color_inactive pt-20 pb-4">Вы — новый пользователь?
 				<Link className={styles.link} to='/register'>Зарегистрироваться</Link>

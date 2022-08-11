@@ -55,7 +55,7 @@ const BurgerIngredients = () => {
 					<Tab value="bun"
 						active={current === "bun"}
 						onClick={() => onTabScroll("bun")}
-						>
+					>
 						Булки
 					</Tab>
 				</a>
@@ -63,15 +63,15 @@ const BurgerIngredients = () => {
 					<Tab value="sauce"
 						active={current === "sauce"}
 						onClick={() => onTabScroll("sauce")}
-						>
+					>
 						Соусы
 					</Tab>
 				</a>
 				<a href='#main' className={burgerIngredientStyle.link}>
-					<Tab 
-					value="main" 
-					active={current === 'main'} 
-					onClick={() => onTabScroll("main")}
+					<Tab
+						value="main"
+						active={current === 'main'}
+						onClick={() => onTabScroll("main")}
 					>
 						Начинки
 					</Tab>

@@ -47,9 +47,13 @@ export const Register = () => {
 				<div className="pb-6">
 					<PasswordInput onChange={onChange} value={password} name={'password'} size="default" />
 				</div>
-				<Button type="primary" size="medium">
+				{email && password && name ?
+					(<Button type="primary" size="medium">
 					Зарегистрироваться
-				</Button>
+					</Button>)
+					: (<Button type="primary" size="medium" disabled>
+					Зарегистрироваться
+					</Button>)}
 			</form>
 			<p className="text text_type_main-default text_color_inactive pt-20 pb-4">Уже зарегистрированы?
 				<Link className={styles.link} to='/login'>Войти</Link>

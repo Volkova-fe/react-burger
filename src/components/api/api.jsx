@@ -23,6 +23,7 @@ export const orderDetailsRequest = async (productsId) => {
 		}),
 		headers: {
 			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + getCookie('token')
 		},
 	})
 	return checkResponse(res);

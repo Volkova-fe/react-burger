@@ -1,10 +1,11 @@
 import { orderDetailsRequest } from "../../components/api/api";
 
-
-export const ORDER_DETAILS_REQUEST = 'ORDER_DETAILS_REQUEST';
-export const ORDER_DETAILS_SUCCESS = 'ORDER_DETAILS_SUCCESS';
-export const ORDER_DETAILS_FAILED = 'ORDER_DETAILS_FAILED';
-export const CLOSE_ORDER_MODAL = 'CLOSE_ORDER_MODAL';
+import {
+	CLOSE_ORDER_MODAL,
+	ORDER_DETAILS_FAILED,
+	ORDER_DETAILS_REQUEST,
+	ORDER_DETAILS_SUCCESS
+} from "../action-types";
 
 export function closeOrderModal() {
 	return {

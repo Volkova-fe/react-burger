@@ -1,16 +1,28 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { NavLink, Route, Switch } from 'react-router-dom';
-import { singOut, updateUser } from '../../services/actions/auth';
-import { Orders } from './orders/orders';
+import { NavLink, Route, Switch, useLocation, useRouteMatch } from 'react-router-dom';
+import { OrdersInfo } from '../../components/order-info/order-info';
+import { getUser, singOut, updateUser } from '../../services/actions/auth';
+import { wsAuthConnectionClosed, wsAuthConnectionOpen } from '../../services/actions/wsAuthActions';
+import { OrderHistory } from './order-history/order-history';
 import styles from './profile.module.css';
 
 export const Profile = () => {
-
 	const dispatch = useDispatch();
+	const location = useLocation();
+	const matchOrderDetails = !!useRouteMatch({ path: '/profile/orders/:id' });
+	const background = location.state?.background;
 	const { email, name } = useSelector(state => state.auth.user);
+
+	useEffect(() => {
+		dispatch(getUser());
+		dispatch(wsAuthConnectionOpen());
+		return () => {
+			dispatch(wsAuthConnectionClosed())
+		}
+	}, [dispatch]);
 
 	const [form, setForm] = useState({
 		email: email,
@@ -44,7 +56,7 @@ export const Profile = () => {
 
 	return (
 		<div className={`${styles.container} pt-30`}>
-			<nav className={`${styles.nav} pr-15`}>
+			{!matchOrderDetails && <nav className={`${styles.nav} pr-15`}>
 				<ul className={`${styles.list}`}>
 					<li className={`${styles.item}`}>
 						<NavLink
@@ -81,10 +93,13 @@ export const Profile = () => {
 				<p className={`${styles.text} text text_type_main-default text_color_inactive pt-20 pb-4`}>
 					В этом разделе вы можете изменить свои персональные данные
 				</p>
-			</nav>
-			<Switch>
-				<Route exact path="/profile/orders">
-					<Orders />
+			</nav>}
+			<Switch location={background || location}>
+				<Route path="/profile/orders" exact>
+					<OrderHistory />
+				</Route>
+				<Route path='/profile/orders/:id' exact>
+					<OrdersInfo />
 				</Route>
 				<Route exact path="/profile">
 					<form className={styles.form} onSubmit={onSubmit}>
