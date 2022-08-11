@@ -55,13 +55,18 @@ export const ResetPassword = () => {
 						size={'default'}
 					/>
 				</div>
-				<Button type="primary" size="medium">
-					{!!resetPassSuccess
-						? (<Redirect to={location.state?.from || '/profile'} />)
-						: ''
-					}
-					Сохранить
-				</Button>
+
+				{code && password ?
+					(<Button type="primary" size="medium">
+						{!!resetPassSuccess
+							? (<Redirect to={location.state?.from || '/profile'} />)
+							: ''
+						}
+						Сохранить
+					</Button>)
+					: (<Button type="primary" size="medium" disabled>
+						Сохранить
+					</Button>)}
 			</form>
 			<p className="text text_type_main-default text_color_inactive pt-20 pb-4">Вспомнили пароль?
 				<Link className={styles.link} to='/login'>Войти</Link>

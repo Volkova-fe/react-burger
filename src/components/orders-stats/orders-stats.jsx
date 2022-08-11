@@ -19,26 +19,26 @@ export const OrdersStats = () => {
 					<ul className={styles.orderList}>
 						{doneStatusOrder.map((order, index) => {
 							return (
-							<li className={`${styles.item} ${styles.done} text text_type_digits-default`} key={ItemId + index}>{order.number}</li>)
+								<li className={`${styles.item} ${styles.done} text text_type_digits-default`} key={ItemId + index}>{order.number}</li>)
 						})}
 					</ul>
 				</div>
 				<div className={styles.column}>
 					<p className='text text_type_main-medium pb-6'>В работе:</p>
 					<ul className={styles.orderList}>
-						{pendingStatusOrder.map((order, index) => { 
+						{pendingStatusOrder.map((order, index) => {
 							return (
-							<li className={`${styles.item} text text_type_digits-default`} key={ItemId + index}>{order.number}</li>)
+								<li className={`${styles.item} text text_type_digits-default`} key={ItemId + index}>{order.number}</li>)
 						})}
 					</ul>
 				</div>
 			</div>
 			<div className={`${styles.completed} pb-15`}>
-				<p  className='text text_type_main-medium'>Выполнено за все время:</p>
+				<p className='text text_type_main-medium'>Выполнено за все время:</p>
 				<h2 className={`${styles.totalItems} text text_type_digits-large`}>{total}</h2>
 			</div>
 			<div className={styles.completed}>
-				<p  className='text text_type_main-medium'>Выполнено за сегодня:</p>
+				<p className='text text_type_main-medium'>Выполнено за сегодня:</p>
 				<h2 className={`${styles.totalItems} text text_type_digits-large`}>{totalToday}</h2>
 			</div>
 		</div >)

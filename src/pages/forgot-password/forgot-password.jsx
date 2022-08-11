@@ -44,13 +44,17 @@ export const ForgotPassword = () => {
 						size={'default'}
 					/>
 				</div>
-				<Button type="primary" size="medium">
-					{!!forgetPassSuccess
-						? (<Redirect to='/reset-password' />)
-						: ''
-					}
-					Восстановить
-				</Button>
+				{email ?
+					(<Button type="primary" size="medium">
+						{!!forgetPassSuccess
+							? (<Redirect to='/reset-password' />)
+							: ''
+						}
+						Восстановить
+					</Button>)
+					: (<Button type="primary" size="medium" disabled>
+						Восстановить
+					</Button>)}
 			</form>
 			<p className="text text_type_main-default text_color_inactive pt-20 pb-4">Вспомнили пароль?
 				<Link className={styles.link} to='/login'>Войти</Link>

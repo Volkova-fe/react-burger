@@ -18,6 +18,7 @@ import { useHistory } from 'react-router-dom';
 
 const BurgerConstructor = () => {
 	const { bun, items, itemsId } = useSelector((state) => state.burgerConstructor);
+	const { orderDetailsRequest } = useSelector((state) => state.order);
 	const dispatch = useDispatch();
 	const [total, setTotal] = useState(0);
 	const cookie = getCookie('token');
@@ -100,13 +101,13 @@ const BurgerConstructor = () => {
 					<p className='text text_type_digits-medium pr-2'>{total}</p>
 					<CurrencyIcon type="primary" />
 				</div>
-				{items.length === 0
+				{items.length === 0  || !!orderDetailsRequest
 					? (<Button
 						type="primary"
 						size="large"
 						disabled
 					>
-						Оформить заказ
+						{ orderDetailsRequest ? '...Заказ оформляется' : 'Оформить заказ' }
 					</Button>)
 					: (<Button
 						type="primary"

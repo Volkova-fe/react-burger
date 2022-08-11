@@ -31,7 +31,7 @@ function App() {
     '/profile/orders/:id',
     '/feed/:id',
   ])?.params?.id;
-const orderNumber = useSelector(store => store.order.number);
+  const orderNumber = useSelector(store => store.order.number);
 
   const token = localStorage.getItem('refreshToken');
   const cookie = getCookie('token');
@@ -44,13 +44,14 @@ const orderNumber = useSelector(store => store.order.number);
     dispatch(getBurgerIngredients());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
+
 
   useEffect(() => {
     if (!cookie && token) {
       dispatch(updateToken());
+    }
+    if (cookie && token) {
+      dispatch(getUser());
     }
   }, [dispatch, token, cookie]);
 
@@ -99,21 +100,18 @@ const orderNumber = useSelector(store => store.order.number);
           <Route path='/ingredients/:id' exact>
             <IngredientDetails />
           </Route>
-          <ProtectedRoute path='/profile'>
-            <Profile />
-          </ProtectedRoute>
           <Route path='/feed' exact>
             <Feed />
           </Route>
           <Route path='/feed/:id' exact>
             <OrdersInfo />
           </Route>
-          <Route path='/profile/orders' exact>
-            <OrderHistory />
-          </Route>
-          <Route path='/profile/orders/:id' exact>
+          <ProtectedRoute path='/profile'>
+            <Profile />
+          </ProtectedRoute>
+          <ProtectedRoute path='/profile/orders/:id'>
             <OrdersInfo />
-          </Route>
+          </ProtectedRoute>
           <Route>
             <NotFound404 />
           </Route>
@@ -129,7 +127,7 @@ const orderNumber = useSelector(store => store.order.number);
         )
         }
         {background && idOrderInfo && (
-          <ProtectedRoute  path='/profile/orders/:id' exact>
+          <ProtectedRoute path='/profile/orders/:id' exact>
             <Modal
               title=''
               onClickClose={handleCloseOrderInfoDetailsModal}>

@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import propTypes from "prop-types";
 import styles from './orders-card.module.css';
 import { useSelector } from 'react-redux';
-import uniqid from 'uniqid';
 import { StackedImage } from './stacked-image/stacked-image';
 
 
@@ -12,20 +11,20 @@ export const OrdersCard = ({ order, status }) => {
 	const { createdAt, number, name } = order;
 
 	const MAX_LENGTH = order.ingredients.length;
-	const hideIngredients = MAX_LENGTH - 6
+	const hideIngredients = MAX_LENGTH - 6;
 
 	const orderIngredientsData = useMemo(() => {
-		return order.ingredients.map((id) => {
+		return order?.ingredients.map((id) => {
 			return ingredients?.find((item) => {
 				return id === item._id
 			})
 		})
-	}, [order.ingredients, ingredients])
+	}, [order?.ingredients, ingredients])
 
 
 	const orderTotalPrice = useMemo(() => {
-		return orderIngredientsData.reduce((sum, item) => {
-			if (item.type === 'bun') {
+		return orderIngredientsData?.reduce((sum, item) => {
+			if (item?.type === 'bun') {
 				return sum += item.price * 2
 			}
 			return sum += (item ? item.price : 0);
@@ -50,33 +49,34 @@ export const OrdersCard = ({ order, status }) => {
 			<div className={styles.price}>
 				<ul className={styles.list}>
 					{orderIngredientsData && MAX_LENGTH <= 5 && orderIngredientsData.map((item, index) => {
-						return ( 
-							<li className={styles.items} key={uniqid()}>
-							{item && 
-								<StackedImage image={item.image} alt={item.name} key={uniqid()} />}
+						return (
+							<li className={styles.items} key={index}>
+								{item &&
+									<StackedImage image={item.image} alt={item.name} />}
 							</li>
 						)
 					})}
 					{orderIngredientsData && MAX_LENGTH >= 6 && orderIngredientsData.slice(0, 5).map((item, index) => {
-						return (item ? (
-							<li className={styles.items} key={uniqid()}>
-								<StackedImage image={item.image} alt={item.name} key={uniqid()} />
+						return (
+							<li className={styles.items} key={index}>
+								{item &&
+									<StackedImage image={item.image} alt={item.name} />}
 							</li>
 						)
-							: '')
 					})}
 					{orderIngredientsData && MAX_LENGTH > 6 && orderIngredientsData.slice(5, 6).map((item, index) => {
-						return (item ? (
-							<>
-								<li className={styles.items} key={uniqid()}>
-									<p className={`text text_type_main-default ${styles.hideText}`}>{`+${hideIngredients}`}</p>
-									<div className={styles.hidePic}>
-										<StackedImage image={item.image} alt={item.name} key={uniqid()}/>
-									</div>
-								</li>
-							</>
+						return (
+							<li className={styles.items} key={index}>
+								{item &&
+									<>
+										<p className={`text text_type_main-default ${styles.hideText}`}>{`+${hideIngredients}`}</p>
+										<div className={styles.hidePic}>
+											<StackedImage image={item.image} alt={item.name} />
+										</div>
+									</>
+								}
+							</li>
 						)
-							: '')
 					})}
 				</ul>
 				<div className={styles.price}>

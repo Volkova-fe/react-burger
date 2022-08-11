@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import uniqid from 'uniqid';
 import { OrdersCard } from '../../../components/orders/orders-card/orders-card';
 import styles from './order-history.module.css';
 
@@ -13,7 +12,7 @@ export const OrderHistory = () => {
 	return (
 		<div className={styles.container}>
 			{orders &&
-				(orders.map((order) => {
+				(orders?.map((order) => {
 					return (
 						<Link
 							to={{ pathname: `/profile/orders/${order._id}`, state: { background: location } }}

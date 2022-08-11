@@ -1,30 +1,29 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory, useParams, useRouteMatch } from 'react-router-dom';
+import { useParams, useRouteMatch } from 'react-router-dom';
 import { OrdersInfoDetails } from './order-info-details/order-info-details';
 import styles from './order-info.module.css';
 import uniqid from 'uniqid';
-import { getUser } from '../../services/actions/auth';
 import { useDispatch } from 'react-redux';
 import { wsConnectionClosed, wsConnectionOpen } from '../../services/actions/wsActions';
 import { wsAuthConnectionClosed, wsAuthConnectionOpen } from '../../services/actions/wsAuthActions';
 
 export const OrdersInfo = () => {
-	let { id } = useParams();
 	const dispatch = useDispatch();
-	const history = useHistory();
-	let match = useRouteMatch()
+
+	let { id } = useParams();
+	let match = useRouteMatch();
 	const isProfile = '/profile/orders/:id';
 	const isFeed = '/feed/:id';
+
 	const allOrders = useSelector(store => store.wsFeed.orders);
 	const authOrders = useSelector(store => store.wsAuthFeed.orders);
-	const ingredients = useSelector(store => store.burgerIngredients.ingredients)
+	const ingredients = useSelector(store => store.burgerIngredients.ingredients);
 
 	let orders = match.path === isProfile ? authOrders : allOrders;
-	console.log(orders)
 	let order = orders.find((order) => order._id === id);
-	console.log(authOrders)
+
 
 	const orderIngredientsData = useMemo(() => {
 		return order?.ingredients.map((id) => {
@@ -34,10 +33,9 @@ export const OrdersInfo = () => {
 		})
 	}, [order?.ingredients, ingredients])
 
-	console.log(orderIngredientsData)
 	const orderTotalPrice = useMemo(() => {
 		return orderIngredientsData?.reduce((sum, item) => {
-			if (item.type === 'bun') {
+			if (item?.type === 'bun') {
 				return sum += item.price * 2
 			}
 			return sum += (item ? item.price : 0);
@@ -61,25 +59,25 @@ export const OrdersInfo = () => {
 				dispatch(wsConnectionClosed());
 			}
 		}
-	}, [dispatch, order, history, match.path, match.url]);
+	}, [dispatch, order, match.path, match.url]);
 
 	return (
 		<>
 			{
 				order && (
 					<div className={styles.container}>
-						<p>#{order.number}</p>
-						<h2>{order.name}</h2>
+						<p className='text text_type_digits-default'>#{order.number}</p>
+						<h2 className={`${styles.name} text text_type_main-medium pt-10`}>{order.name}</h2>
 						{!!order.status &&
-							<p className={`${styles.status} text text_type_main-default`}>
+							<p className={`${styles.status} text text_type_main-default pt-3`}>
 								{order.status === 'done' ? 'Выполнен' : order.status === 'pending' ? 'Готовится' : order.status === 'created' ? 'Создан' : 'Выполнен'}
 							</p>}
-						<h3>Состав:</h3>
-						<ul>
+						<h3 className={`${styles.order} text text_type_main-medium pt-15`}>Состав:</h3>
+						<ul className={`${styles.list}`}>
 							<OrdersInfoDetails details={orderIngredientsData} key={id} />
 						</ul>
-						<div>
-							<p>{order.createdAt}</p>
+						<div className={`${styles.total} pb-10`}>
+							<p className="text text_type_main-default text_color_inactive">{order.createdAt}</p>
 							<div className={styles.price}>
 								<p className='text text_type_digits-default pr-2'>{orderTotalPrice}</p>
 								<CurrencyIcon type="primary" key={uniqid()} />
