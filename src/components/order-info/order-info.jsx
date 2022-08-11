@@ -23,7 +23,7 @@ export const OrdersInfo = () => {
 	const ingredients = useSelector(store => store.burgerIngredients.ingredients);
 
 	let orders = match.path === isProfile ? authOrders : allOrders;
-	let order = orders.find((order) => order._id === id);
+	let order = orders?.find((order) => order._id === id);
 
 
 	const orderIngredientsData = useMemo(() => {
