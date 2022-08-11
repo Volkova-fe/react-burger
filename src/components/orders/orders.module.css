@@ -1,6 +1,6 @@
 .container {
-	height: calc(100vh - 475px);
-	min-height: 208px;
+	height: 70vh;
+	min-height: 70%;
 	overflow-y: auto;
 	overflow-x: hidden;
 	max-width: 600px;

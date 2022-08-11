@@ -21,7 +21,7 @@ import {
 	WS_AUTH_CONNECTION_START,
 } from './action-types';
 import { socketMiddleware } from './middleware/socketMiddleware';
-import { socketAuthMiddleware } from './middleware/socketAuthMiddleware';
+
 
 const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
 const wsAuthUrl = 'wss://norma.nomoreparties.space/orders';
@@ -51,5 +51,8 @@ declare global {
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware(wsUrl, wsActions), socketAuthMiddleware(wsAuthUrl, wsAuthActions)));
+const enhancer = composeEnhancers(
+	applyMiddleware(thunk,
+		socketMiddleware(wsUrl, wsActions, false),
+		socketMiddleware(wsAuthUrl, wsAuthActions, true)));
 export const store = createStore(rootReducer, enhancer);
