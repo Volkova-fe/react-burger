@@ -16,6 +16,7 @@
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.13.1",
+    "dayjs": "^1.11.4",
     "react": "^18.2.0",
     "react-avatar": "^5.0.2",
     "react-avatar-group": "^1.0.2",

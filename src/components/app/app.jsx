@@ -18,7 +18,7 @@ import { getBurgerIngredients } from '../../services/actions/burger-ingredients'
 import { closeIngredientModal } from '../../services/actions/ingredient-details';
 import { RESET_ITEM } from '../../services/action-types';
 
-import { Feed, ForgotPassword, Login, NotFound404, OrderHistory, Profile, Register, ResetPassword } from '../../pages';
+import { Feed, ForgotPassword, Login, NotFound404, Profile, Register, ResetPassword } from '../../pages';
 import { getUser, updateToken } from '../../services/actions/auth';
 import { getCookie } from '../../utils/utils';
 import { ProtectedRoute } from '../protected-route/protected-route';

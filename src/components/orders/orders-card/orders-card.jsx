@@ -4,6 +4,7 @@ import propTypes from "prop-types";
 import styles from './orders-card.module.css';
 import { useSelector } from 'react-redux';
 import { StackedImage } from './stacked-image/stacked-image';
+import { formatDate } from '../../../utils/utils';
 
 
 export const OrdersCard = ({ order, status }) => {
@@ -31,13 +32,12 @@ export const OrdersCard = ({ order, status }) => {
 		}, 0);
 	}, [orderIngredientsData])
 
-	const dataCreate = new Date(createdAt).toLocaleString()
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.orderid}>
 				<p className="text text_type_digits-default">#{number}</p>
-				<p className="text text_type_main-default text_color_inactive">{dataCreate}</p>
+				<p className="text text_type_main-default text_color_inactive">{formatDate(createdAt)}</p>
 			</div>
 			<div className={styles.info}>
 				<h2 className={`${styles.text} text text_type_main-medium`}>{name}</h2>

@@ -6,7 +6,7 @@ import styles from './orders-stats.module.css';
 export const OrdersStats = () => {
 	const { total, totalToday, orders } = useSelector(store => store.wsFeed);
 
-	const doneStatusOrder = orders.filter(order => order.status === 'done').filter((order, index) => index < 10);
+	const doneStatusOrder = orders.filter(order => order.status === 'done').filter((order, index) => index < 15);
 	const pendingStatusOrder = orders.filter(order => order.status !== 'done').filter((order, index) => index >= 10)
 
 	const ItemId = uniqid();

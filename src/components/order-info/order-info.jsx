@@ -8,6 +8,7 @@ import uniqid from 'uniqid';
 import { useDispatch } from 'react-redux';
 import { wsConnectionClosed, wsConnectionOpen } from '../../services/actions/wsActions';
 import { wsAuthConnectionClosed, wsAuthConnectionOpen } from '../../services/actions/wsAuthActions';
+import { formatDate } from '../../utils/utils';
 
 export const OrdersInfo = () => {
 	const dispatch = useDispatch();
@@ -77,7 +78,7 @@ export const OrdersInfo = () => {
 							<OrdersInfoDetails details={orderIngredientsData} key={id} />
 						</ul>
 						<div className={`${styles.total} pb-10`}>
-							<p className="text text_type_main-default text_color_inactive">{order.createdAt}</p>
+							<p className="text text_type_main-default text_color_inactive">{formatDate(order.createdAt)}</p>
 							<div className={styles.price}>
 								<p className='text text_type_digits-default pr-2'>{orderTotalPrice}</p>
 								<CurrencyIcon type="primary" key={uniqid()} />

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import ingredientType from '../../../utils/types'
 import ingredientsItemStyles from './ingredients-item.module.css'

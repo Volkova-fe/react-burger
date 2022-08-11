@@ -18,6 +18,10 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	height: 245px;
+	flex-direction: column;
 }
 
 .column {
