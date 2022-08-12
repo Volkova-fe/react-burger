@@ -6,8 +6,8 @@ import styles from './order-history.module.css';
 
 export const OrderHistory = () => {
 	const location = useLocation();
-	const orders = useSelector(store => store.wsAuthFeed.orders)
-
+	const orders = useSelector(store => store.wsAuthFeed.orders).slice();
+	orders.reverse();
 
 	return (
 		<div className={styles.container}>
