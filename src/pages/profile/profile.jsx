@@ -25,8 +25,8 @@ export const Profile = () => {
 	}, [dispatch]);
 
 	const [form, setForm] = useState({
-		email: email,
-		name: name,
+		email: '',
+		name: '',
 		password: '',
 	});
 
@@ -43,11 +43,19 @@ export const Profile = () => {
 		dispatch(singOut());
 	};
 
-	const onResetForm = (e) => {
-		e.preventDefault();
+	useEffect(() => {
 		setForm({
 			email: email,
 			name: name,
+			password: ''
+		})
+	}, [email, name])
+
+	const onResetForm = (e) => {
+		e.preventDefault();
+		setForm({
+			email: '',
+			name: '',
 			password: '',
 		})
 	}
@@ -109,7 +117,7 @@ export const Profile = () => {
 								placeholder={'Имя'}
 								onChange={onChange}
 								icon={'EditIcon'}
-								value={form.name}
+								value={name}
 								name={'name'}
 								error={false}
 								errorText={'Ошибка'}
@@ -122,7 +130,7 @@ export const Profile = () => {
 								placeholder={'Логин'}
 								onChange={onChange}
 								icon={'EditIcon'}
-								value={form.email}
+								value={email}
 								name={'email'}
 								error={false}
 								errorText={'Ошибка'}
