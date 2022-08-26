@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
-import ingredientType from '../../../utils/types'
 import ingredientsItemStyles from './ingredients-item.module.css'
 import {
 	CurrencyIcon,
@@ -9,8 +8,13 @@ import {
 }
 	from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useLocation } from 'react-router-dom';
+import { TIngredient } from '../../../utils/types';
 
-const IngredientsItem = ({ ingredient }) => {
+type TIngredientsItem = {
+	ingredient: TIngredient;
+}
+
+const IngredientsItem: FC<TIngredientsItem> = ({ ingredient }) => {
 	const location = useLocation();
 
 	const { bun, items } = useSelector((state) => state.burgerConstructor);
@@ -56,10 +60,6 @@ const IngredientsItem = ({ ingredient }) => {
 			</div>
 		</Link>
 	)
-}
-
-IngredientsItem.propTypes = {
-	ingredient: ingredientType.isRequired
 }
 
 export default IngredientsItem;

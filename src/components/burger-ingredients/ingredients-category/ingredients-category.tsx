@@ -1,11 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import ingredientsCategoryStyles from './ingredients-category.module.css'
 import IngredientsItem from '../ingredients-item/ingredients-item';
+import { TIngredient } from '../../../utils/types';
 
-const IngredientsCategory = ({ ingredients, type }) => {
+type TIngredientsCategory = {
+	ingredients: TIngredient[];
+	type: string;
+}
+
+type TCategories = {
+	[key: string]: string;
+}
+
+const IngredientsCategory: FC<TIngredientsCategory>= ({ ingredients, type }) => {
 	const category = ingredients.filter((elem) => elem.type === type)
-	const categories = {
+	const categories: TCategories = {
 		'bun': 'Булки',
 		'sauce': 'Соусы',
 		'main': 'Начинки'
@@ -23,11 +32,6 @@ const IngredientsCategory = ({ ingredients, type }) => {
 			</ul>
 		</li>
 	)
-}
-
-IngredientsCategory.propTypes = {
-	type: PropTypes.string.isRequired,
-	ingredients: PropTypes.array.isRequired,
 }
 
 export default IngredientsCategory;

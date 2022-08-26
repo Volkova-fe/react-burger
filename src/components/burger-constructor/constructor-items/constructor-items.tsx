@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { FC, useRef } from 'react';
 import constructorItemStyles from './constructor-items.module.css'
 import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
@@ -9,21 +9,32 @@ import {
 	from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { DELETE_ITEM, MOVE_ITEM } from '../../../services/action-types';
-import ingredientType from '../../../utils/types'
+import { TIngredient } from '../../../utils/types'
 
-const ConstructorItems = ({ index, items }) => {
+type TConstructorItems = {
+	index: number;
+	items: TIngredient & {id: string};
+}
+
+type TDragItem = {
+	index: number;
+	id: string;
+	type: string;
+};
+
+const ConstructorItems: FC<TConstructorItems>= ({ index, items }) => {
 	const dispatch = useDispatch();
 	const { image, id, price, name } = items;
 	const ref = useRef(null);
 
-	const onDelete = (id) => {
+	const onDelete = (id: string) => {
 		dispatch({
 			type: DELETE_ITEM,
 			id: id,
 		});
 	};
 
-	const [, drop] = useDrop({
+	const [, drop] = useDrop<TDragItem>({
 		accept: "item",
 		hover(items) {
 			if (!ref.current) {
@@ -64,10 +75,6 @@ const ConstructorItems = ({ index, items }) => {
 			</li>
 		</>
 	)
-}
-
-ConstructorItems.propTypes = {
-	items: ingredientType.isRequired
 }
 
 export default ConstructorItems;
