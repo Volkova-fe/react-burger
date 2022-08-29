@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import orderDetailsStyle from './order-details.module.css'
 import orderAccepted from '../../images/order_accpeted.svg'
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 
 
-const OrderDetails = () => {
+const OrderDetails: FC = () => {
 	const  orderNumber  = useSelector(store => store.order.number);
 	return (
 		<div className={`${orderDetailsStyle.container} pl-25 pr-25`}>
