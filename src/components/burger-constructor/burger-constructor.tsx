@@ -15,6 +15,7 @@ import { ADD_BUN, ADD_ITEM_CONSTRUCTOR } from '../../services/action-types';
 import { getCookie } from '../../utils/utils';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../services/hooks';
+import { TLocation } from '../../services/types/data';
 
 const BurgerConstructor = () => {
 	const { bun, items, itemsId } = useSelector((state) => state.burgerConstructor);
@@ -22,20 +23,20 @@ const BurgerConstructor = () => {
 	const dispatch = useDispatch();
 	const [total, setTotal] = useState(0);
 	const cookie = getCookie('token');
-	const history = useHistory();
+	const history = useHistory<TLocation>();
 
 	const filling = useMemo(
 		() => items.filter((item) => item.type !== 'bun'),
 		[items]);
 
 	useEffect(() => {
-		const totalPrice = filling.reduce((sum, item) => sum + item.price, bun.length === 0 ? 0 : (bun.price * 2));
+		const totalPrice = filling.reduce((sum, item) => sum + item.price, bun?.length === 0 ? 0 : (bun.price * 2));
 		setTotal(totalPrice);
 	}, [bun, filling]);
 
 
 
-	const orderDetailsModal = (itemsId) => {
+	const orderDetailsModal = (itemsId: string) => {
 		cookie && dispatch(getOrderDetails(itemsId));
 		!cookie && history.push('/login');
 	};

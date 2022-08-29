@@ -1,9 +1,11 @@
-import { Redirect, Route, useLocation } from 'react-router-dom';
+import { FC } from 'react';
+import { BrowserRouterProps, Redirect, Route, useLocation } from 'react-router-dom';
+import { TLocation } from '../../services/types/data';
 import { getCookie } from '../../utils/utils';
 
-export function ProtectedRoute({ children, ...rest }) {
+export const ProtectedRoute: FC<BrowserRouterProps> = ({ children, ...rest }) => {
 	const cookie = getCookie('token');
-	const location = useLocation();
+	const location = useLocation<TLocation>();
 
 	return (
 		<Route

@@ -3,24 +3,24 @@ import { TIngredient } from "../types/data";
 
 
 export interface IAddBun {
+	data: TIngredient | null;
 	readonly type: typeof ADD_BUN;
-	data: Array<TIngredient>;
+	itemsId: TIngredient;
 }
 
 export interface IAddItems {
 	readonly type: typeof ADD_ITEM_CONSTRUCTOR;
 	data: Array<TIngredient>;
-	items: Array<TIngredient>;
-	ItemsId: string[];
 }
 
 export interface IDeleteItem {
 	readonly type: typeof DELETE_ITEM;
-	items: Array<TIngredient>;
+	data: Array<TIngredient>;
 	id: string;
 }
 
 export interface IMoveItem {
+	data: any;
 	readonly type: typeof MOVE_ITEM;
 	dragIndex: number;
 	hoverIndex: number;
@@ -28,8 +28,7 @@ export interface IMoveItem {
 
 export interface IResetItem {
 	readonly type: typeof RESET_ITEM;
-	items: Array<TIngredient>;
-	bun: Array<TIngredient>;
+	data: Array<TIngredient>;
 }
 
 export type TBurgerConstructorActions = 

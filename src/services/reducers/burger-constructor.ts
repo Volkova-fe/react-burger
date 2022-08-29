@@ -10,14 +10,14 @@ import { TIngredient } from "../types/data";
 
 export type TInitialState = {
 	items: Array<TIngredient>;
-	bun: Array<TIngredient>;
-	itemsId: string[];
+	bun?: TIngredient;
+	itemsId?: TIngredient;
 }
 
 const initialState: TInitialState = {
 	items: [],
-	bun: [],
-	itemsId: [],
+	bun: undefined,
+	itemsId: undefined,
 };
 
 export const constructorReducer = (

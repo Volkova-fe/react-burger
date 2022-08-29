@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerIngredientStyle from './burger-ingredients.module.css'
 import IngredientsCategory from './ingredients-category/ingredients-category'
 import { useSelector } from '../../services/hooks';
 
-const BurgerIngredients = () => {
+const BurgerIngredients: FC = () => {
 	const ingredients = useSelector(store => store.burgerIngredients.ingredients)
 
 	const [current, setCurrent] = useState("bun");
@@ -20,10 +20,12 @@ const BurgerIngredients = () => {
 		threshold: 0.1
 	});
 
-	const onTabScroll = (type) => {
+	const onTabScroll = (type: string) => {
 		setCurrent(type);
-		const section = document.getElementById(type);
-		section?.scrollIntoView({ behavior: "smooth", block: "start" });
+		const section: HTMLElement | null = document.getElementById(type);
+		if (section) {
+			section.scrollIntoView({ behavior: "smooth", block: "start" });
+		}
 	};
 
 	const handleIngredientScroll = () => {

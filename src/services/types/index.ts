@@ -1,17 +1,15 @@
 import { ThunkAction } from 'redux-thunk';
 import { Action, ActionCreator } from 'redux';
 import { store } from '../store';
-import { TBurgerIngredientsActions } from '../actions/burger-ingredients';
-import { TOrderDetailsActions } from '../actions/order-details';
+import { IBurgerIngredientsSuccess } from '../actions/burger-ingredients';
+import { IOrderDetailsSuccess } from '../actions/order-details';
 import { TIngredientModalActions } from '../actions/ingredient-details';
 import { TOrderInfoDetailsModalActions } from '../actions/order-info-details';
 
 
 type TApplicationActions =
-	| TBurgerIngredientsActions
-	| TOrderDetailsActions
-	| TIngredientModalActions
-	| TOrderInfoDetailsModalActions;
+	| IBurgerIngredientsSuccess
+	| IOrderDetailsSuccess;
 
 
 export type RootState = ReturnType<typeof store.getState>;

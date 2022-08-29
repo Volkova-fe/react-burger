@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, FC } from 'react';
 import { useDispatch, useSelector } from '../../services/hooks';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
@@ -26,7 +26,7 @@ import { OrdersInfo } from '../order-info/order-info';
 import { closeOrderInfoModal } from '../../services/actions/order-info-details';
 import { TLocation } from '../../services/types/data';
 
-function App() {
+const App: FC = () => {
   const dispatch = useDispatch();
   const idOrderInfo = useRouteMatch<{[id: string] : string} | null>([
     '/profile/orders/:id',

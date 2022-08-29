@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 
 export type TIngredient = {
 	type: string;
@@ -62,3 +63,13 @@ export type TLocation = {
 	from: string;
 	state?: object;
 };
+
+export type TModal = { 
+	title: string; 
+	children: ReactNode; 
+	onClickClose: () => void; 
+}
+
+export type TModalOverlay = { 
+	onClickClose: () => void; 
+}
