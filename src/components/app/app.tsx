@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 import { Switch, Route, useLocation, useHistory, useRouteMatch } from 'react-router-dom';
@@ -24,10 +24,11 @@ import { getCookie } from '../../utils/utils';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { OrdersInfo } from '../order-info/order-info';
 import { closeOrderInfoModal } from '../../services/actions/order-info-details';
+import { TLocation } from '../../services/types/data';
 
 function App() {
   const dispatch = useDispatch();
-  const idOrderInfo = useRouteMatch([
+  const idOrderInfo = useRouteMatch<{[id: string] : string} | null>([
     '/profile/orders/:id',
     '/feed/:id',
   ])?.params?.id;
@@ -36,7 +37,7 @@ function App() {
   const token = localStorage.getItem('refreshToken');
   const cookie = getCookie('token');
 
-  const location = useLocation();
+  const location = useLocation<TLocation>();
   const history = useHistory();
   const background = location.state?.background;
 
