@@ -9,7 +9,7 @@ import {
 	from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { DELETE_ITEM, MOVE_ITEM } from '../../../services/action-types';
-import { TIngredient } from '../../../utils/types'
+import { TIngredient } from '../../../services/types/data'
 
 type TConstructorItems = {
 	index: number;

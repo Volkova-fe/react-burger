@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import ingredientsCategoryStyles from './ingredients-category.module.css'
 import IngredientsItem from '../ingredients-item/ingredients-item';
-import { TIngredient } from '../../../utils/types';
+import { TIngredient } from '../../../services/types/data';
 
 type TIngredientsCategory = {
 	ingredients: TIngredient[];

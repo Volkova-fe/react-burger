@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerIngredientStyle from './burger-ingredients.module.css'
 import IngredientsCategory from './ingredients-category/ingredients-category'
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 
 const BurgerIngredients = () => {
 	const ingredients = useSelector(store => store.burgerIngredients.ingredients)
@@ -23,7 +23,7 @@ const BurgerIngredients = () => {
 	const onTabScroll = (type) => {
 		setCurrent(type);
 		const section = document.getElementById(type);
-		section.scrollIntoView({ behavior: "smooth", block: "start" });
+		section?.scrollIntoView({ behavior: "smooth", block: "start" });
 	};
 
 	const handleIngredientScroll = () => {

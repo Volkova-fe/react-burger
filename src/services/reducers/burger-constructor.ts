@@ -5,14 +5,25 @@ import {
 	MOVE_ITEM,
 	RESET_ITEM
 } from "../action-types";
+import { TBurgerConstructorActions } from "../actions/burger-constructor";
+import { TIngredient } from "../types/data";
 
-const initialState = {
+export type TInitialState = {
+	items: Array<TIngredient>;
+	bun: Array<TIngredient>;
+	itemsId: string[];
+}
+
+const initialState: TInitialState = {
 	items: [],
 	bun: [],
 	itemsId: [],
 };
 
-export const constructorReducer = (state = initialState, action) => {
+export const constructorReducer = (
+	state = initialState,
+	action: TBurgerConstructorActions)
+	: TInitialState => {
 	switch (action.type) {
 		case DELETE_ITEM: {
 			return {

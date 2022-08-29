@@ -6,6 +6,30 @@ import {
 	ORDER_DETAILS_REQUEST,
 	ORDER_DETAILS_SUCCESS
 } from "../action-types";
+import { AppDispatch, AppThunk } from "../types";
+
+export interface IOrderDetailsModal {
+	readonly type: typeof CLOSE_ORDER_MODAL;
+}
+
+export interface IOrderDetailsFailed {
+	readonly type: typeof ORDER_DETAILS_FAILED;
+}
+
+export interface IOrderDetailsRequest{
+	readonly type: typeof ORDER_DETAILS_REQUEST;
+}
+
+export interface IOrderDetailsSuccess{
+	readonly type: typeof ORDER_DETAILS_SUCCESS;
+	readonly number: number;
+}
+
+export type TOrderDetailsActions = 
+	| IOrderDetailsModal
+	| IOrderDetailsFailed
+	| IOrderDetailsRequest
+	| IOrderDetailsSuccess;
 
 export function closeOrderModal() {
 	return {
@@ -13,8 +37,8 @@ export function closeOrderModal() {
 	};
 }
 
-export function getOrderDetails(order) {
-	return function (dispatch) {
+export const getOrderDetails: AppThunk = (order: Array<string>) => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: ORDER_DETAILS_REQUEST
 		});

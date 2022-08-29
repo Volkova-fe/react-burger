@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../services/hooks';
 import { useDrag } from 'react-dnd';
 import ingredientsItemStyles from './ingredients-item.module.css'
 import {
@@ -8,7 +8,7 @@ import {
 }
 	from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useLocation } from 'react-router-dom';
-import { TIngredient } from '../../../utils/types';
+import { TIngredient } from '../../../services/types/data';
 
 type TIngredientsItem = {
 	ingredient: TIngredient;

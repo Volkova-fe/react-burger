@@ -4,16 +4,24 @@ import {
 	ORDER_DETAILS_REQUEST,
 	ORDER_DETAILS_SUCCESS
 } from "../action-types";
+import { TOrderDetailsActions } from "../actions/order-details";
 
+export type TOrderInitialState = {
+	orderDetailsFailed: boolean;
+	number: number | null;
+	orderDetailsRequest: boolean;
+}
 
-
-const orderInitialState = {
+const orderInitialState: TOrderInitialState = {
 	orderDetailsFailed: false,
 	number: null,
 	orderDetailsRequest: false
 };
 
-export const orderReducer = (state = orderInitialState, action) => {
+export const orderReducer = (
+	state = orderInitialState, 
+	action: TOrderDetailsActions)
+	: TOrderInitialState => {
 	switch (action.type) {
 		case ORDER_DETAILS_REQUEST: {
 			return {

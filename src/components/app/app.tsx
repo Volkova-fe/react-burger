@@ -23,7 +23,7 @@ import { getUser, updateToken } from '../../services/actions/auth';
 import { getCookie } from '../../utils/utils';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { OrdersInfo } from '../order-info/order-info';
-import { closeOrderInfoModal } from '../../services/actions/order-info-detailsTypes';
+import { closeOrderInfoModal } from '../../services/actions/order-info-details';
 
 function App() {
   const dispatch = useDispatch();

@@ -4,7 +4,7 @@ import { constructorReducer } from "./burger-constructor";
 import { ingredientsReducer } from "./burger-ingredients";
 import { ingredientReducer } from "./ingredient-details";
 import { orderReducer } from "./order-details";
-import { orderInfoReducer } from "./order-info-detailsTypes";
+import { orderInfoReducer } from "./order-info-details";
 import { wsAuthReducer } from "./wsAuthReducer";
 import { wsReducer } from "./wsReducer";
 

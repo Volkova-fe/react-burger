@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import {
 	ConstructorElement,
@@ -15,6 +14,7 @@ import { getOrderDetails } from '../../services/actions/order-details';
 import { ADD_BUN, ADD_ITEM_CONSTRUCTOR } from '../../services/action-types';
 import { getCookie } from '../../utils/utils';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from '../../services/hooks';
 
 const BurgerConstructor = () => {
 	const { bun, items, itemsId } = useSelector((state) => state.burgerConstructor);

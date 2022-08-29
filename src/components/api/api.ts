@@ -1,3 +1,4 @@
+import { TIngredientResponse, TOrderDetailsResponse, TUser, TUserLogoutResponse } from "../../services/types/data";
 import { getCookie } from "../../utils/utils";
 
 export const API = {
@@ -7,7 +8,7 @@ export const API = {
 	},
 }
 
-export const checkResponse = res => {
+export const checkResponse = <T>(res: Response): Promise<T> => {
 	if (res.ok) {
 		return res.json();
 	} else {
@@ -15,8 +16,8 @@ export const checkResponse = res => {
 	}
 }
 
-export const orderDetailsRequest = async (productsId) => {
-	const res = await fetch(`${API.url}orders`, {
+export const orderDetailsRequest = async (productsId: string[]) => {
+	return await fetch(`${API.url}orders`, {
 		method: 'POST',
 		body: JSON.stringify({
 			ingredients: productsId
@@ -26,20 +27,20 @@ export const orderDetailsRequest = async (productsId) => {
 			Authorization: 'Bearer ' + getCookie('token')
 		},
 	})
-	return checkResponse(res);
+		.then (res => checkResponse<TOrderDetailsResponse>(res));
 }
 
 export const getIngredientData = async () => {
-	const res = await fetch(`${API.url}ingredients`, {
+	return await fetch(`${API.url}ingredients`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 	})
-	return checkResponse(res);
+	.then (res => checkResponse<TIngredientResponse>(res));
 }
 
-export const forgotPassRequest = async email => {
+export const forgotPassRequest = async (email:string) => {
 	return await fetch(`${API.url}password-reset`, {
 		method: 'POST',
 		body: JSON.stringify(
@@ -54,24 +55,24 @@ export const forgotPassRequest = async email => {
 		redirect: 'follow',
 		referrerPolicy: 'no-referrer',
 	})
-		.then(checkResponse);
+		.then(res => checkResponse<TUser>(res));
 }
 
-export const resetPassRequest = async (password, token) => {
+export const resetPassRequest = async (password: string, token: string) => {
 	return await fetch(`${API.url}password-reset/reset`, {
 		method: 'POST',
-		body: JSON.stringify(
-			password,
-			token,
-		),
+		body: JSON.stringify({
+			password: password,
+			token: token,
+		}),
 		headers: {
 			'Content-Type': 'application/json',
 		},
 	})
-		.then(checkResponse);
+		.then(res => checkResponse<TUser>(res));
 }
 
-export const loginRequest = async (email, password) => {
+export const loginRequest = async (email: string, password: string) => {
 	return await fetch(`${API.url}auth/login`, {
 		method: 'POST',
 		headers: {
@@ -82,10 +83,10 @@ export const loginRequest = async (email, password) => {
 			password: password,
 		}),
 	})
-		.then(checkResponse);
+		.then(res => checkResponse<TUser>(res));
 }
 
-export const resgisterUserRequest = async (email, password, name) => {
+export const resgisterUserRequest = async (email: string, password: string, name: string) => {
 	return await fetch(`${API.url}auth/register`, {
 		method: 'POST',
 		body: JSON.stringify({
@@ -97,7 +98,7 @@ export const resgisterUserRequest = async (email, password, name) => {
 			'Content-Type': 'application/json',
 		},
 	})
-		.then(checkResponse);
+		.then(res => checkResponse<TUser>(res));
 }
 
 export const logoutRequest = async () => {
@@ -110,7 +111,7 @@ export const logoutRequest = async () => {
 			token: localStorage.getItem('refreshToken'),
 		}),
 	})
-		.then(checkResponse);
+		.then(res => checkResponse<TUserLogoutResponse>(res));
 }
 
 export const getUserRequest = async () => {
@@ -121,10 +122,10 @@ export const getUserRequest = async () => {
 			Authorization: 'Bearer ' + getCookie('token'),
 		},
 	})
-		.then(checkResponse);
+		.then(res => checkResponse<TUser>(res));
 }
 
-export const updateUserRequest = async (email, name, password) => {
+export const updateUserRequest = async (email: string, name: string, password: string) => {
 	return await fetch(`${API.url}auth/user`, {
 		method: 'PATCH',
 		headers: {
@@ -137,7 +138,7 @@ export const updateUserRequest = async (email, name, password) => {
 			password: password,
 		}),
 	})
-		.then(checkResponse);
+		.then(res => checkResponse<TUser>(res));
 }
 
 export const updateTokenRequest = async () => {
@@ -150,5 +151,5 @@ export const updateTokenRequest = async () => {
 			token: localStorage.getItem('refreshToken'),
 		}),
 	})
-		.then(checkResponse);
+		.then(res => checkResponse<TUser>(res));
 }
