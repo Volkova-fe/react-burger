@@ -1,6 +1,6 @@
 import React, { FC, useRef } from 'react';
 import constructorItemStyles from './constructor-items.module.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../../services/hooks';
 import { useDrag, useDrop } from 'react-dnd';
 import {
 	DragIcon,
@@ -13,13 +13,13 @@ import { TIngredient } from '../../../services/types/data'
 
 type TConstructorItems = {
 	index: number;
-	items: TIngredient & {id: string};
+	items: TIngredient;
 }
 
 type TDragItem = {
 	index: number;
-	id: string;
 	type: string;
+	id?: string;
 };
 
 const ConstructorItems: FC<TConstructorItems>= ({ index, items }) => {
@@ -70,7 +70,7 @@ const ConstructorItems: FC<TConstructorItems>= ({ index, items }) => {
 					text={name}
 					price={price}
 					thumbnail={image}
-					handleClose={(() => onDelete(id))}
+					handleClose={() => {onDelete}}
 				/>
 			</li>
 		</>

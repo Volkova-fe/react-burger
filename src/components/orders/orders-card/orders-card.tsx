@@ -1,13 +1,17 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useMemo } from 'react';
-import propTypes from "prop-types";
+import React, { FC, useMemo } from 'react';
 import styles from './orders-card.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../services/hooks';
 import { StackedImage } from './stacked-image/stacked-image';
 import { formatDate } from '../../../utils/utils';
+import { TFeed } from '../../../services/types/data';
 
+type TOrdersCard = {
+	order: TFeed;
+	status: string;
+}
 
-export const OrdersCard = ({ order, status }) => {
+export const OrdersCard: FC<TOrdersCard> = ({ order, status }) => {
 	const ingredients = useSelector(store => store.burgerIngredients.ingredients)
 	const { createdAt, number, name } = order;
 
@@ -86,8 +90,3 @@ export const OrdersCard = ({ order, status }) => {
 			</div>
 		</div >)
 }
-
-OrdersCard.propTypes = {
-	order: propTypes.object.isRequired,
-	status: propTypes.bool,
-};

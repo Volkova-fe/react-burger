@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import uniqid from 'uniqid';
 import styles from './orders-stats.module.css';
 

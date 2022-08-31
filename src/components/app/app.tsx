@@ -26,6 +26,12 @@ import { OrdersInfo } from '../order-info/order-info';
 import { closeOrderInfoModal } from '../../services/actions/order-info-details';
 import { TLocation } from '../../services/types/data';
 
+declare module 'react' {
+  interface FunctionComponent<P = {}> {
+    (props: PropsWithChildren<P>, context?: any): ReactElement<any, any> | null;
+  }
+}
+
 const App: FC = () => {
   const dispatch = useDispatch();
   const idOrderInfo = useRouteMatch<{[id: string] : string} | null>([

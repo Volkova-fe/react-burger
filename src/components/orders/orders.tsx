@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/hooks';
 import { Link, useLocation } from 'react-router-dom';
 import { OrdersCard } from './orders-card/orders-card';
 import styles from './orders.module.css';
@@ -16,7 +16,7 @@ export const Orders = () => {
 						to={{ pathname: `/feed/${order._id}`, state: { background: location } }}
 						className={`${styles.link}`} key={order._id}
 					>
-						<OrdersCard order={order} status={false} key={index} />
+						<OrdersCard order={order} status={order.status} key={index} />
 					</Link>
 				)
 			})}

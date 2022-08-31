@@ -9,15 +9,30 @@ import { TBurgerConstructorActions } from "../actions/burger-constructor";
 import { TIngredient } from "../types/data";
 
 export type TInitialState = {
-	items: Array<TIngredient>;
-	bun?: TIngredient;
-	itemsId?: TIngredient;
+	items: TIngredient[];
+	bun: TIngredient;
+	itemsId: string[];
 }
 
 const initialState: TInitialState = {
 	items: [],
-	bun: undefined,
-	itemsId: undefined,
+	bun: {
+		calories: 0,
+		carbohydrates: 0,
+		fat: 0,
+		image: '',
+		image_large: '',
+		image_mobile: '',
+		name: '',
+		price: 0,
+		proteins: 0,
+		type: "bun",
+		__v: 0,
+		_id: '',
+		id: '',
+		count: 0,
+	},
+	itemsId: [],
 };
 
 export const constructorReducer = (
@@ -53,7 +68,7 @@ export const constructorReducer = (
 			return {
 				...state,
 				items: [],
-				bun: [],
+				bun: initialState.bun,
 			};
 		}
 		case MOVE_ITEM: {

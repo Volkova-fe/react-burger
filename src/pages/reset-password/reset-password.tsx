@@ -1,24 +1,24 @@
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import React, { ChangeEvent, FormEvent } from 'react';
+import { useSelector, useDispatch } from '../../services/hooks';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { resetPassword, setResetFormValue } from '../../services/actions/auth';
 import { getCookie } from '../../utils/utils';
 import styles from './reset-password.module.css';
+import { TLocation } from '../../services/types/data';
 
 export const ResetPassword = () => {
 	const dispatch = useDispatch();
-	const location = useLocation()
+	const location = useLocation<TLocation>()
 	const cookie = getCookie('token');
 	const { password, code } = useSelector(state => state.auth.form);
 	const { resetPassSuccess, forgetPassSuccess } = useSelector(state => state.auth);
 
-	const onChange = e => {
+	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 		dispatch(setResetFormValue(e.target.name, e.target.value));
 	}
 
-	const onFormSubmit = e => {
+	const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		dispatch(resetPassword({ password, token: code }));
 	}
@@ -36,7 +36,6 @@ export const ResetPassword = () => {
 			<form className={styles.form} onSubmit={onFormSubmit}>
 				<div className="pb-6">
 					<PasswordInput
-						placeholder={'Введите новый пароль'}
 						onChange={onChange}
 						value={password}
 						name={'password'}

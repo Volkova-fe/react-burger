@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 import { OrdersStats } from '../../components/orders-stats/orders-stats';
 import { Orders } from '../../components/orders/orders';
 import { wsConnectionClosed, wsConnectionOpen } from '../../services/actions/wsActions';

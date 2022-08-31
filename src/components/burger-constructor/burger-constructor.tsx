@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import {
 	ConstructorElement,
@@ -15,9 +15,9 @@ import { ADD_BUN, ADD_ITEM_CONSTRUCTOR } from '../../services/action-types';
 import { getCookie } from '../../utils/utils';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../services/hooks';
-import { TLocation } from '../../services/types/data';
+import { TIngredient, TLocation } from '../../services/types/data';
 
-const BurgerConstructor = () => {
+const BurgerConstructor: FC = () => {
 	const { bun, items, itemsId } = useSelector((state) => state.burgerConstructor);
 	const { orderDetailsRequest } = useSelector((state) => state.order);
 	const dispatch = useDispatch();
@@ -30,29 +30,29 @@ const BurgerConstructor = () => {
 		[items]);
 
 	useEffect(() => {
-		const totalPrice = filling.reduce((sum, item) => sum + item.price, bun?.length === 0 ? 0 : (bun.price * 2));
+		const totalPrice = filling.reduce((sum, item) => sum + item.price, bun?.type === 'bun' ? 0 : bun.price * 2);
 		setTotal(totalPrice);
 	}, [bun, filling]);
 
 
 
-	const orderDetailsModal = (itemsId: string) => {
+	const orderDetailsModal = (itemsId: string[]) => {
 		cookie && dispatch(getOrderDetails(itemsId));
 		!cookie && history.push('/login');
 	};
 
 	const [, dropTarget] = useDrop({
 		accept: "ingredients",
-		drop(item) {
-			if (item.ingredient.type === "bun") {
+		drop(item: TIngredient) {
+			if (item.type === "bun") {
 				dispatch({
 					type: ADD_BUN,
-					data: item.ingredient,
+					data: item,
 				});
 			} else {
 				dispatch({
 					type: ADD_ITEM_CONSTRUCTOR,
-					data: { ...item.ingredient, id: Date.now() },
+					data: { ...item, id: Date.now() },
 				});
 			}
 		},
@@ -61,7 +61,7 @@ const BurgerConstructor = () => {
 	return (
 		<section className={`${burgerConstructorStyle.section} pl-10 pt-15`}>
 			<div className={`${burgerConstructorStyle.container} pr-2 pt-4`} ref={dropTarget}>
-				{bun.length === 0
+				{!bun 
 					? (<p className='text text_type_main-large pr-2'>Выберите булочку</p>)
 					: (<ConstructorElement
 						type="top"
@@ -86,7 +86,7 @@ const BurgerConstructor = () => {
 						})}
 					</ul>
 				}
-				{bun.length === 0
+				{!bun
 					? (<p className='text text_type_main-large pr-2'>Выберите булочку </p>)
 					: (<ConstructorElement
 						type="bottom"

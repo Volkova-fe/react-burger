@@ -1,9 +1,15 @@
-import { FC } from 'react';
-import { BrowserRouterProps, Redirect, Route, useLocation } from 'react-router-dom';
+import { FC, ReactNode } from 'react';
+import { Redirect, Route, useLocation } from 'react-router-dom';
 import { TLocation } from '../../services/types/data';
 import { getCookie } from '../../utils/utils';
 
-export const ProtectedRoute: FC<BrowserRouterProps> = ({ children, ...rest }) => {
+interface Props {
+	children: ReactNode;
+	path: string;
+	exact?: boolean;
+}
+
+export const ProtectedRoute: FC<Props> = ({ children, ...rest }) => {
 	const cookie = getCookie('token');
 	const location = useLocation<TLocation>();
 

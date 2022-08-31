@@ -1,4 +1,4 @@
-import { TIngredientResponse, TOrderDetailsResponse, TUser, TUserLogoutResponse } from "../../services/types/data";
+import { TIngredientResponse, TOrderDetailsResponse, TUserLogoutResponse, TUserResponce } from "../../services/types/data";
 import { getCookie } from "../../utils/utils";
 
 export const API = {
@@ -55,7 +55,7 @@ export const forgotPassRequest = async (email:string) => {
 		redirect: 'follow',
 		referrerPolicy: 'no-referrer',
 	})
-		.then(res => checkResponse<TUser>(res));
+		.then(res => checkResponse<TUserResponce>(res));
 }
 
 export const resetPassRequest = async (password: string, token: string) => {
@@ -69,7 +69,7 @@ export const resetPassRequest = async (password: string, token: string) => {
 			'Content-Type': 'application/json',
 		},
 	})
-		.then(res => checkResponse<TUser>(res));
+		.then(res => checkResponse<TUserResponce>(res));
 }
 
 export const loginRequest = async (email: string, password: string) => {
@@ -83,7 +83,7 @@ export const loginRequest = async (email: string, password: string) => {
 			password: password,
 		}),
 	})
-		.then(res => checkResponse<TUser>(res));
+		.then(res => checkResponse<TUserResponce>(res));
 }
 
 export const resgisterUserRequest = async (email: string, password: string, name: string) => {
@@ -98,7 +98,7 @@ export const resgisterUserRequest = async (email: string, password: string, name
 			'Content-Type': 'application/json',
 		},
 	})
-		.then(res => checkResponse<TUser>(res));
+		.then(res => checkResponse<TUserResponce>(res));
 }
 
 export const logoutRequest = async () => {
@@ -122,7 +122,7 @@ export const getUserRequest = async () => {
 			Authorization: 'Bearer ' + getCookie('token'),
 		},
 	})
-		.then(res => checkResponse<TUser>(res));
+		.then(res => checkResponse<TUserResponce>(res));
 }
 
 export const updateUserRequest = async (email: string, name: string, password: string) => {
@@ -138,7 +138,7 @@ export const updateUserRequest = async (email: string, name: string, password: s
 			password: password,
 		}),
 	})
-		.then(res => checkResponse<TUser>(res));
+		.then(res => checkResponse<TUserResponce>(res));
 }
 
 export const updateTokenRequest = async () => {
@@ -151,5 +151,5 @@ export const updateTokenRequest = async () => {
 			token: localStorage.getItem('refreshToken'),
 		}),
 	})
-		.then(res => checkResponse<TUser>(res));
+		.then(res => checkResponse<TUserResponce>(res));
 }

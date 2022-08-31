@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './stacked-image.module.css';
-import propTypes from "prop-types";
 
-export const StackedImage = ({ image, alt }) => {
+type TStackedImage = {
+	image: string;
+	alt: string;
+}
 
+export const StackedImage: FC<TStackedImage> = ({ image, alt }) => {
 
 	return (
 		<div className={styles.border}>
@@ -13,8 +16,3 @@ export const StackedImage = ({ image, alt }) => {
 		</div>
 	)
 }
-
-StackedImage.propTypes = {
-	image: propTypes.string.isRequired,
-	alt: propTypes.string.isRequired,
-};

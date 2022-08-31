@@ -40,9 +40,23 @@ import {
 } from "../action-types";
 
 import { deleteCookie, setCookie } from "../../utils/utils";
+import { AppDispatch, AppThunk } from "../types";
+import { TUser, TUserResponce } from "../types/data";
 
-export function forgotPassword(email) {
-	return function (dispatch) {
+interface IForgotPasswordRequest {
+	readonly type: typeof FORGOT_PASSWORD_REQUEST;
+}
+
+interface IForgotPasswordSuccess {
+	readonly type: typeof FORGOT_PASSWORD_SUCCESS;
+}
+
+interface IForgotPasswordFailed {
+	readonly type: typeof FORGOT_PASSWORD_FAILED;
+}
+
+export const forgotPassword: AppThunk = (email: string) => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: FORGOT_PASSWORD_REQUEST,
 		});
@@ -50,7 +64,6 @@ export function forgotPassword(email) {
 			.then((res) => {
 				dispatch({
 					type: FORGOT_PASSWORD_SUCCESS,
-					message: res.message,
 				});
 			})
 			.catch(() => {
@@ -61,14 +74,32 @@ export function forgotPassword(email) {
 	};
 }
 
-export const setResetFormValue = (field, value) => ({
+interface IResetPasswordRequest {
+	readonly type: typeof RESET_PASSWORD_REQUEST;
+}
+
+interface IResetPasswordSuccess {
+	readonly type: typeof RESET_PASSWORD_SUCCESS;
+}
+
+interface IResetPasswordFailed {
+	readonly type: typeof RESET_PASSWORD_FAILED;
+}
+
+interface ISetResetFormValue {
+	value: string;
+	field: string;
+	readonly type: typeof RESET_FORM_SET_VALUE;
+}
+
+export const setResetFormValue = (field: string, value: string) => ({
 	type: RESET_FORM_SET_VALUE,
 	field,
 	value,
 });
 
-export function resetPassword(password, token) {
-	return function (dispatch) {
+export const resetPassword: AppThunk = (password: string, token: string) => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: RESET_PASSWORD_REQUEST,
 		});
@@ -86,14 +117,33 @@ export function resetPassword(password, token) {
 	};
 }
 
-export const setLoginFormValue = (field, value) => ({
+interface ISingInRequest {
+	readonly type: typeof LOGIN_FORM_REQUEST;
+}
+
+interface ISingInSuccess {
+	readonly type: typeof LOGIN_FORM_SUCCESS;
+	readonly user: TUser;
+}
+
+interface ISingInFailed {
+	readonly type: typeof LOGIN_FORM_FAILED;
+}
+
+interface ISetLoginFormValue {
+	readonly type: typeof LOGIN_FORM_SET_VALUE;
+	value: string;
+	field: string;
+}
+
+export const setLoginFormValue = (field: string, value: string) => ({
 	type: LOGIN_FORM_SET_VALUE,
 	field,
 	value,
 });
 
-export function singIn(email, password) {
-	return function (dispatch) {
+export const singIn: AppThunk = (email: string, password: string) => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: LOGIN_FORM_REQUEST,
 		});
@@ -119,8 +169,20 @@ export function singIn(email, password) {
 	};
 }
 
-export function singOut() {
-	return function (dispatch) {
+interface ISingOutRequest {
+	readonly type: typeof LOGOUT_FORM_REQUEST;
+}
+
+interface ISingOutSuccess {
+	readonly type: typeof LOGOUT_FORM_SUCCESS;
+}
+
+interface ISingOutFailed {
+	readonly type: typeof LOGOUT_FORM_FAILED;
+}
+
+export const singOut: AppThunk = () => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: LOGOUT_FORM_REQUEST,
 		});
@@ -128,7 +190,7 @@ export function singOut() {
 			.then(res => {
 				const refreshToken = res.refreshToken;
 				deleteCookie('token');
-				localStorage.removeItem('refreshToken', refreshToken);
+				localStorage.removeItem(refreshToken);
 				if (res && res.success) {
 					dispatch({
 						type: LOGOUT_FORM_SUCCESS,
@@ -145,14 +207,33 @@ export function singOut() {
 	};
 }
 
-export const setRegisterFormValue = (field, value) => ({
+interface IRegisterUserRequest {
+	readonly type: typeof REGISTER_FORM_REQUEST;
+}
+
+interface IRegisterUserSuccess {
+	readonly type: typeof REGISTER_FORM_SUCCESS;
+	readonly user: TUser;
+}
+
+interface IRegisterUserFailed {
+	readonly type: typeof REGISTER_FORM_FAILED;
+}
+
+interface ISetRegisterFormValue {
+	readonly type: typeof REGISTER_FORM_SET_VALUE;
+	value: string;
+	field: string;
+}
+
+export const setRegisterFormValue = (field: string, value: string) => ({
 	type: REGISTER_FORM_SET_VALUE,
 	field,
 	value,
 });
 
-export function registerUser(email, password, name) {
-	return function (dispatch) {
+export const registerUser: AppThunk = (email: string, password: string, name: string) => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: REGISTER_FORM_REQUEST,
 		});
@@ -167,7 +248,7 @@ export function registerUser(email, password, name) {
 			.then((res) => {
 				dispatch({
 					type: REGISTER_FORM_SUCCESS,
-					user: res,
+					user: res.user,
 				});
 			})
 			.catch(() => {
@@ -178,8 +259,21 @@ export function registerUser(email, password, name) {
 	};
 }
 
-export function getUser() {
-	return function (dispatch) {
+interface IGetUserRequest {
+	readonly type: typeof GET_USER_REQUEST;
+}
+
+interface IGetUserSuccess {
+	readonly type: typeof GET_USER_SUCCESS;
+	readonly user: TUser;
+}
+
+interface IGetUserFailed {
+	readonly type: typeof GET_USER_FAILED;
+}
+
+export const getUser: AppThunk = () => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: GET_USER_REQUEST,
 		});
@@ -198,8 +292,21 @@ export function getUser() {
 	};
 }
 
-export function updateUser(email, name, password) {
-	return function (dispatch) {
+interface IUpdateUserRequest {
+	readonly type: typeof PATCH_USER_REQUEST;
+}
+
+interface IUpdateUserSuccess {
+	readonly type: typeof PATCH_USER_SUCCESS;
+	readonly user: TUser;
+}
+
+interface IUpdateUserFailed {
+	readonly type: typeof PATCH_USER_FAILED;
+}
+
+export const updateUser: AppThunk = (email: string, name: string, password: string) => {
+	return function (dispatch: AppDispatch) {
 		dispatch({
 			type: PATCH_USER_REQUEST,
 		});
@@ -207,7 +314,7 @@ export function updateUser(email, name, password) {
 			.then((res) => {
 				dispatch({
 					type: PATCH_USER_SUCCESS,
-					user: res,
+					user: res.user,
 				});
 			})
 			.catch(() => {
@@ -218,8 +325,20 @@ export function updateUser(email, name, password) {
 	};
 }
 
-export function updateToken() {
-	return function (dispatch) {
+interface IUpdateTokenRequest {
+	readonly type: typeof UPDATE_TOKEN_REQUEST;
+}
+
+interface IUpdateTokenSuccess {
+	readonly type: typeof UPDATE_TOKEN_SUCCESS;
+}
+
+interface IUpdateTokenFailed {
+	readonly type: typeof UPDATE_TOKEN_FAILED;
+}
+
+export const updateToken: AppThunk = () => {
+	return function (dispatch: AppDispatch) {
 		dispatch({ type: UPDATE_TOKEN_REQUEST })
 		updateTokenRequest()
 			.then((res) => {
@@ -238,3 +357,32 @@ export function updateToken() {
 			});
 	}
 }
+
+export type TAuthActions = 
+| IForgotPasswordFailed
+| IForgotPasswordRequest
+| IForgotPasswordSuccess
+| IGetUserFailed
+| IGetUserRequest
+| IGetUserSuccess
+| IRegisterUserFailed
+| IRegisterUserRequest
+| IRegisterUserSuccess
+| IResetPasswordFailed
+| IResetPasswordRequest
+| IResetPasswordSuccess
+| ISingInFailed
+| ISingInRequest
+| ISingInSuccess
+| ISingOutFailed
+| ISingOutRequest
+| ISingOutSuccess
+| IUpdateTokenFailed
+| IUpdateTokenRequest
+| IUpdateTokenSuccess
+| IUpdateUserFailed
+| IUpdateUserRequest
+| IUpdateUserSuccess
+| ISetResetFormValue
+| ISetLoginFormValue
+| ISetRegisterFormValue;

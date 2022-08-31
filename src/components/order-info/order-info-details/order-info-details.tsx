@@ -1,16 +1,21 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useMemo } from 'react';
+import React, { FC, ReactNode, useMemo } from 'react';
 import uniqid from 'uniqid';
-import propTypes from "prop-types";
 import { StackedImage } from '../../orders/orders-card/stacked-image/stacked-image';
 import styles from './order-info-details.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../services/hooks';
+import { TFeed } from '../../../services/types/data';
 
-export const OrdersInfoDetails = ({ details }) => {
+type TOrdersInfoDetails = {
+	details: TFeed[];
+	_id: string;
+}
+
+export const OrdersInfoDetails: FC<TOrdersInfoDetails> = ({ details }) => {
 	const ingredients = useSelector(store => store.burgerIngredients.ingredients);
 
-	const count = (elem) => {
-		let count = details.filter((item) => {
+	const count = (elem: object) => {
+		let count = details?.filter((item) => {
 			return item === elem;
 		}).length
 		return count
@@ -48,7 +53,3 @@ export const OrdersInfoDetails = ({ details }) => {
 		</div>
 	)
 }
-
-OrdersInfoDetails.propTypes = {
-	details: propTypes.array.isRequired,
-};

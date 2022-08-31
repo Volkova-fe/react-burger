@@ -27,10 +27,47 @@ import {
 	UPDATE_TOKEN_REQUEST,
 	UPDATE_TOKEN_SUCCESS
 } from "../action-types";
+import { TAuthActions } from "../actions/auth";
+import { TUser } from "../types/data";
+
+type AuthInitialState = {
+	forgetPassRequest: boolean;
+	forgetPassFailed: boolean;
+	forgetPassSuccess: boolean;
+
+	resetPassRequest: boolean;
+	resetPassFailed: boolean;
+	resetPassSuccess: boolean;
+
+	form: {
+		email: string;
+		password: string;
+		code: string;
+		name: string;
+	};
+
+	user: TUser;
+
+	loginRequest: boolean;
+	loginFailed: boolean;
+	loginSuccess: boolean;
+
+	logoutRequest: boolean;
+	logoutFailed: boolean;
+
+	getUserRequest: boolean;
+	getUserFailed: boolean;
+
+	updateUserRequest: boolean;
+	updateUserFailed: boolean;
+
+	updateTokenRequest: boolean;
+	updateTokenSuccess: boolean;
+	updateTokenFailed: boolean;
+};
 
 
-const initialState = {
-	message: '',
+const initialState: AuthInitialState = {
 
 	forgetPassRequest: false,
 	forgetPassFailed: false,
@@ -65,12 +102,15 @@ const initialState = {
 	updateUserRequest: false,
 	updateUserFailed: false,
 
-	updateupdateTokenRequest: false,
-	updateupdateTokenSuccess: false,
-	updateupdateTokenFailed: false,
+	updateTokenRequest: false,
+	updateTokenSuccess: false,
+	updateTokenFailed: false,
 };
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (
+	state = initialState, 
+	action: TAuthActions) 
+	: AuthInitialState => {
 	switch (action.type) {
 		case GET_USER_REQUEST: {
 			return {
@@ -115,7 +155,6 @@ export const authReducer = (state = initialState, action) => {
 					...state.form,
 					email: ''
 				},
-				message: action.message,
 				forgetPassRequest: false,
 				forgetPassFailed: false,
 				forgetPassSuccess: true,
@@ -241,7 +280,7 @@ export const authReducer = (state = initialState, action) => {
 		case REGISTER_FORM_SUCCESS: {
 			return {
 				...state,
-				user: action.playload,
+				user: action.user,
 				form: {
 					...state.form,
 					email: '',
@@ -270,7 +309,7 @@ export const authReducer = (state = initialState, action) => {
 		case PATCH_USER_SUCCESS: {
 			return {
 				...state,
-				user: action.playload,
+				user: action.user,
 				form: {
 					...state.form,
 					email: '',

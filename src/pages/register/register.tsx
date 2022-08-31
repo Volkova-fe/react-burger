@@ -1,23 +1,23 @@
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import React, { ChangeEvent, FormEvent } from 'react';
+import { useSelector, useDispatch } from '../../services/hooks';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { registerUser, setRegisterFormValue } from '../../services/actions/auth';
 import { getCookie } from '../../utils/utils';
 import styles from './register.module.css';
+import { TLocation } from '../../services/types/data';
 
 export const Register = () => {
 	const dispatch = useDispatch();
-	const location = useLocation();
+	const location = useLocation<TLocation>();
 	const cookie = getCookie('token');
 	const { email, password, name } = useSelector(state => state.auth.form);
 
-	const onChange = e => {
+	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 		dispatch(setRegisterFormValue(e.target.name, e.target.value));
 	}
 
-	const onFormSubmit = e => {
+	const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		dispatch(registerUser(email, password, name));
 	}

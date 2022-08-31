@@ -1,14 +1,15 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerIngredientStyle from './burger-ingredients.module.css'
 import IngredientsCategory from './ingredients-category/ingredients-category'
 import { useSelector } from '../../services/hooks';
 
+
 const BurgerIngredients: FC = () => {
 	const ingredients = useSelector(store => store.burgerIngredients.ingredients)
 
-	const [current, setCurrent] = useState("bun");
+	const [current, setCurrent] = useState<string>("bun");
 
 	const [bunRef, bunInView] = useInView({
 		threshold: 0.1
@@ -54,10 +55,7 @@ const BurgerIngredients: FC = () => {
 			<h1 className={`${burgerIngredientStyle.title} text text_type_main-large`}>Соберите бургер</h1>
 			<div className={`${burgerIngredientStyle.tab} pt-5`}>
 				<a href='#bun' className={burgerIngredientStyle.link}>
-					<Tab value="bun"
-						active={current === "bun"}
-						onClick={() => onTabScroll("bun")}
-					>
+					<Tab value="bun" active={current === "bun"} onClick={() => onTabScroll("bun")}>
 						Булки
 					</Tab>
 				</a>
@@ -72,7 +70,7 @@ const BurgerIngredients: FC = () => {
 				<a href='#main' className={burgerIngredientStyle.link}>
 					<Tab
 						value="main"
-						active={current === 'main'}
+						active={current === "main"}
 						onClick={() => onTabScroll("main")}
 					>
 						Начинки

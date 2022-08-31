@@ -3,37 +3,39 @@ import { TIngredient } from "../types/data";
 
 
 export interface IAddBun {
-	data: TIngredient | null;
 	readonly type: typeof ADD_BUN;
-	itemsId: TIngredient;
+	data: TIngredient;
+	itemsId: string[];
+	bun: TIngredient;
 }
 
 export interface IAddItems {
 	readonly type: typeof ADD_ITEM_CONSTRUCTOR;
-	data: Array<TIngredient>;
+	data: TIngredient;
 }
 
 export interface IDeleteItem {
 	readonly type: typeof DELETE_ITEM;
-	data: Array<TIngredient>;
+	data: TIngredient;
 	id: string;
 }
 
 export interface IMoveItem {
-	data: any;
+	data: {
+		dragIndex: number;
+		hoverIndex: number;
+	};
 	readonly type: typeof MOVE_ITEM;
-	dragIndex: number;
-	hoverIndex: number;
 }
 
 export interface IResetItem {
 	readonly type: typeof RESET_ITEM;
-	data: Array<TIngredient>;
+	data: TIngredient[];
 }
 
-export type TBurgerConstructorActions = 
-| IAddBun
-| IAddItems
-| IDeleteItem
-| IMoveItem
-| IResetItem;
+export type TBurgerConstructorActions =
+	| IAddBun
+	| IAddItems
+	| IDeleteItem
+	| IMoveItem
+	| IResetItem;

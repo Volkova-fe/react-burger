@@ -1,19 +1,19 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useEffect, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import React, { FC, useEffect, useMemo } from 'react';
 import { useParams, useRouteMatch } from 'react-router-dom';
 import { OrdersInfoDetails } from './order-info-details/order-info-details';
 import styles from './order-info.module.css';
 import uniqid from 'uniqid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/hooks';
 import { wsConnectionClosed, wsConnectionOpen } from '../../services/actions/wsActions';
 import { wsAuthConnectionClosed, wsAuthConnectionOpen } from '../../services/actions/wsAuthActions';
 import { formatDate } from '../../utils/utils';
+import { TIngredient } from '../../services/types/data';
 
-export const OrdersInfo = () => {
+export const OrdersInfo: FC = () => {
 	const dispatch = useDispatch();
 
-	let { id } = useParams();
+	let { id } = useParams<{id: string}>();
 	let match = useRouteMatch();
 	const isProfile = '/profile/orders/:id';
 	const isFeed = '/feed/:id';
@@ -27,7 +27,7 @@ export const OrdersInfo = () => {
 
 
 	const orderIngredientsData = useMemo(() => {
-		return order?.ingredients.map((id) => {
+		return order?.ingredients.map((id: string) => {
 			return ingredients?.find((item) => {
 				return id === item._id
 			})
