@@ -27,7 +27,7 @@ const ConstructorItems: FC<TConstructorItems>= ({ index, items }) => {
 	const { image, id, price, name } = items;
 	const ref = useRef(null);
 
-	const onDelete = (id: string) => {
+	const onDelete = (id: string | undefined) => {
 		dispatch({
 			type: DELETE_ITEM,
 			id: id,
@@ -70,7 +70,7 @@ const ConstructorItems: FC<TConstructorItems>= ({ index, items }) => {
 					text={name}
 					price={price}
 					thumbnail={image}
-					handleClose={() => {onDelete}}
+					handleClose={() => {onDelete(id)}}
 				/>
 			</li>
 		</>

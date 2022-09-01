@@ -1,4 +1,9 @@
-import { TIngredientResponse, TOrderDetailsResponse, TUserLogoutResponse, TUserResponce } from "../../services/types/data";
+import { 
+	TIngredientResponse, 
+	TOrderDetailsResponse, 
+	TUserLogoutResponse, 
+	TUserResponce 
+} from "../../services/types/data";
 import { getCookie } from "../../utils/utils";
 
 export const API = {
