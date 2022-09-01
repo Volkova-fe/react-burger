@@ -1,5 +1,5 @@
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { ChangeEvent, FC, FormEvent } from 'react';
 import { useSelector, useDispatch } from '../../services/hooks';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 import { setLoginFormValue, singIn } from '../../services/actions/auth';
@@ -7,7 +7,7 @@ import { getCookie } from '../../utils/utils';
 import styles from './login.module.css';
 import { TLocation } from '../../services/types/data';
 
-export const Login = () => {
+export const Login: FC = () => {
 	const dispatch = useDispatch();
 	const location = useLocation<TLocation>();
 	const cookie = getCookie('token');

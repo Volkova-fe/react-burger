@@ -1,5 +1,5 @@
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from '../../services/hooks';
 import { NavLink, Route, Switch, useLocation, useRouteMatch } from 'react-router-dom';
 import { OrdersInfo } from '../../components/order-info/order-info';
@@ -9,7 +9,7 @@ import { OrderHistory } from './order-history/order-history';
 import styles from './profile.module.css';
 import { TLocation } from '../../services/types/data';
 
-export const Profile = () => {
+export const Profile: FC = () => {
 	const dispatch = useDispatch();
 	const location = useLocation<TLocation>();
 	const matchOrderDetails = !!useRouteMatch({ path: '/profile/orders/:id' });
@@ -150,7 +150,7 @@ export const Profile = () => {
 								size={'default'}
 							/>
 						</div>
-						<Button type="secondary" size="medium" onClick={() => {onResetForm}}>
+						<Button type="secondary" size="medium" onClick={() => onResetForm}>
 							Oтмена
 						</Button>
 						<Button disabled={!form.password} type="primary" size="medium">

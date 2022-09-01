@@ -30,7 +30,7 @@ interface IWsAuthSendMessage {
 	payload: TFeedResponce
 }
 
-export type IWsAuthActions = 
+export type TWsAuthActions = 
 | IWsAuthConnectionStart
 | IWsAuthConnectionSuccess
 | IWsAuthConnectionError

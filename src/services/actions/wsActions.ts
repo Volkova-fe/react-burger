@@ -29,7 +29,7 @@ interface IWsSendMessage {
 	payload: TFeedResponce
 }
 
-export type IWsActions = 
+export type TWsActions = 
 | IWsConnectionStart
 | IWsConnectionSuccess
 | IWsConnectionError

@@ -21,12 +21,13 @@ import {
 	WS_AUTH_CONNECTION_START,
 } from './action-types';
 import { socketMiddleware } from './middleware/socketMiddleware';
+import { TWsSocketMiddlewareActions } from './types/data';
 
 
 const wsUrl = 'wss://norma.nomoreparties.space/orders/all';
 const wsAuthUrl = 'wss://norma.nomoreparties.space/orders';
 
-const wsActions = {
+const wsActions: TWsSocketMiddlewareActions = {
 	wsInit: WS_CONNECTION_START,
 	wsSendMessage: WS_SEND_ORDERS,
 	onOpen: WS_CONNECTION_SUCCESS,
@@ -35,7 +36,7 @@ const wsActions = {
 	onMessage: WS_GET_ORDERS
 };
 
-const wsAuthActions = {
+const wsAuthActions: TWsSocketMiddlewareActions = {
 	wsInit: WS_AUTH_CONNECTION_START,
 	wsSendMessage: WS_AUTH_SEND_ORDERS,
 	onOpen: WS_AUTH_CONNECTION_SUCCESS,

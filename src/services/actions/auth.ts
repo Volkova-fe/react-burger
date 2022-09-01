@@ -49,6 +49,7 @@ interface IForgotPasswordRequest {
 
 interface IForgotPasswordSuccess {
 	readonly type: typeof FORGOT_PASSWORD_SUCCESS;
+	message: string;
 }
 
 interface IForgotPasswordFailed {
@@ -64,6 +65,7 @@ export const forgotPassword: AppThunk = (email: string) => {
 			.then((res) => {
 				dispatch({
 					type: FORGOT_PASSWORD_SUCCESS,
+					message: res.message
 				});
 			})
 			.catch(() => {

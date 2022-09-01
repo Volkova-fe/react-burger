@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useSelector } from '../../../services/hooks';
 import { Link, useLocation } from 'react-router-dom';
 import { OrdersCard } from '../../../components/orders/orders-card/orders-card';
 import styles from './order-history.module.css';
 
-export const OrderHistory = () => {
+export const OrderHistory: FC = () => {
 	const location = useLocation();
 	const orders = useSelector(store => store.wsAuthFeed.orders).slice();
 	orders.reverse();

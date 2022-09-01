@@ -31,6 +31,7 @@ import { TAuthActions } from "../actions/auth";
 import { TUser } from "../types/data";
 
 type AuthInitialState = {
+	message: string;
 	forgetPassRequest: boolean;
 	forgetPassFailed: boolean;
 	forgetPassSuccess: boolean;
@@ -68,7 +69,7 @@ type AuthInitialState = {
 
 
 const initialState: AuthInitialState = {
-
+	message: '',
 	forgetPassRequest: false,
 	forgetPassFailed: false,
 	forgetPassSuccess: false,
@@ -155,6 +156,7 @@ export const authReducer = (
 					...state.form,
 					email: ''
 				},
+				message: action.message,
 				forgetPassRequest: false,
 				forgetPassFailed: false,
 				forgetPassSuccess: true,

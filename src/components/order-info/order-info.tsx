@@ -27,7 +27,7 @@ export const OrdersInfo: FC = () => {
 
 
 	const orderIngredientsData = useMemo(() => {
-		return order?.ingredients.map((id: string) => {
+		return order?.ingredients.map((id) => {
 			return ingredients?.find((item) => {
 				return id === item._id
 			})
@@ -75,7 +75,7 @@ export const OrdersInfo: FC = () => {
 							</p>}
 						<h3 className={`${styles.order} text text_type_main-medium pt-15`}>Состав:</h3>
 						<ul className={`${styles.list}`}>
-							<OrdersInfoDetails details={orderIngredientsData} key={id} />
+							<OrdersInfoDetails details={orderIngredientsData as TIngredient[]} key={id} />
 						</ul>
 						<div className={`${styles.total} pb-10`}>
 							<p className="text text_type_main-default text_color_inactive">{formatDate(order.createdAt)}</p>

@@ -7,8 +7,8 @@ import { TIngredientModalActions } from '../actions/ingredient-details';
 import { TOrderInfoDetailsModalActions } from '../actions/order-info-details';
 import { TAuthActions } from '../actions/auth';
 import { TBurgerConstructorActions } from '../actions/burger-constructor';
-import { IWsActions } from '../actions/wsActions';
-import { IWsAuthActions } from '../actions/wsAuthActions';
+import { TWsActions } from '../actions/wsActions';
+import { TWsAuthActions } from '../actions/wsAuthActions';
 import { rootReducer } from '../reducers';
 
 
@@ -19,8 +19,8 @@ type TApplicationActions =
 	| TIngredientModalActions
 	| TOrderInfoDetailsModalActions
 	| TAuthActions
-	| IWsActions
-	| IWsAuthActions;
+	| TWsActions
+	| TWsAuthActions;
 
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -4,11 +4,10 @@ import uniqid from 'uniqid';
 import { StackedImage } from '../../orders/orders-card/stacked-image/stacked-image';
 import styles from './order-info-details.module.css';
 import { useSelector } from '../../../services/hooks';
-import { TFeed } from '../../../services/types/data';
+import { TIngredient } from '../../../services/types/data';
 
 type TOrdersInfoDetails = {
-	details: TFeed[];
-	_id: string;
+	details: TIngredient[];
 }
 
 export const OrdersInfoDetails: FC<TOrdersInfoDetails> = ({ details }) => {

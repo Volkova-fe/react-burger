@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useDispatch } from '../../services/hooks';
 import { OrdersStats } from '../../components/orders-stats/orders-stats';
 import { Orders } from '../../components/orders/orders';
 import { wsConnectionClosed, wsConnectionOpen } from '../../services/actions/wsActions';
 import styles from './feed.module.css';
 
-export const Feed = () => {
+export const Feed: FC = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {

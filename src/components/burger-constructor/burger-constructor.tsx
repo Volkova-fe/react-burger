@@ -17,6 +17,10 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../services/hooks';
 import { TIngredient, TLocation } from '../../services/types/data';
 
+interface DropItem {
+	ingredient: TIngredient;
+}
+
 const BurgerConstructor: FC = () => {
 	const { bun, items, itemsId } = useSelector((state) => state.burgerConstructor);
 	const { orderDetailsRequest } = useSelector((state) => state.order);
@@ -30,10 +34,9 @@ const BurgerConstructor: FC = () => {
 		[items]);
 
 	useEffect(() => {
-		const totalPrice = filling.reduce((sum, item) => sum + item.price, bun?.type === 'bun' ? 0 : bun.price * 2);
+		const totalPrice = items.reduce((sum, item) => sum + item.price, !bun ? 0 : (bun.price * 2));
 		setTotal(totalPrice);
 	}, [bun, filling]);
-
 
 
 	const orderDetailsModal = (itemsId: string[]) => {
@@ -43,16 +46,16 @@ const BurgerConstructor: FC = () => {
 
 	const [, dropTarget] = useDrop({
 		accept: "ingredients",
-		drop(item: TIngredient) {
-			if (item.type === "bun") {
+		drop(item: DropItem) {
+			if (item.ingredient.type === "bun") {
 				dispatch({
 					type: ADD_BUN,
-					data: item,
+					data: item.ingredient,
 				});
 			} else {
 				dispatch({
 					type: ADD_ITEM_CONSTRUCTOR,
-					data: { ...item, id: Date.now() },
+					data: { ...item.ingredient, id: Date.now() },
 				});
 			}
 		},
@@ -61,7 +64,7 @@ const BurgerConstructor: FC = () => {
 	return (
 		<section className={`${burgerConstructorStyle.section} pl-10 pt-15`}>
 			<div className={`${burgerConstructorStyle.container} pr-2 pt-4`} ref={dropTarget}>
-				{!bun 
+				{!bun
 					? (<p className='text text_type_main-large pr-2'>Выберите булочку</p>)
 					: (<ConstructorElement
 						type="top"
@@ -102,13 +105,13 @@ const BurgerConstructor: FC = () => {
 					<p className='text text_type_digits-medium pr-2'>{total}</p>
 					<CurrencyIcon type="primary" />
 				</div>
-				{items.length === 0  || !!orderDetailsRequest
+				{items.length === 0 || !!orderDetailsRequest
 					? (<Button
 						type="primary"
 						size="large"
 						disabled
 					>
-						{ orderDetailsRequest ? '...Заказ оформляется' : 'Оформить заказ' }
+						{orderDetailsRequest ? '...Заказ оформляется' : 'Оформить заказ'}
 					</Button>)
 					: (<Button
 						type="primary"

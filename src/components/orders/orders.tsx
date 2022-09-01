@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useSelector } from '../../services/hooks';
 import { Link, useLocation } from 'react-router-dom';
 import { OrdersCard } from './orders-card/orders-card';
 import styles from './orders.module.css';
 
-export const Orders = () => {
+export const Orders: FC = () => {
 	const location = useLocation();
 	const orders = useSelector(store => store.wsFeed.orders);
 

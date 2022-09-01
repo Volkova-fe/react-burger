@@ -64,7 +64,7 @@ export type TUserResponce = {
 	user: TUser;
 	accessToken: string;
 	refreshToken: string;
-	message?: string;
+	message: string;
 }
 
 export type TUserLogoutResponse = {
@@ -103,20 +103,11 @@ export type TModalOverlay = {
 	onClickClose: () => void; 
 }
 
-export type TWsAuthSocketMiddlewareActions = {
-	wsInit: typeof WS_AUTH_CONNECTION_START;
-	wsSendMessage: typeof WS_AUTH_SEND_ORDERS;
-	onOpen: typeof WS_AUTH_CONNECTION_SUCCESS;
-	onClose: typeof WS_AUTH_CONNECTION_CLOSED;
-	onError: typeof WS_AUTH_CONNECTION_ERROR;
-	onMessage: typeof WS_AUTH_GET_ORDERS;
-}
-
 export type TWsSocketMiddlewareActions = {
-	wsInit: typeof WS_CONNECTION_START;
-	wsSendMessage: typeof WS_SEND_ORDERS;
-	onOpen: typeof WS_CONNECTION_SUCCESS;
-	onClose: typeof WS_CONNECTION_CLOSED;
-	onError: typeof WS_CONNECTION_ERROR;
-	onMessage: typeof WS_GET_ORDERS;
+	wsInit: string;
+	wsSendMessage: string;
+	onOpen: string;
+	onClose: string;
+	onError: string;
+	onMessage: string;
 }

@@ -4,7 +4,7 @@ import {
 	WS_CONNECTION_CLOSED,
 	WS_GET_ORDERS,
 } from '../action-types';
-import { IWsActions } from '../actions/wsActions';
+import { TWsActions } from '../actions/wsActions';
 import { TFeed } from '../types/data';
 
 type TWsinitialState = {
@@ -23,7 +23,7 @@ const initialState: TWsinitialState = {
 
 export const wsReducer = (
 	state = initialState, 
-	action: IWsActions) 
+	action: TWsActions) 
 	: TWsinitialState => {
 	switch (action.type) {
 		case WS_CONNECTION_SUCCESS:
