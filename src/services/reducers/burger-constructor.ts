@@ -12,6 +12,7 @@ export type TInitialState = {
 	items: TIngredient[];
 	bun: TIngredient;
 	itemsId: string[];
+	bunRequestSuccess: boolean;
 }
 
 const initialState: TInitialState = {
@@ -32,6 +33,7 @@ const initialState: TInitialState = {
 		id: '',
 		count: 0,
 	},
+	bunRequestSuccess: false,
 	itemsId: [],
 };
 
@@ -54,7 +56,8 @@ export const constructorReducer = (
 			return {
 				...state,
 				bun: action.data,
-				itemsId: [...state.itemsId, action.data._id]
+				itemsId: [...state.itemsId, action.data._id],
+				bunRequestSuccess: true,
 			};
 		}
 		case ADD_ITEM_CONSTRUCTOR: {
@@ -69,6 +72,7 @@ export const constructorReducer = (
 				...state,
 				items: [],
 				bun: initialState.bun,
+				bunRequestSuccess: false
 			};
 		}
 		case MOVE_ITEM: {

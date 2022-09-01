@@ -22,7 +22,7 @@ interface DropItem {
 }
 
 const BurgerConstructor: FC = () => {
-	const { bun, items, itemsId } = useSelector((state) => state.burgerConstructor);
+	const { bun, items, itemsId, bunRequestSuccess } = useSelector((state) => state.burgerConstructor);
 	const { orderDetailsRequest } = useSelector((state) => state.order);
 	const dispatch = useDispatch();
 	const [total, setTotal] = useState(0);
@@ -64,7 +64,7 @@ const BurgerConstructor: FC = () => {
 	return (
 		<section className={`${burgerConstructorStyle.section} pl-10 pt-15`}>
 			<div className={`${burgerConstructorStyle.container} pr-2 pt-4`} ref={dropTarget}>
-				{!bun
+				{!bunRequestSuccess
 					? (<p className='text text_type_main-large pr-2'>Выберите булочку</p>)
 					: (<ConstructorElement
 						type="top"
@@ -89,7 +89,7 @@ const BurgerConstructor: FC = () => {
 						})}
 					</ul>
 				}
-				{!bun
+				{!bunRequestSuccess
 					? (<p className='text text_type_main-large pr-2'>Выберите булочку </p>)
 					: (<ConstructorElement
 						type="bottom"
