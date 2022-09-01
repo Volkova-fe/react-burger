@@ -16,16 +16,16 @@ export interface IOrderDetailsFailed {
 	readonly type: typeof ORDER_DETAILS_FAILED;
 }
 
-export interface IOrderDetailsRequest{
+export interface IOrderDetailsRequest {
 	readonly type: typeof ORDER_DETAILS_REQUEST;
 }
 
-export interface IOrderDetailsSuccess{
+export interface IOrderDetailsSuccess {
 	readonly type: typeof ORDER_DETAILS_SUCCESS;
 	readonly number: number;
 }
 
-export type TOrderDetailsActions = 
+export type TOrderDetailsActions =
 	| IOrderDetailsModal
 	| IOrderDetailsFailed
 	| IOrderDetailsRequest

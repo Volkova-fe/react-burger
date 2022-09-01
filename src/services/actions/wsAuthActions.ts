@@ -30,13 +30,13 @@ interface IWsAuthSendMessage {
 	payload: TFeedResponce
 }
 
-export type TWsAuthActions = 
-| IWsAuthConnectionStart
-| IWsAuthConnectionSuccess
-| IWsAuthConnectionError
-| IWsAuthConnectionClosed
-| IWsAuthGetMessage
-| IWsAuthSendMessage;
+export type TWsAuthActions =
+	| IWsAuthConnectionStart
+	| IWsAuthConnectionSuccess
+	| IWsAuthConnectionError
+	| IWsAuthConnectionClosed
+	| IWsAuthGetMessage
+	| IWsAuthSendMessage;
 
 export const wsAuthConnectionSuccess = (): IWsAuthConnectionSuccess => {
 	return {

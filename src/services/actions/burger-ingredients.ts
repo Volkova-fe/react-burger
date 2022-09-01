@@ -16,12 +16,12 @@ export interface IBurgerIngredientsRequest {
 	readonly type: typeof BURGER_INGREDIENTS_REQUEST;
 }
 
-export interface IBurgerIngredientsSuccess{
+export interface IBurgerIngredientsSuccess {
 	readonly type: typeof BURGER_INGREDIENTS_SUCCESS;
 	ingredients: Array<TIngredient>;
 }
 
-export type TBurgerIngredientsActions = 
+export type TBurgerIngredientsActions =
 	| IBurgerIngredientsFailed
 	| IBurgerIngredientsRequest
 	| IBurgerIngredientsSuccess;

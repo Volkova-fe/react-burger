@@ -19,7 +19,7 @@ const orderInitialState: TOrderInitialState = {
 };
 
 export const orderReducer = (
-	state = orderInitialState, 
+	state = orderInitialState,
 	action: TOrderDetailsActions)
 	: TOrderInitialState => {
 	switch (action.type) {

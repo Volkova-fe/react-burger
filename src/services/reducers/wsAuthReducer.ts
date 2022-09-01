@@ -22,9 +22,9 @@ const initialState: TWsAuthinitialState = {
 };
 
 export const wsAuthReducer = (
-	state = initialState, 
-	action: TWsAuthActions) 
-	: TWsAuthinitialState=> {
+	state = initialState,
+	action: TWsAuthActions)
+	: TWsAuthinitialState => {
 	switch (action.type) {
 		case WS_AUTH_CONNECTION_SUCCESS:
 			return {

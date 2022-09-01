@@ -67,7 +67,6 @@ type AuthInitialState = {
 	updateTokenFailed: boolean;
 };
 
-
 const initialState: AuthInitialState = {
 	message: '',
 	forgetPassRequest: false,
@@ -109,8 +108,8 @@ const initialState: AuthInitialState = {
 };
 
 export const authReducer = (
-	state = initialState, 
-	action: TAuthActions) 
+	state = initialState,
+	action: TAuthActions)
 	: AuthInitialState => {
 	switch (action.type) {
 		case GET_USER_REQUEST: {

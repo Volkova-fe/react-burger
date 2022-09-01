@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useSelector } from '../../services/hooks';
 import uniqid from 'uniqid';
 import styles from './orders-stats.module.css';
 
-export const OrdersStats = () => {
+export const OrdersStats: FC = () => {
 	const { total, totalToday, orders } = useSelector(store => store.wsFeed);
 
 	const doneStatusOrder = orders.filter(order => order.status === 'done').filter((order, index) => index < 15);

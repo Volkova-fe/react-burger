@@ -4,7 +4,7 @@ export interface IOrderInfoDetailsCloseModal {
 	readonly type: typeof CLOSE_ORDER_INFO_MODAL;
 }
 
-export type TOrderInfoDetailsModalActions = 
+export type TOrderInfoDetailsModalActions =
 	| IOrderInfoDetailsCloseModal;
 
 export const closeOrderInfoModal = (): IOrderInfoDetailsCloseModal => {

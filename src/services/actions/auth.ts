@@ -360,31 +360,31 @@ export const updateToken: AppThunk = () => {
 	}
 }
 
-export type TAuthActions = 
-| IForgotPasswordFailed
-| IForgotPasswordRequest
-| IForgotPasswordSuccess
-| IGetUserFailed
-| IGetUserRequest
-| IGetUserSuccess
-| IRegisterUserFailed
-| IRegisterUserRequest
-| IRegisterUserSuccess
-| IResetPasswordFailed
-| IResetPasswordRequest
-| IResetPasswordSuccess
-| ISingInFailed
-| ISingInRequest
-| ISingInSuccess
-| ISingOutFailed
-| ISingOutRequest
-| ISingOutSuccess
-| IUpdateTokenFailed
-| IUpdateTokenRequest
-| IUpdateTokenSuccess
-| IUpdateUserFailed
-| IUpdateUserRequest
-| IUpdateUserSuccess
-| ISetResetFormValue
-| ISetLoginFormValue
-| ISetRegisterFormValue;
+export type TAuthActions =
+	| IForgotPasswordFailed
+	| IForgotPasswordRequest
+	| IForgotPasswordSuccess
+	| IGetUserFailed
+	| IGetUserRequest
+	| IGetUserSuccess
+	| IRegisterUserFailed
+	| IRegisterUserRequest
+	| IRegisterUserSuccess
+	| IResetPasswordFailed
+	| IResetPasswordRequest
+	| IResetPasswordSuccess
+	| ISingInFailed
+	| ISingInRequest
+	| ISingInSuccess
+	| ISingOutFailed
+	| ISingOutRequest
+	| ISingOutSuccess
+	| IUpdateTokenFailed
+	| IUpdateTokenRequest
+	| IUpdateTokenSuccess
+	| IUpdateUserFailed
+	| IUpdateUserRequest
+	| IUpdateUserSuccess
+	| ISetResetFormValue
+	| ISetLoginFormValue
+	| ISetRegisterFormValue;

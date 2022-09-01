@@ -8,14 +8,14 @@ import {
 }
 	from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useLocation } from 'react-router-dom';
-import { TIngredient } from '../../../services/types/data';
+import { TIngredient, TLocation } from '../../../services/types/data';
 
 type TIngredientsItem = {
 	ingredient: TIngredient;
 }
 
 const IngredientsItem: FC<TIngredientsItem> = ({ ingredient }) => {
-	const location = useLocation();
+	const location = useLocation<TLocation>();
 
 	const { bun, items } = useSelector((state) => state.burgerConstructor);
 	const { image, name, price } = ingredient;

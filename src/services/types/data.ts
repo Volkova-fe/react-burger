@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { WS_AUTH_CONNECTION_CLOSED, WS_AUTH_CONNECTION_ERROR, WS_AUTH_CONNECTION_START, WS_AUTH_CONNECTION_SUCCESS, WS_AUTH_GET_ORDERS, WS_AUTH_SEND_ORDERS, WS_CONNECTION_CLOSED, WS_CONNECTION_ERROR, WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_GET_ORDERS, WS_SEND_ORDERS } from "../action-types";
 
 export type TIngredient = {
 	calories: number;
@@ -45,8 +44,8 @@ export type TFeed = {
 	status: string;
 	updatedAt: string;
 	_id: string;
-	}
-	
+}
+
 
 export type TOrderDetailsResponse = {
 	name: string
@@ -78,8 +77,8 @@ export type TFeedResponce = {
 	total: number;
 	totalToday: number;
 	orders: Array<TFeed>;
-	}
-	
+}
+
 
 export type TLocation = {
 	background: {
@@ -93,14 +92,14 @@ export type TLocation = {
 	state?: object;
 };
 
-export type TModal = { 
-	title: string; 
-	children: ReactNode; 
-	onClickClose: () => void; 
+export type TModal = {
+	title: string;
+	children: ReactNode;
+	onClickClose: () => void;
 }
 
-export type TModalOverlay = { 
-	onClickClose: () => void; 
+export type TModalOverlay = {
+	onClickClose: () => void;
 }
 
 export type TWsSocketMiddlewareActions = {

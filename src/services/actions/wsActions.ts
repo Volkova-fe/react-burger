@@ -29,13 +29,13 @@ interface IWsSendMessage {
 	payload: TFeedResponce
 }
 
-export type TWsActions = 
-| IWsConnectionStart
-| IWsConnectionSuccess
-| IWsConnectionError
-| IWsConnectionClosed
-| IWsGetMessage
-| IWsSendMessage;
+export type TWsActions =
+	| IWsConnectionStart
+	| IWsConnectionSuccess
+	| IWsConnectionError
+	| IWsConnectionClosed
+	| IWsGetMessage
+	| IWsSendMessage;
 
 export const wsConnectionSuccess = (): IWsConnectionSuccess => {
 	return {

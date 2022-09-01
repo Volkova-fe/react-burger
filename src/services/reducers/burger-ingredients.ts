@@ -13,7 +13,6 @@ export type TIngredientsInitialState = {
 	ingredientsFailed: boolean;
 }
 
-
 const ingredientsInitialState: TIngredientsInitialState = {
 	ingredients: [],
 	ingredientsRequest: false,
@@ -21,7 +20,7 @@ const ingredientsInitialState: TIngredientsInitialState = {
 };
 
 export const ingredientsReducer = (
-	state = ingredientsInitialState, 
+	state = ingredientsInitialState,
 	action: TBurgerIngredientsActions)
 	: TIngredientsInitialState => {
 	switch (action.type) {
