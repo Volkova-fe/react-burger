@@ -39,6 +39,7 @@ ___
 * Redux
 * DnD
 * React Router v5.2.1
+* TypeScript
 * Установка заготовенного CRA - npx create-react-app react-burger --template typescript 
 * Использована библиотека готовых компонентов - npm i @ya.praktikum/react-developer-burger-ui-components 
 * Организована файловая структура : 
