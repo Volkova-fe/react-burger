@@ -1,7 +1,7 @@
-## Учебный проект Stellar-Burgers
+## Проект Stellar-Burgers
 ___
 ## Обзор
-**Проект в рамках изучения React&Redux&DnD**
+**Проект в рамках изучения React&Redux&DnD TS&&WebSocket**
 
 Статическая верстка веб-страницы
 
@@ -39,19 +39,12 @@ ___
 * Redux
 * DnD
 * React Router v5.2.1
+* WebSocket
 * TypeScript
 * Установка заготовенного CRA - npx create-react-app react-burger --template typescript 
 * Использована библиотека готовых компонентов - npm i @ya.praktikum/react-developer-burger-ui-components 
 * Организована файловая структура : 
   - Компоненты в директории components/, шрифты — в fonts/, изображения — в images, экшены и редьюсеры - services/
-  - App
-   	 - AppHeader
-	 - BurgerIngredients (внутри содержит свои компоненты: IngredientsCategory, IngridientsItem)
-	 - BurgerConstructor (внутри содержит свой компонент: ConstructorItems)
-	 - OrderDetails
-	 - IngredientDetails
-	 - Modal
-	 - Api
   - Каждый компонент хранится в отдельной директории
   - Для стилизации компонентов используются CSS-модули
   - Директории и файлы компонентов в нотации kebab-case
