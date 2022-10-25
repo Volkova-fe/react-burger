@@ -54,12 +54,12 @@ const BurgerIngredients: FC = () => {
 		<section className={styles.section}>
 			<h1 className={`${styles.title} text text_type_main-large`}>Соберите бургер</h1>
 			<div className={`${styles.tab} pt-5`}>
-				<a href='#bun' className={styles.link}>
+				<a href='bun#' className={styles.link}>
 					<Tab value="bun" active={current === "bun"} onClick={() => onTabScroll("bun")}>
 						Булки
 					</Tab>
 				</a>
-				<a href='#sauce' className={styles.link}>
+				<a href='sauce#' className={styles.link}>
 					<Tab value="sauce"
 						active={current === "sauce"}
 						onClick={() => onTabScroll("sauce")}
@@ -67,7 +67,7 @@ const BurgerIngredients: FC = () => {
 						Соусы
 					</Tab>
 				</a>
-				<a href='#main' className={styles.link}>
+				<a href='main#' className={styles.link}>
 					<Tab
 						value="main"
 						active={current === "main"}
