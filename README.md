@@ -1,4 +1,6 @@
 ## Проект Stellar-Burgers
+<img src="demo/feed.png" width="445"> <img src="demo/main.png" width="400">
+
 ___
 ## Обзор
 **Проект в рамках изучения React&Redux&DnD TS&&WebSocket**
@@ -30,6 +32,9 @@ ___
    - Куки
    - Получение и обновление информации о пользователе
    - Защищённые маршруты в приложении
+
+<img src="demo/login.png" width="800">
+
 ___
 ## Использованные технологии
 * HTML
