@@ -11,6 +11,8 @@
 
 .container {
 	gap: 10;
+	max-width: 600px;
+	width: 100%;
 }
 
 .order {
@@ -31,7 +33,7 @@
 	padding: 0;
 	margin: 0;
 	height: calc(100vh - 475px);
-	min-height: 208px;
+	min-height: 48px;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
@@ -50,4 +52,36 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.empty_ingredient {
+	padding: 16px 24px;
+	display: inline-block;
+	border-radius: var(--common-border-radius-s);
+	background: var(--background-element);
+	max-width: 488px;
+	width: 100%;
+	min-height: 48px;
+	font-family: "Jet Brains Mono";
+	font-size: 16px;
+	line-height: 24px;
+	color: #f2f2f3;
+	flex-grow: 1;
+	align-items: center;
+	line-height: 24px;
+	text-align: center;
+}
+
+.empty_ingredient_top {
+	border-radius: var(--top-constructor-item-border-radius);
+	margin: 0;
+}
+
+.empty_ingredient_bottom {
+	border-radius: var(--bottom-constructor-item-border-radius);
+	margin: 0;
+}
+
+.empty_ingredient_middle {
+	margin: 15px 0;
 }

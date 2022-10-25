@@ -65,7 +65,7 @@ const BurgerConstructor: FC = () => {
 		<section className={`${burgerConstructorStyle.section} pl-10 pt-15`}>
 			<div className={`${burgerConstructorStyle.container} pr-2 pt-4`} ref={dropTarget}>
 				{!bunRequestSuccess
-					? (<p className='text text_type_main-large pr-2'>Выберите булочку</p>)
+					? (<p className={`${burgerConstructorStyle.empty_ingredient} ${burgerConstructorStyle.empty_ingredient_top} pr-2`}>Выберите булочку</p>)
 					: (<ConstructorElement
 						type="top"
 						isLocked={true}
@@ -75,7 +75,10 @@ const BurgerConstructor: FC = () => {
 						key={bun._id}
 					/>)}
 				{items.length === 0
-					? (<p className={`${burgerConstructorStyle.list} ${burgerConstructorStyle.text} pr-2 text text_type_main-large`}>&#8592; Выберите начинку</p>)
+					? (<p 
+						className={`${burgerConstructorStyle.list} ${burgerConstructorStyle.empty_ingredient} ${burgerConstructorStyle.empty_ingredient_middle} pr-2`}>
+							&#8592; Выберите начинку
+							</p>)
 					: <ul className={`${burgerConstructorStyle.list} pr-2`}>
 						{items.map((elem, index) => {
 							if (elem.type === 'sauce' || elem.type === 'main') {
@@ -90,7 +93,7 @@ const BurgerConstructor: FC = () => {
 					</ul>
 				}
 				{!bunRequestSuccess
-					? (<p className='text text_type_main-large pr-2'>Выберите булочку </p>)
+					? (<p className={`${burgerConstructorStyle.empty_ingredient} ${burgerConstructorStyle.empty_ingredient_bottom} pr-2`}>Выберите булочку </p>)
 					: (<ConstructorElement
 						type="bottom"
 						isLocked={true}

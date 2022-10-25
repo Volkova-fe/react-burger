@@ -2,7 +2,7 @@
   "name": "react-burger",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://volkova-fe.github.io/",
+  "homepage": "https://volkova-fe.github.io/react-burger/",
   "dependencies": {
     "@emotion/styled": "^11.10.0",
     "@mui/joy": "^5.0.0-alpha.39",
