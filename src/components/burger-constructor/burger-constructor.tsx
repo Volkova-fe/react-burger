@@ -8,7 +8,7 @@ import {
 	from '@ya.praktikum/react-developer-burger-ui-components'
 
 import ConstructorItems from './constructor-items/constructor-items'
-import burgerConstructorStyle from './burger-constructor.module.css'
+import styles from './burger-constructor.module.css'
 
 import { getOrderDetails } from '../../services/actions/order-details';
 import { ADD_BUN, ADD_ITEM_CONSTRUCTOR } from '../../services/action-types';
@@ -62,10 +62,10 @@ const BurgerConstructor: FC = () => {
 	});
 
 	return (
-		<section className={`${burgerConstructorStyle.section} pl-10 pt-15`}>
-			<div className={`${burgerConstructorStyle.container} pr-2 pt-4`} ref={dropTarget}>
+		<section className={`${styles.section} pl-10 pt-15`}>
+			<div className={`${styles.container} pr-2 pt-4`} ref={dropTarget}>
 				{!bunRequestSuccess
-					? (<p className={`${burgerConstructorStyle.empty_ingredient} ${burgerConstructorStyle.empty_ingredient_top} pr-2`}>Выберите булочку</p>)
+					? (<p className={`${styles.empty_ingredient} ${styles.empty_ingredient_top} pr-2`}>Выберите булочку</p>)
 					: (<ConstructorElement
 						type="top"
 						isLocked={true}
@@ -76,10 +76,10 @@ const BurgerConstructor: FC = () => {
 					/>)}
 				{items.length === 0
 					? (<p 
-						className={`${burgerConstructorStyle.list} ${burgerConstructorStyle.empty_ingredient} ${burgerConstructorStyle.empty_ingredient_middle} pr-2`}>
+						className={`${styles.list} ${styles.empty_ingredient} ${styles.empty_ingredient_middle} pr-2`}>
 							&#8592; Выберите начинку
 							</p>)
-					: <ul className={`${burgerConstructorStyle.list} pr-2`}>
+					: <ul className={`${styles.list} pr-2`}>
 						{items.map((elem, index) => {
 							if (elem.type === 'sauce' || elem.type === 'main') {
 								return (
@@ -93,7 +93,7 @@ const BurgerConstructor: FC = () => {
 					</ul>
 				}
 				{!bunRequestSuccess
-					? (<p className={`${burgerConstructorStyle.empty_ingredient} ${burgerConstructorStyle.empty_ingredient_bottom} pr-2`}>Выберите булочку </p>)
+					? (<p className={`${styles.empty_ingredient} ${styles.empty_ingredient_bottom} pr-2`}>Выберите булочку </p>)
 					: (<ConstructorElement
 						type="bottom"
 						isLocked={true}
@@ -103,8 +103,8 @@ const BurgerConstructor: FC = () => {
 						key={`bottom: ${bun._id}`}
 					/>)}
 			</div>
-			<div className={`${burgerConstructorStyle.order} pt-10 pr-5`}>
-				<div className={`${burgerConstructorStyle.count_result} pr-10`}>
+			<div className={`${styles.order} pt-10 pr-5`}>
+				<div className={`${styles.count_result} pr-10`}>
 					<p className='text text_type_digits-medium pr-2'>{total}</p>
 					<CurrencyIcon type="primary" />
 				</div>

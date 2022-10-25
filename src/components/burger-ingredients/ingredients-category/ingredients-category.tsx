@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import ingredientsCategoryStyles from './ingredients-category.module.css'
+import styles from './ingredients-category.module.css'
 import IngredientsItem from '../ingredients-item/ingredients-item';
 import { TIngredient } from '../../../services/types/data';
 
@@ -21,11 +21,11 @@ const IngredientsCategory: FC<TIngredientsCategory>= ({ ingredients, type }) => 
 	}
 
 	return (
-		<li className={`${ingredientsCategoryStyles.item}`} id={type}>
-			<h2 className={`${ingredientsCategoryStyles.text} text text_type_main-medium pb-6 pt-2`}>{categories[type]}</h2>
-			<ul className={ingredientsCategoryStyles.list} >
+		<li className={`${styles.item}`} id={type}>
+			<h2 className={`${styles.text} text text_type_main-medium pb-6 pt-2`}>{categories[type]}</h2>
+			<ul className={styles.list} >
 				{category.map((elem) => (
-					<li className={`${ingredientsCategoryStyles.item} `} key={elem._id} >
+					<li className={`${styles.item} `} key={elem._id} >
 						<IngredientsItem key={elem._id} ingredient={elem} />
 					</li>
 				))}

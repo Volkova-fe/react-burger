@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import burgerIngredientStyle from './burger-ingredients.module.css'
+import styles from './burger-ingredients.module.css'
 import IngredientsCategory from './ingredients-category/ingredients-category'
 import { useSelector } from '../../services/hooks';
 
@@ -51,15 +51,15 @@ const BurgerIngredients: FC = () => {
 
 
 	return (
-		<section className={burgerIngredientStyle.section}>
-			<h1 className={`${burgerIngredientStyle.title} text text_type_main-large`}>Соберите бургер</h1>
-			<div className={`${burgerIngredientStyle.tab} pt-5`}>
-				<a href='#bun' className={burgerIngredientStyle.link}>
+		<section className={styles.section}>
+			<h1 className={`${styles.title} text text_type_main-large`}>Соберите бургер</h1>
+			<div className={`${styles.tab} pt-5`}>
+				<a href='#bun' className={styles.link}>
 					<Tab value="bun" active={current === "bun"} onClick={() => onTabScroll("bun")}>
 						Булки
 					</Tab>
 				</a>
-				<a href='#sauce' className={burgerIngredientStyle.link}>
+				<a href='#sauce' className={styles.link}>
 					<Tab value="sauce"
 						active={current === "sauce"}
 						onClick={() => onTabScroll("sauce")}
@@ -67,7 +67,7 @@ const BurgerIngredients: FC = () => {
 						Соусы
 					</Tab>
 				</a>
-				<a href='#main' className={burgerIngredientStyle.link}>
+				<a href='#main' className={styles.link}>
 					<Tab
 						value="main"
 						active={current === "main"}
@@ -78,7 +78,7 @@ const BurgerIngredients: FC = () => {
 				</a>
 			</div>
 
-			<ul className={`${burgerIngredientStyle.list} pt-8`}>
+			<ul className={`${styles.list} pt-8`}>
 				<div ref={bunRef}>
 					<IngredientsCategory ingredients={ingredients} type='bun' />
 				</div>

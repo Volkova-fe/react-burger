@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import modalStyles from './modal.module.css'
+import styles from './modal.module.css'
 import ModalOverlay from './modal-overlay/modal-overlay'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TModal } from '../../services/types/data';
@@ -24,9 +24,9 @@ const Modal: FC<TModal> = ({ title, onClickClose, children }) => {
 
 	return ReactDOM.createPortal(
 		<>
-			<div className={modalStyles.container}>
-				<h3 className={`${modalStyles.title} text text_type_main-large pl-10 pt-15 pb-1`}>{title}</h3>
-				<button className={modalStyles.close_icon} >
+			<div className={styles.container}>
+				<h3 className={`${styles.title} text text_type_main-large pl-10 pt-15 pb-1`}>{title}</h3>
+				<button className={styles.close_icon} >
 					<CloseIcon onClick={onClickClose} type='primary'/>
 				</button>
 				{children}

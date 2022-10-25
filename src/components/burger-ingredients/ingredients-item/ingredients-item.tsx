@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { useSelector } from '../../../services/hooks';
 import { useDrag } from 'react-dnd';
-import ingredientsItemStyles from './ingredients-item.module.css'
+import styles from './ingredients-item.module.css'
 import {
 	CurrencyIcon,
 	Counter
@@ -43,15 +43,15 @@ const IngredientsItem: FC<TIngredientsItem> = ({ ingredient }) => {
 	return (
 		<Link
 			to={{ pathname: `/ingredients/${ingredient._id}`, state: { background: location } }}
-			className={`${ingredientsItemStyles.link}`}
+			className={`${styles.link}`}
 		>
 			<div
-				className={`${ingredientsItemStyles.item} pl-4 mr-4`}
+				className={`${styles.item} pl-4 mr-4`}
 				style={{ opacity }}
 				ref={dragRef}
 			>
-				<img className={`${ingredientsItemStyles.image}`} src={image} alt={name} />
-				<div className={`${ingredientsItemStyles.price} pt-1 pb-2`}>
+				<img className={`${styles.image}`} src={image} alt={name} />
+				<div className={`${styles.price} pt-1 pb-2`}>
 					<p className='text text_type_digits-default pr-2'>{price}</p>
 					<CurrencyIcon type="primary" />
 				</div>

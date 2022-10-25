@@ -1,5 +1,5 @@
 import React, { FC, useRef } from 'react';
-import constructorItemStyles from './constructor-items.module.css'
+import styles from './constructor-items.module.css'
 import { useDispatch } from '../../../services/hooks';
 import { useDrag, useDrop } from 'react-dnd';
 import {
@@ -64,7 +64,7 @@ const ConstructorItems: FC<TConstructorItems>= ({ index, items }) => {
 
 	return (
 		<>
-			<li className={`${constructorItemStyles.item} pt-4 pr-3`} style={{ opacity }} ref={ref}>
+			<li className={`${styles.item} pt-4 pr-3`} style={{ opacity }} ref={ref}>
 				<DragIcon type="primary" />
 				<ConstructorElement
 					text={name}
